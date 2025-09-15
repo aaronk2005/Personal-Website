@@ -2,7 +2,7 @@ import { ReactTyped } from "react-typed";
 
 export function Hero() {
   return (
-    <section id="hero" className="min-h-screen flex items-center justify-center px-4 sm:px-6 pt-24 sm:pt-20">
+    <section id="hero" className="min-h-screen flex items-center justify-center px-4 sm:px-6 pt-32 sm:pt-20">
       <div className="glass-card rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 max-w-6xl mx-auto text-center floating-animation w-full">
         <div className="space-y-6 sm:space-y-8">
           <div className="space-y-4 sm:space-y-6">
@@ -11,7 +11,7 @@ export function Hero() {
             </h1>
             <div className="text-2xl md:text-3xl text-blue-300 min-h-[1.5em]">
               <ReactTyped
-                strings={["Computer Engineer", "Software Developer", "Hardware Engineer", "AI Enthusiast"]}
+                strings={["Computer Engineer"]}
                 typeSpeed={100}
                 backSpeed={50}
                 loop

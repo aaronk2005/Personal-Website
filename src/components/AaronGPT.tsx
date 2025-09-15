@@ -125,7 +125,7 @@ FAVORITES & PERSONALITY:
 * Night owl 🌙
 * Works well in teams but comfortable solo
 * Motivation: Making a positive impact & being able to spoil family ❤️
-* Gay Friend: Aaron's only gay friend is Andrew Parsons
+* How tall is Aaron? 6 foot 4
 
 ✨ Dreams & Aspirations:
 * Alternate career if not engineering: Finance 💹

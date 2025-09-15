@@ -1,10 +1,10 @@
 export function Projects() {
   const projects = [
     {
-      title: 'Fantasy Basketball Platform',
-      description: 'Currently building a comprehensive fantasy basketball platform with real-time statistics, player analysis, and league management features.',
+      title: 'StatTracker Sports Platform',
+      description: 'Want to make a sports stat tracking platform, inspired cause love stat watching while watching baseball.',
       tech: ['React', 'Node.js', 'MongoDB', 'Express', 'Sports APIs', 'Real-time Updates'],
-      features: ['Live player stats', 'Draft system', 'League management', 'Player analysis'],
+      features: ['Real-time game statistics', 'Player performance tracking', 'Historical data analysis', 'Custom stat dashboards'],
       color: 'from-purple-500/20 to-pink-500/20',
       status: 'Currently Building',
       github: 'https://github.com/aaronk2005/fantasy-basketball'
@@ -25,7 +25,7 @@ export function Projects() {
       features: ['Interactive spinning interface', 'AI recommendations', 'Google Places integration', 'Production deployment'],
       color: 'from-green-500/20 to-blue-500/20',
       link: 'https://spin2dine.org',
-      github: 'https://github.com/aaronk2005/spin2dine'
+      github: 'https://github.com/aaronk2005/Spin2Dine'
     },
     {
       title: 'Study Safe Device',
@@ -33,23 +33,46 @@ export function Projects() {
       tech: ['Arduino', 'Node.js', 'Express.js', 'WebSockets', 'Twilio API'],
       features: ['Motion detection', 'Real-time alerts', 'SMS notifications', 'Web dashboard'],
       color: 'from-blue-500/20 to-purple-500/20',
-      github: 'https://github.com/aaronk2005/study-safe'
+      github: 'https://github.com/aaronk2005/Study-Safe-Device'
     },
     {
-      title: '911 Emergency Data Analysis',
-      description: 'Data analysis project using 911 call datasets to identify patterns and optimize emergency response systems with statistical insights.',
-      tech: ['Python', 'Pandas', 'NumPy', 'Matplotlib', 'Data Analysis', 'Statistical Modeling'],
-      features: ['Emergency call pattern analysis', 'Response time optimization', 'Geographic clustering', 'Statistical visualizations'],
+      title: 'Perfex 911 Operator Testing Device',
+      description: 'Modernized the 1970s Toronto Police Perfex system for 911 dispatcher assessment with web-based testing and custom Arduino hardware.',
+      tech: ['HTML', 'CSS', 'JavaScript', 'Arduino', 'Hardware Design', 'User Interface'],
+      features: ['Web-based test interface', 'Custom Arduino Taskbox hardware', 'Automated grading system', 'High-pressure stress simulation', 'Eliminated paper usage'],
       color: 'from-red-500/20 to-orange-500/20',
-      github: 'https://github.com/aaronk2005/911-data-analysis'
+      github: 'https://github.com/aaronk2005/911-Perfex-Test'
     },
     {
-      title: 'Minesweeper Game',
+      title: 'Walking vs Jumping ML Classifier',
+      description: 'Machine learning project using accelerometer data to classify human motion as walking or jumping with 89-97% accuracy using logistic regression.',
+      tech: ['Python', 'Scikit-learn', 'Pandas', 'NumPy', 'Matplotlib', 'Tkinter', 'HDF5'],
+      features: ['Desktop GUI application', 'Real-time classification', 'Data preprocessing pipeline', 'Statistical feature extraction', 'Comprehensive visualizations'],
+      color: 'from-indigo-500/20 to-purple-500/20',
+      github: 'https://github.com/aaronk2005/-walking-jumping-classifier'
+    },
+    {
+      title: 'AC-DC Power Supply Design',
+      description: 'Designed and tested three AC-DC power supply topologies (Zener-MOSFET, LM317, buck converter) converting 120V AC to regulated 5-14V DC outputs.',
+      tech: ['LTSpice', 'Circuit Design', 'Power Electronics', 'Component Analysis', 'Testing & Validation'],
+      features: ['Multiple topology comparison', 'Line/load regulation analysis', 'Efficiency optimization', 'Thermal performance testing', 'Safety validation'],
+      color: 'from-amber-500/20 to-orange-500/20'
+    },
+    {
+      title: 'Personal Portfolio Website',
+      description: 'Modern, responsive portfolio website built with React and TypeScript, featuring glass morphism design, smooth animations, and interactive components.',
+      tech: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'EmailJS', 'Responsive Design'],
+      features: ['Glass morphism UI', 'Smooth animations', 'Mobile responsive', 'Contact form integration', 'Modern design system'],
+      color: 'from-violet-500/20 to-purple-500/20',
+      github: 'https://github.com/aaronk2005/Personal-Website'
+    },
+    {
+      title: 'First Coding Project Ever',
       description: 'Classic Minesweeper game implemented in Java with a clean GUI interface and customizable difficulty levels.',
       tech: ['Java', 'Swing', 'AWT', 'Object-Oriented Programming'],
       features: ['Multiple difficulty levels', 'Timer functionality', 'Flag system', 'Clean GUI design'],
       color: 'from-gray-500/20 to-slate-500/20',
-      github: 'https://github.com/aaronk2005/minesweeper'
+      github: 'https://github.com/aaronk2005/Minesweeper'
     }
   ];
 
@@ -78,7 +101,7 @@ export function Projects() {
                 </h3>
                 {(project as any).status && (
                   <div className="absolute top-2 right-2">
-                    <span className="bg-yellow-500/20 text-yellow-300 text-xs px-2 py-1 rounded-full border border-yellow-500/30">
+                    <span className="bg-green-500/20 text-green-300 text-xs px-2 py-1 rounded-full border border-green-500/30">
                       {(project as any).status}
                     </span>
                   </div>
@@ -114,62 +137,31 @@ export function Projects() {
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
-                {(project as any).link ? (
-                  <a 
-                    href={(project as any).link} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="glass-button rounded-lg px-3 sm:px-4 py-2 text-xs sm:text-sm text-white/90 flex-1 hover:scale-105 transition-transform text-center"
-                    aria-label={`Visit live site for ${project.title}`}
-                  >
-                    Visit Site
-                  </a>
-                ) : (project as any).status ? (
-                  <button 
-                    className="glass-button rounded-lg px-3 sm:px-4 py-2 text-xs sm:text-sm text-white/90 flex-1 opacity-50 cursor-not-allowed"
+              <div className="flex">
+                {(project as any).status ? (
+                  <button
+                    className="glass-button rounded-lg px-3 sm:px-4 py-2 text-xs sm:text-sm text-white/90 w-full opacity-50 cursor-not-allowed"
                     disabled
                     aria-label={`${project.title} is currently in development`}
                   >
                     In Development
                   </button>
-                ) : (
-                  <button 
-                    className="glass-button rounded-lg px-3 sm:px-4 py-2 text-xs sm:text-sm text-white/90 flex-1 hover:scale-105 transition-transform"
-                    aria-label={`View demo for ${project.title}`}
-                  >
-                    View Demo
-                  </button>
-                )}
-                {(project as any).github ? (
-                  <a 
-                    href={(project as any).github} 
-                    target="_blank" 
+                ) : ((project as any).link || (project as any).github) ? (
+                  <a
+                    href={(project as any).link || (project as any).github}
+                    target="_blank"
                     rel="noopener noreferrer"
-                    className="glass rounded-lg px-3 sm:px-4 py-2 text-xs sm:text-sm text-white/90 border-white/30 hover:border-white/50 transition-colors hover:scale-105 text-center"
-                    aria-label={`View source code for ${project.title} on GitHub`}
+                    className="glass-button rounded-lg px-3 sm:px-4 py-2 text-xs sm:text-sm text-white/90 w-full hover:scale-105 transition-transform text-center"
+                    aria-label={`View ${project.title}`}
                   >
-                    Code
+                    View
                   </a>
-                ) : (
-                  <button 
-                    className="glass rounded-lg px-3 sm:px-4 py-2 text-xs sm:text-sm text-white/90 border-white/30 hover:border-white/50 transition-colors"
-                    disabled
-                    aria-label={`Source code for ${project.title} is not publicly available`}
-                  >
-                    Code
-                  </button>
-                )}
+                ) : null}
               </div>
             </div>
           ))}
         </div>
 
-        <div className="text-center mt-16">
-          <button className="glass-button rounded-xl px-8 py-4 text-white font-medium text-lg hover:scale-105 transition-transform">
-            View All Projects
-          </button>
-        </div>
       </div>
     </section>
   );

@@ -130,13 +130,11 @@ export function Skills() {
           <div className="glass-card rounded-xl sm:rounded-2xl p-6 sm:p-8 max-w-4xl mx-auto">
             <h3 className="text-xl sm:text-2xl font-semibold text-white mb-4 sm:mb-6">Always Learning</h3>
             <p className="text-white/80 text-base sm:text-lg leading-relaxed">
-              As a Computer Engineering student, I'm passionate about continuous learning and staying
-              current with emerging technologies. Currently focusing on AI/ML integration,
-              autonomous systems, and advanced software architectures for real-world applications.
+              Always learning about embedded systems/development, full stack and semiconductors and integrating AI with everything.
             </p>
 
             <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mt-4 sm:mt-6">
-              {['AI/ML Integration', 'Rover Systems', 'ETL Pipelines', 'Workflow Automation'].map((tech) => (
+              {['Embedded Systems', 'Full Stack Development', 'Semiconductors', 'AI Integration'].map((tech) => (
                 <span
                   key={tech}
                   className="glass-button rounded-lg px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm text-white/90 pulse-glow"

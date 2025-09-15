@@ -48,20 +48,20 @@ export function Navigation() {
   }, []);
 
   return (
-    <nav 
-      className={`fixed top-4 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 ${isScrolled ? 'top-2' : ''}`}
+    <nav
+      className={`fixed top-2 sm:top-4 left-1/2 transform -translate-x-1/2 z-50 transition-all duration-300 ${isScrolled ? 'top-1 sm:top-2' : ''}`}
       role="navigation"
       aria-label="Main navigation"
     >
-      <div className={`glass-nav rounded-2xl px-4 sm:px-12 md:px-24 py-4 sm:py-6 md:py-8 transition-all duration-300 ${isScrolled ? 'backdrop-blur-md' : ''}`}>
+      <div className={`glass-nav rounded-2xl px-4 sm:px-8 lg:px-12 py-4 sm:py-6 transition-all duration-300 ${isScrolled ? 'backdrop-blur-md' : ''}`}>
         <div className="flex items-center justify-center">
           {/* Navigation Items */}
-          <div className="flex items-center justify-between gap-2 sm:gap-6 md:gap-10">
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 lg:gap-8">
           {navItems.map((item) => (
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className={`relative px-3 sm:px-5 md:px-6 py-2.5 text-sm sm:text-lg md:text-2xl font-medium transition-all duration-300 rounded-lg ${
+              className={`relative px-2 sm:px-4 lg:px-6 py-2 text-xs sm:text-base lg:text-lg font-medium transition-all duration-300 rounded-lg ${
                 activeSection === item.id
                   ? 'text-cyan-400 glow-text'
                   : 'text-white/70 hover:text-white hover:glow-text'
@@ -71,7 +71,7 @@ export function Navigation() {
             >
               {item.name}
               {activeSection === item.id && (
-                <div 
+                <div
                   className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-cyan-400 rounded-full animate-pulse"
                   aria-hidden="true"
                 />
