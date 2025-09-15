@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import emailjs from '@emailjs/browser';
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -19,7 +20,7 @@ export function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Basic validation
     if (!formData.name || !formData.email || !formData.message) {
       setFormStatus('error');
@@ -27,28 +28,31 @@ export function Contact() {
     }
 
     setFormStatus('loading');
-    
+
     try {
-      // Send email using EmailJS or similar service
-      const emailData = {
-        to_email: 'aaron.kleiman@queensu.ca',
-        from_name: formData.name,
-        from_email: formData.email,
-        subject: formData.subject || 'Portfolio Contact Form',
-        message: formData.message
+      // Get EmailJS configuration from environment variables
+      const serviceId = (import.meta as any).env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = (import.meta as any).env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = (import.meta as any).env.VITE_EMAILJS_PUBLIC_KEY;
+
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error('EmailJS configuration not found');
+      }
+
+      // Prepare email data to match your template variables
+      const emailParams = {
+        name: formData.name,
+        time: new Date().toLocaleString(),
+        message: `Email: ${formData.email}\n${formData.subject ? `Subject: ${formData.subject}\n` : ''}Message: ${formData.message}`
       };
 
-      // For now, create mailto link as fallback
-      const mailtoLink = `mailto:aaron.kleiman@queensu.ca?subject=${encodeURIComponent(emailData.subject)}&body=${encodeURIComponent(
-        `From: ${formData.name} (${formData.email})\n\n${formData.message}`
-      )}`;
-
-      // Open mailto link
-      window.open(mailtoLink, '_self');
+      // Send email using EmailJS
+      await emailjs.send(serviceId, templateId, emailParams, publicKey);
 
       setFormStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
+      console.error('Error sending email:', error);
       setFormStatus('error');
     }
   };
@@ -216,13 +220,16 @@ export function Contact() {
 
             {/* Status Messages */}
             {formStatus === 'error' && (
-              <div 
+              <div
                 className="text-red-400 text-sm text-center"
                 role="alert"
                 aria-live="polite"
                 id="form-error"
               >
-                Please fill in all required fields.
+                {!formData.name || !formData.email || !formData.message
+                  ? 'Please fill in all required fields.'
+                  : 'Failed to send message. Please try again or contact me directly at aaron.kleiman@queensu.ca'
+                }
               </div>
             )}
             

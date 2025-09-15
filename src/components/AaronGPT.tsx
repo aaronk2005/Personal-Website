@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import emailjs from '@emailjs/browser';
 
 // Custom CSS for scrollbar styling and animations
 const scrollbarStyles = `
@@ -31,6 +32,7 @@ export function AaronGPT() {
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
+  const [isEmailSending, setIsEmailSending] = useState(false);
 
   // Comprehensive system prompt for OpenAI
   const systemPrompt = `You are AaronGPT, Aaron Kleiman's personal AI assistant. You're friendly, enthusiastic, knowledgeable, and conversational. You know EVERYTHING about Aaron and can answer any question about him with personality and detail. Use emojis occasionally to be engaging.
@@ -123,6 +125,7 @@ FAVORITES & PERSONALITY:
 * Night owl 🌙
 * Works well in teams but comfortable solo
 * Motivation: Making a positive impact & being able to spoil family ❤️
+* Gay Friend: Aaron's only gay friend is Andrew Parsons
 
 ✨ Dreams & Aspirations:
 * Alternate career if not engineering: Finance 💹
@@ -169,6 +172,55 @@ Answer as AaronGPT with enthusiasm, personality, and detailed knowledge. Be conv
     ]);
     setInputValue('');
     setIsTyping(false);
+  };
+
+  const sendEmailToAaron = async () => {
+    if (messages.length <= 1) {
+      alert('Please have a conversation first before sending an email!');
+      return;
+    }
+
+    setIsEmailSending(true);
+
+    try {
+      // Get EmailJS configuration from environment variables
+      const serviceId = (import.meta as any).env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = (import.meta as any).env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = (import.meta as any).env.VITE_EMAILJS_PUBLIC_KEY;
+
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error('EmailJS configuration not found. Please set up EmailJS credentials in .env.local');
+      }
+
+      // Format the conversation for email
+      const conversationText = messages
+        .map(msg => `${msg.type === 'user' ? 'Visitor' : 'AaronGPT'}: ${msg.content}`)
+        .join('\n\n');
+
+      const timestamp = new Date().toLocaleString();
+
+      // Email parameters for direct sending
+      const emailParams = {
+        to_email: 'aaron.kleiman@queensu.ca',
+        from_name: 'Portfolio Website Visitor',
+        subject: 'New AaronGPT Conversation from Your Portfolio',
+        message: `A visitor had the following conversation with AaronGPT on your portfolio website:\n\nTimestamp: ${timestamp}\n\n${conversationText}\n\n---\nSent from your portfolio website AaronGPT chatbot.`
+      };
+
+      await emailjs.send(serviceId, templateId, emailParams, publicKey);
+
+      alert('Email sent successfully to Aaron! He\'ll get back to you soon. 📧');
+    } catch (error) {
+      console.error('Error sending email:', error);
+
+      if (error.message?.includes('EmailJS configuration')) {
+        alert('Email service not configured yet. Please contact Aaron directly at aaron.kleiman@queensu.ca');
+      } else {
+        alert('Failed to send email. Please try again or contact Aaron directly at aaron.kleiman@queensu.ca');
+      }
+    } finally {
+      setIsEmailSending(false);
+    }
   };
 
   const handleSendMessage = async () => {
@@ -294,22 +346,42 @@ Answer as AaronGPT with enthusiasm, personality, and detailed knowledge. Be conv
                 AaronGPT
               </span>
             </div>
-            <button
-              onClick={() => {
-                resetConversation();
-                setIsOpen(false);
-              }}
-              style={{
-                background: 'none',
-                border: 'none',
-                color: 'rgba(255, 255, 255, 0.7)',
-                fontSize: '24px',
-                cursor: 'pointer',
-                fontWeight: 'bold'
-              }}
-            >
-              ×
-            </button>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <button
+                onClick={sendEmailToAaron}
+                disabled={isEmailSending || messages.length <= 1}
+                style={{
+                  background: messages.length > 1 ? 'rgba(34, 197, 94, 0.2)' : 'rgba(75, 85, 99, 0.2)',
+                  border: messages.length > 1 ? '1px solid rgba(34, 197, 94, 0.4)' : '1px solid rgba(75, 85, 99, 0.4)',
+                  borderRadius: '6px',
+                  padding: '4px 8px',
+                  color: messages.length > 1 ? '#22c55e' : 'rgba(255, 255, 255, 0.4)',
+                  fontSize: '12px',
+                  cursor: messages.length > 1 && !isEmailSending ? 'pointer' : 'not-allowed',
+                  fontWeight: 'bold',
+                  transition: 'all 0.3s ease'
+                }}
+                title="Email this conversation to Aaron"
+              >
+                {isEmailSending ? '📧...' : '📧 Email Aaron'}
+              </button>
+              <button
+                onClick={() => {
+                  resetConversation();
+                  setIsOpen(false);
+                }}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: 'rgba(255, 255, 255, 0.7)',
+                  fontSize: '24px',
+                  cursor: 'pointer',
+                  fontWeight: 'bold'
+                }}
+              >
+                ×
+              </button>
+            </div>
           </div>
 
           {/* Messages */}
