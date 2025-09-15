@@ -53,15 +53,14 @@ export function Navigation() {
       role="navigation"
       aria-label="Main navigation"
     >
-      <div className={`glass-nav rounded-2xl px-4 sm:px-8 lg:px-12 py-4 sm:py-6 transition-all duration-300 ${isScrolled ? 'backdrop-blur-md' : ''}`}>
+      <div className={`glass-nav rounded-2xl px-2 sm:px-4 md:px-8 lg:px-12 py-2 sm:py-4 md:py-6 transition-all duration-300 ${isScrolled ? 'backdrop-blur-md' : ''}`}>
         <div className="flex items-center justify-center">
-          {/* Navigation Items */}
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 lg:gap-8">
+          <div className="flex flex-wrap items-center justify-center gap-1 sm:gap-2 md:gap-4 lg:gap-8">
           {navItems.map((item) => (
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className={`relative px-2 sm:px-4 lg:px-6 py-2 text-xs sm:text-base lg:text-lg font-medium transition-all duration-300 rounded-lg ${
+              className={`relative px-1 sm:px-2 md:px-4 lg:px-6 py-1 sm:py-2 text-xs sm:text-sm md:text-base lg:text-lg font-medium transition-all duration-300 rounded-lg ${
                 activeSection === item.id
                   ? 'text-cyan-400 glow-text'
                   : 'text-white/70 hover:text-white hover:glow-text'

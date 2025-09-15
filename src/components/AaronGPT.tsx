@@ -33,6 +33,15 @@ export function AaronGPT() {
   const [inputValue, setInputValue] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [isEmailSending, setIsEmailSending] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check if mobile on mount and window resize
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Comprehensive system prompt for OpenAI
   const systemPrompt = `You are AaronGPT, Aaron Kleiman's personal AI assistant. You're friendly, enthusiastic, knowledgeable, and conversational. You know EVERYTHING about Aaron and can answer any question about him with personality and detail. Use emojis occasionally to be engaging.
@@ -306,14 +315,17 @@ Answer as AaronGPT with enthusiasm, personality, and detailed knowledge. Be conv
         <div
           style={{
             position: 'fixed',
-            bottom: '24px',
-            right: '24px',
-            width: '400px',
-            height: '500px',
+            bottom: isMobile ? '16px' : '24px',
+            right: isMobile ? '16px' : '24px',
+            left: isMobile ? '16px' : 'auto',
+            width: isMobile ? 'calc(100vw - 32px)' : '400px',
+            maxWidth: isMobile ? '100%' : '400px',
+            height: isMobile ? 'calc(100vh - 32px)' : '500px',
+            maxHeight: isMobile ? 'calc(100vh - 32px)' : '500px',
             background: 'rgba(0, 0, 0, 0.9)',
             backdropFilter: 'blur(20px)',
             border: '2px solid rgba(0, 255, 255, 0.7)',
-            borderRadius: '20px',
+            borderRadius: isMobile ? '16px' : '20px',
             boxShadow: '0 0 30px rgba(0, 255, 255, 0.5)',
             zIndex: 999999,
             display: 'flex',
@@ -509,15 +521,15 @@ Answer as AaronGPT with enthusiasm, personality, and detailed knowledge. Be conv
           }}
           style={{
             position: 'fixed',
-            bottom: '24px',
-            right: '24px',
-            padding: '12px 20px',
+            bottom: isMobile ? '16px' : '24px',
+            right: isMobile ? '16px' : '24px',
+            padding: isMobile ? '10px 16px' : '12px 20px',
             background: 'rgba(0, 0, 0, 0.6)',
             backdropFilter: 'blur(20px)',
             border: '2px solid rgba(0, 255, 255, 0.6)',
             borderRadius: '25px',
             color: '#00ffff',
-            fontSize: '16px',
+            fontSize: isMobile ? '14px' : '16px',
             fontWeight: 'bold',
             cursor: 'pointer',
             zIndex: 999999,
