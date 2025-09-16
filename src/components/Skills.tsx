@@ -2,7 +2,7 @@ export function Skills() {
   const skillCategories = [
     {
       title: "Languages",
-      color: "from-blue-400 to-cyan-400",
+      color: "from-blue-400 to-blue-400",
       skills: [
         { name: "Python", icon: "🐍" },
         { name: "C/C++", icon: "⚙️" },
@@ -100,14 +100,14 @@ export function Skills() {
                     className="glass-card rounded-xl p-4 hover:scale-105 transition-all duration-300 group cursor-pointer"
                     style={{
                       animationDelay: `${categoryIndex * 200 + skillIndex * 100}ms`,
-                      boxShadow: `0 0 20px rgba(0, 255, 255, 0.1)`,
+                      boxShadow: `0 0 20px rgba(96, 165, 250, 0.1)`,
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.boxShadow = `0 0 30px rgba(0, 255, 255, 0.3)`;
+                      e.currentTarget.style.boxShadow = `0 0 30px rgba(96, 165, 250, 0.3)`;
                       e.currentTarget.style.transform = 'scale(1.05)';
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.boxShadow = `0 0 20px rgba(0, 255, 255, 0.1)`;
+                      e.currentTarget.style.boxShadow = `0 0 20px rgba(96, 165, 250, 0.1)`;
                       e.currentTarget.style.transform = 'scale(1)';
                     }}
                   >

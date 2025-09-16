@@ -5,7 +5,7 @@ export function Interests() {
       category: 'Sports',
       items: ['Hockey', 'Basketball', 'Baseball'],
       icon: '🏒',
-      color: 'from-green-500/20 to-blue-500/20'
+      color: 'from-green-500/20 to-blue-400/20'
     },
     {
       category: 'Lifestyle',
@@ -23,7 +23,7 @@ export function Interests() {
   category: 'Music',
   items: ['Rap', 'Jazz', 'Lo-fi'],
   icon: '🎶',
-  color: 'from-blue-500/20 to-violet-500/20'
+  color: 'from-blue-400/20 to-violet-500/20'
 }
 
   ];

@@ -9,15 +9,14 @@ export function Hero() {
             <h1 className="text-6xl md:text-8xl font-bold text-white glow-text">
               Aaron Kleiman
             </h1>
-            <div className="text-2xl md:text-3xl text-blue-300 min-h-[1.5em]">
+            <div className="text-2xl md:text-3xl text-blue-400 min-h-[1.5em]">
               <ReactTyped
                 strings={["Computer Engineer"]}
                 typeSpeed={100}
-                backSpeed={50}
-                loop
                 cursorChar="|"
                 showCursor={true}
                 startDelay={1000}
+                loop={false}
               />
             </div>
           </div>

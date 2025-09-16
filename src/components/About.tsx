@@ -12,24 +12,28 @@ export function About() {
           <div className="glass-card rounded-xl sm:rounded-2xl p-6 sm:p-8">
             <div className="space-y-4 sm:space-y-6">
               <p className="text-white/80 text-base sm:text-lg leading-relaxed">
-               Hi, I’m Aaron. I’m a third-year Computer Engineering student at Queen’s University. 
-               This summer I worked as a Software Engineering Intern at Tallysight, where I built Python 
-               ETL pipelines, AI-powered automation tools, and Retool agents. Previously I was a Software 
-               Developer at Swarmed, contributing to UI/UX redesigns and Bubble.io workflows, and an 
-               Engineering Intern at CAD Railway Industries, where I created maintenance manuals and organized 
-               technical schematics.
+               Hi, I’m Aaron, a third-year Computer Engineering student at Queen’s 
+               University. Last summer I worked as a Software Engineering Intern at 
+               Tallysight, where I built Python ETL pipelines, AI-powered automation 
+               tools, and Retool agents. Previously I was a Software Developer at 
+               Swarmed, contributing to UI/UX redesigns and Bubble.io workflows, and 
+               an Engineering Intern at CAD Railway Industries, where I created maintenance 
+               manuals and organized technical schematics.
+
               </p>
               
               <p className="text-white/80 text-base sm:text-lg leading-relaxed">
-               Right now I’m an Undergraduate Teaching Assistant for Intro to Programming I, helping 
-               first-year students learn C programming fundamentals. I also lead the UI dashboard 
-               redesign for Queen’s Space Engineering Team, integrating ROS 2 telemetry and real-time 
-               rover mission planning tools.</p>
+               Currently I’m an Undergraduate Teaching Assistant for Intro to Programming I, 
+               helping first-year students learn C programming fundamentals. I also lead the 
+               UI dashboard redesign for Queen’s Space Engineering Team, integrating ROS 2 
+               telemetry and real-time rover mission planning tools.
+</p>
 
                <p className="text-white/80 text-base sm:text-lg leading-relaxed">
-               I’m interested in embedded systems, hardware development, full-stack engineering, and 
-               integrating artificial intelligence into real-world applications. I love learning new 
-               technologies, solving problems, and building tools that make a difference.</p>
+              I’m interested in embedded systems, hardware development, full-stack engineering, 
+              and integrating artificial intelligence into real-world applications. I love learning 
+              new technologies, solving problems, and building tools that make a difference.
+</p>
             </div>
           </div>
 

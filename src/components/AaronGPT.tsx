@@ -11,11 +11,11 @@ const scrollbarStyles = `
     border-radius: 3px;
   }
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: rgba(0, 255, 255, 0.5);
+    background: rgba(96, 165, 250, 0.5);
     border-radius: 3px;
   }
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 255, 255, 0.7);
+    background: rgba(96, 165, 250, 0.7);
   }
 
   @keyframes pulse {
@@ -324,9 +324,9 @@ Answer as AaronGPT with enthusiasm, personality, and detailed knowledge. Be conv
             maxHeight: isMobile ? '70vh' : '500px',
             background: 'rgba(0, 0, 0, 0.9)',
             backdropFilter: 'blur(20px)',
-            border: '2px solid rgba(0, 255, 255, 0.7)',
+            border: '2px solid rgba(96, 165, 250, 0.7)',
             borderRadius: isMobile ? '16px' : '20px',
-            boxShadow: '0 0 30px rgba(0, 255, 255, 0.5)',
+            boxShadow: '0 0 30px rgba(96, 165, 250, 0.5)',
             zIndex: 999999,
             display: 'flex',
             flexDirection: 'column'
@@ -336,8 +336,8 @@ Answer as AaronGPT with enthusiasm, personality, and detailed knowledge. Be conv
           <div
             style={{
               padding: '16px',
-              borderBottom: '1px solid rgba(0, 255, 255, 0.3)',
-              background: 'rgba(0, 255, 255, 0.1)',
+              borderBottom: '1px solid rgba(96, 165, 250, 0.3)',
+              background: 'rgba(96, 165, 250, 0.1)',
               borderRadius: '18px 18px 0 0',
               display: 'flex',
               alignItems: 'center',
@@ -354,7 +354,7 @@ Answer as AaronGPT with enthusiasm, personality, and detailed knowledge. Be conv
                   animation: 'pulse 2s infinite'
                 }}
               ></div>
-              <span style={{ color: '#00ffff', fontWeight: 'bold', fontSize: '18px' }}>
+              <span style={{ color: 'rgb(96, 165, 250)', fontWeight: 'bold', fontSize: '18px' }}>
                 AaronGPT
               </span>
             </div>
@@ -425,11 +425,11 @@ Answer as AaronGPT with enthusiasm, personality, and detailed knowledge. Be conv
                     lineHeight: '1.4',
                     background:
                       message.type === 'user'
-                        ? 'rgba(0, 255, 255, 0.2)'
+                        ? 'rgba(96, 165, 250, 0.2)'
                         : 'rgba(255, 255, 255, 0.05)',
                     border:
                       message.type === 'user'
-                        ? '1px solid rgba(0, 255, 255, 0.3)'
+                        ? '1px solid rgba(96, 165, 250, 0.3)'
                         : '1px solid rgba(255, 255, 255, 0.1)',
                     color: message.type === 'user' ? '#ffffff' : 'rgba(255, 255, 255, 0.9)'
                   }}
@@ -476,7 +476,7 @@ Answer as AaronGPT with enthusiasm, personality, and detailed knowledge. Be conv
                 style={{
                   flex: 1,
                   background: 'rgba(255, 255, 255, 0.1)',
-                  border: '1px solid rgba(0, 255, 255, 0.3)',
+                  border: '1px solid rgba(96, 165, 250, 0.3)',
                   borderRadius: '8px',
                   padding: '8px 12px',
                   color: '#ffffff',
@@ -487,22 +487,22 @@ Answer as AaronGPT with enthusiasm, personality, and detailed knowledge. Be conv
               <button
                 onClick={handleSendMessage}
                 style={{
-                  background: 'rgba(0, 255, 255, 0.2)',
-                  border: '1px solid rgba(0, 255, 255, 0.4)',
+                  background: 'rgba(96, 165, 250, 0.2)',
+                  border: '1px solid rgba(96, 165, 250, 0.4)',
                   borderRadius: '8px',
                   padding: '8px 16px',
-                  color: '#00ffff',
+                  color: 'rgb(96, 165, 250)',
                   fontSize: '14px',
                   cursor: 'pointer',
                   fontWeight: 'bold',
                   transition: 'all 0.3s ease'
                 }}
                 onMouseOver={(e) => {
-                  e.currentTarget.style.background = 'rgba(0, 255, 255, 0.3)';
+                  e.currentTarget.style.background = 'rgba(96, 165, 250, 0.3)';
                   e.currentTarget.style.transform = 'scale(1.05)';
                 }}
                 onMouseOut={(e) => {
-                  e.currentTarget.style.background = 'rgba(0, 255, 255, 0.2)';
+                  e.currentTarget.style.background = 'rgba(96, 165, 250, 0.2)';
                   e.currentTarget.style.transform = 'scale(1)';
                 }}
               >
@@ -526,14 +526,14 @@ Answer as AaronGPT with enthusiasm, personality, and detailed knowledge. Be conv
             padding: isMobile ? '8px 12px' : '12px 20px',
             background: 'rgba(0, 0, 0, 0.6)',
             backdropFilter: 'blur(20px)',
-            border: '2px solid rgba(0, 255, 255, 0.6)',
+            border: '2px solid rgba(96, 165, 250, 0.6)',
             borderRadius: '25px',
-            color: '#00ffff',
+            color: 'rgb(96, 165, 250)',
             fontSize: isMobile ? '12px' : '16px',
             fontWeight: 'bold',
             cursor: 'pointer',
             zIndex: 999999,
-            boxShadow: '0 0 25px rgba(0, 255, 255, 0.4)',
+            boxShadow: '0 0 25px rgba(96, 165, 250, 0.4)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -542,11 +542,11 @@ Answer as AaronGPT with enthusiasm, personality, and detailed knowledge. Be conv
           }}
           onMouseOver={(e) => {
             e.currentTarget.style.transform = 'scale(1.05)';
-            e.currentTarget.style.boxShadow = '0 0 35px rgba(0, 255, 255, 0.6)';
+            e.currentTarget.style.boxShadow = '0 0 35px rgba(96, 165, 250, 0.6)';
           }}
           onMouseOut={(e) => {
             e.currentTarget.style.transform = 'scale(1)';
-            e.currentTarget.style.boxShadow = '0 0 25px rgba(0, 255, 255, 0.4)';
+            e.currentTarget.style.boxShadow = '0 0 25px rgba(96, 165, 250, 0.4)';
           }}
         >
           AaronGPT

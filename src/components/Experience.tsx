@@ -97,13 +97,13 @@ export function Experience() {
           </h3>
           <div className="relative">
             {/* Timeline line */}
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 to-purple-500"></div>
+            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-400 to-purple-500"></div>
 
             <div className="space-y-12">
               {professionalExperiences.map((exp, index) => (
                 <div key={index} className="relative flex items-start">
                   {/* Timeline dot */}
-                  <div className="absolute left-6 w-4 h-4 bg-blue-500 rounded-full border-4 border-blue-500/30 pulse-glow"></div>
+                  <div className="absolute left-6 w-4 h-4 bg-blue-400 rounded-full border-4 border-blue-400/30 pulse-glow"></div>
                   
                   {/* Content */}
                   <div className="ml-20 glass-card rounded-2xl p-8 w-full hover:scale-105 transition-all duration-300">
@@ -112,7 +112,7 @@ export function Experience() {
                         <span className="text-3xl">{exp.emoji}</span>
                         <h3 className="text-2xl font-semibold text-white">{exp.title}</h3>
                       </div>
-                      <span className="text-blue-300 font-medium">{exp.period}</span>
+                      <span className="text-blue-400 font-medium">{exp.period}</span>
                     </div>
                     
                     <div className="mb-6">
@@ -142,7 +142,7 @@ export function Experience() {
           </h3>
           <div className="relative">
             {/* Timeline line */}
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-green-500 to-cyan-500"></div>
+            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-green-500 to-blue-400"></div>
 
             <div className="space-y-12">
               {extracurricularExperiences.map((exp, index) => (
@@ -157,7 +157,7 @@ export function Experience() {
                         <span className="text-3xl">{(exp as any).emoji}</span>
                         <h3 className="text-2xl font-semibold text-white">{exp.title}</h3>
                       </div>
-                      <span className="text-green-300 font-medium">{exp.period}</span>
+                      <span className="text-blue-400 font-medium">{exp.period}</span>
                     </div>
 
                     <div className="mb-6">

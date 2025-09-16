@@ -74,7 +74,7 @@ export function Navigation() {
                 onClick={() => scrollToSection(item.id)}
                 className={`relative px-2 sm:px-3 md:px-5 lg:px-7 py-2 sm:py-3 text-sm sm:text-base md:text-lg lg:text-xl font-medium transition-all duration-300 rounded-lg ${
                   activeSection === item.id
-                    ? 'text-cyan-400 glow-text'
+                    ? 'text-blue-400 glow-text'
                     : 'text-white/70 hover:text-white hover:glow-text'
                 }`}
                 aria-label={`Navigate to ${item.name} section`}
@@ -83,7 +83,7 @@ export function Navigation() {
                 {item.name}
                 {activeSection === item.id && (
                   <div
-                    className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-cyan-400 rounded-full animate-pulse"
+                    className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-blue-400 rounded-full animate-pulse"
                     aria-hidden="true"
                   />
                 )}
@@ -101,7 +101,7 @@ export function Navigation() {
                     onClick={() => scrollToSection(item.id)}
                     className={`relative px-2 py-2 text-sm font-medium transition-all duration-300 rounded-lg ${
                       activeSection === item.id
-                        ? 'text-cyan-400 glow-text'
+                        ? 'text-blue-400 glow-text'
                         : 'text-white/70 hover:text-white hover:glow-text'
                     }`}
                     aria-label={`Navigate to ${item.name} section`}
@@ -110,7 +110,7 @@ export function Navigation() {
                     {item.name}
                     {activeSection === item.id && (
                       <div
-                        className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-cyan-400 rounded-full animate-pulse"
+                        className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-blue-400 rounded-full animate-pulse"
                         aria-hidden="true"
                       />
                     )}
@@ -125,7 +125,7 @@ export function Navigation() {
                     onClick={() => scrollToSection(item.id)}
                     className={`relative px-2 py-2 text-sm font-medium transition-all duration-300 rounded-lg ${
                       activeSection === item.id
-                        ? 'text-cyan-400 glow-text'
+                        ? 'text-blue-400 glow-text'
                         : 'text-white/70 hover:text-white hover:glow-text'
                     }`}
                     aria-label={`Navigate to ${item.name} section`}
@@ -134,7 +134,7 @@ export function Navigation() {
                     {item.name}
                     {activeSection === item.id && (
                       <div
-                        className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-cyan-400 rounded-full animate-pulse"
+                        className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-blue-400 rounded-full animate-pulse"
                         aria-hidden="true"
                       />
                     )}

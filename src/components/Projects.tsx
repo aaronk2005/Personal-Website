@@ -2,7 +2,7 @@ export function Projects() {
   const projects = [
     {
       title: 'StatTracker Sports Platform',
-      description: 'Want to make a sports stat tracking platform, inspired cause love stat watching while watching baseball.',
+      description: 'Currently developing a sports statistics tracking platform for baseball. I love analyzing baseball stats and wanted to create a better way to do it.',
       tech: ['React', 'Node.js', 'MongoDB', 'Express', 'Sports APIs', 'Real-time Updates'],
       features: ['Real-time game statistics', 'Player performance tracking', 'Historical data analysis', 'Custom stat dashboards'],
       color: 'from-purple-500/20 to-pink-500/20',
@@ -14,7 +14,7 @@ export function Projects() {
       description: 'Rover dashboard with configurable widgets, real-time maps, and mission planning tools using ROS 2 integration.',
       tech: ['React', 'ROS 2', 'WebSockets', 'GitLab CI/CD', 'Real-time Data'],
       features: ['Configurable widgets', 'Real-time telemetry', 'Mission planning', 'TF frames visualization'],
-      color: 'from-cyan-500/20 to-blue-500/20',
+      color: 'from-blue-400/20 to-purple-500/20',
       status: 'Currently Building',
       github: 'https://github.com/aaronk2005/qset-rover-dashboard'
     },
@@ -23,7 +23,7 @@ export function Projects() {
       description: 'Full-stack restaurant discovery app with spinning wheels and AI-powered recommendations using Google Places API.',
       tech: ['React', 'TypeScript', 'Node.js', 'Express', 'Google Places API', 'OpenAI GPT-4o'],
       features: ['Interactive spinning interface', 'AI recommendations', 'Google Places integration', 'Production deployment'],
-      color: 'from-green-500/20 to-blue-500/20',
+      color: 'from-green-500/20 to-blue-400/20',
       link: 'https://spin2dine.org',
       github: 'https://github.com/aaronk2005/Spin2Dine'
     },
@@ -32,7 +32,7 @@ export function Projects() {
       description: 'Arduino-based anti-theft device with accelerometer to trigger alarms on unauthorized movement, featuring real-time monitoring.',
       tech: ['Arduino', 'Node.js', 'Express.js', 'WebSockets', 'Twilio API'],
       features: ['Motion detection', 'Real-time alerts', 'SMS notifications', 'Web dashboard'],
-      color: 'from-blue-500/20 to-purple-500/20',
+      color: 'from-blue-400/20 to-purple-500/20',
       github: 'https://github.com/aaronk2005/Study-Safe-Device'
     },
     {
@@ -71,7 +71,7 @@ export function Projects() {
       description: 'Classic Minesweeper game implemented in Java with a clean GUI interface and customizable difficulty levels.',
       tech: ['Java', 'Swing', 'AWT', 'Object-Oriented Programming'],
       features: ['Multiple difficulty levels', 'Timer functionality', 'Flag system', 'Clean GUI design'],
-      color: 'from-gray-500/20 to-slate-500/20',
+      color: 'from-orange-500/20 to-red-500/20',
       github: 'https://github.com/aaronk2005/Minesweeper'
     }
   ];

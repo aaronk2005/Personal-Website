@@ -77,7 +77,7 @@ export function Contact() {
       label: 'LinkedIn',
       value: 'LinkedIn Profile',
       link: 'https://www.linkedin.com/in/aaron-kleiman-477b19286/',
-      color: 'text-blue-500'
+      color: 'text-blue-400'
     },
     {
       icon: (
@@ -151,7 +151,7 @@ export function Contact() {
                   className={`w-full glass rounded-lg px-4 py-3 text-white placeholder-white/50 border transition-all focus:outline-none focus:ring-2 ${
                     formStatus === 'error' && !formData.name 
                       ? 'border-red-500/50 focus:border-red-500/50 focus:ring-red-500/30' 
-                      : 'border-white/20 focus:border-blue-500/50 focus:ring-blue-500/30'
+                      : 'border-white/20 focus:border-blue-400/50 focus:ring-blue-400/30'
                   }`}
                   placeholder="Your name"
                   disabled={formStatus === 'loading'}
@@ -172,7 +172,7 @@ export function Contact() {
                   className={`w-full glass rounded-lg px-4 py-3 text-white placeholder-white/50 border transition-all focus:outline-none focus:ring-2 ${
                     formStatus === 'error' && !formData.email 
                       ? 'border-red-500/50 focus:border-red-500/50 focus:ring-red-500/30' 
-                      : 'border-white/20 focus:border-blue-500/50 focus:ring-blue-500/30'
+                      : 'border-white/20 focus:border-blue-400/50 focus:ring-blue-400/30'
                   }`}
                   placeholder="your@email.com"
                   disabled={formStatus === 'loading'}
@@ -208,7 +208,7 @@ export function Contact() {
                 className={`w-full glass rounded-lg px-4 py-3 text-white placeholder-white/50 border transition-all focus:outline-none focus:ring-2 resize-none ${
                   formStatus === 'error' && !formData.message 
                     ? 'border-red-500/50 focus:border-red-500/50 focus:ring-red-500/30' 
-                    : 'border-white/20 focus:border-blue-500/50 focus:ring-blue-500/30'
+                    : 'border-white/20 focus:border-blue-400/50 focus:ring-blue-400/30'
                 }`}
                 placeholder="Tell me about your project or opportunity..."
                 disabled={formStatus === 'loading'}
