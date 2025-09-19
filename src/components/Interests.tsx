@@ -20,11 +20,11 @@ export function Interests() {
       color: 'from-purple-500/20 to-pink-500/20'
     },
     {
-  category: 'Music',
-  items: ['Rap', 'Jazz', 'Lo-fi'],
-  icon: '🎶',
-  color: 'from-blue-400/20 to-violet-500/20'
-}
+      category: 'Music',
+      items: ['Rap', 'Jazz', 'Lo-fi'],
+      icon: '🎶',
+      color: 'from-blue-400/20 to-violet-500/20'
+    }
 
   ];
   
