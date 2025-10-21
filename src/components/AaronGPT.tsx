@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import emailjs from '@emailjs/browser';
 
 // Custom CSS for scrollbar styling and animations
 const scrollbarStyles = `
@@ -60,15 +59,15 @@ AARON'S COMPLETE PROFILE:
 
 💼 WORK EXPERIENCE:
 * **TALLYSIGHT - Software Engineering Intern (Sept 2024 – Dec 2024, Toronto, ON):**
-  * Built Python ETL pipelines processing 10,000+ records daily with 99.9% accuracy
-  * Developed AI-powered automation tools reducing manual work by 15+ hours weekly
-  * Created data visualization dashboards improving decision-making efficiency by 30%
-  * Collaborated with cross-functional teams on scalable software solutions
+  * Worked on an Agile 5-person team, contributing to sprints, code reviews, and deployments
+• Built a Python ETL pipeline that automated scraping of 100+ analyst articles, replacing an 8-hour task
+• Cut data entry processes from hours to minutes with n8n workflows powered by LLMs and Slack automation
+• Developed AI agents in Retool to update player icons and team logos, replacing search and MongoDB uploads
 
 * **SWARMED - Software Developer Volunteer (Aug 2024 – Present, Remote):**
-  * Enhanced platform scalability through optimized database queries and efficient algorithms
-  * Collaborated on feature development using modern web technologies
-  * Contributed to open-source initiatives and community-driven projects
+  * Redesigned UI/UX for a beekeeper–public platform, contributing to the rescue of 36M+ honey bees
+• Built a dashboard survey element with JavaScript and Tally forms, streamlining user feedback collection
+• Developed Bubble.io workflows with API integrations, streamlining user interaction and backend operations
 
 🚀 PROJECTS:
 1. Fantasy Basketball Platform — Full-stack app w/ React, Node.js, MongoDB, Express, Sports APIs. Real-time stats, player analysis, league management.
@@ -192,41 +191,28 @@ Answer as AaronGPT with enthusiasm, personality, and detailed knowledge. Be conv
     setIsEmailSending(true);
 
     try {
-      // Get EmailJS configuration from environment variables
-      const serviceId = (import.meta as any).env.VITE_EMAILJS_SERVICE_ID;
-      const templateId = (import.meta as any).env.VITE_EMAILJS_TEMPLATE_ID;
-      const publicKey = (import.meta as any).env.VITE_EMAILJS_PUBLIC_KEY;
+      // Call backend API to send conversation
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+      const response = await fetch(`${API_URL}/api/send-conversation`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          messages: messages
+        }),
+      });
 
-      if (!serviceId || !templateId || !publicKey) {
-        throw new Error('EmailJS configuration not found. Please set up EmailJS credentials in .env.local');
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || 'Failed to send conversation');
       }
-
-      // Format the conversation for email
-      const conversationText = messages
-        .map(msg => `${msg.type === 'user' ? 'Visitor' : 'AaronGPT'}: ${msg.content}`)
-        .join('\n\n');
-
-      const timestamp = new Date().toLocaleString();
-
-      // Email parameters for direct sending
-      const emailParams = {
-        to_email: 'aaron.kleiman@queensu.ca',
-        from_name: 'Portfolio Website Visitor',
-        subject: 'New AaronGPT Conversation from Your Portfolio',
-        message: `A visitor had the following conversation with AaronGPT on your portfolio website:\n\nTimestamp: ${timestamp}\n\n${conversationText}\n\n---\nSent from your portfolio website AaronGPT chatbot.`
-      };
-
-      await emailjs.send(serviceId, templateId, emailParams, publicKey);
 
       alert('Email sent successfully to Aaron! He\'ll get back to you soon. 📧');
     } catch (error) {
       console.error('Error sending email:', error);
-
-      if (error.message?.includes('EmailJS configuration')) {
-        alert('Email service not configured yet. Please contact Aaron directly at aaron.kleiman@queensu.ca');
-      } else {
-        alert('Failed to send email. Please try again or contact Aaron directly at aaron.kleiman@queensu.ca');
-      }
+      alert('Failed to send email. Please try again or contact Aaron directly at aaron.kleiman@queensu.ca');
     } finally {
       setIsEmailSending(false);
     }
@@ -242,44 +228,30 @@ Answer as AaronGPT with enthusiasm, personality, and detailed knowledge. Be conv
     setIsTyping(true);
 
     try {
-      // Call OpenAI API - check for API key in .env.local
-      const apiKey = (import.meta as any).env.VITE_OPENAI_API_KEY;
-      console.log('API Key found:', !!apiKey);
-      console.log('Environment variables:', (import.meta as any).env);
-
-      if (!apiKey) {
-        throw new Error('OpenAI API key not found in environment variables');
-      }
-
-      const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      // Call backend API for OpenAI chat
+      const API_URL = (import.meta.env as any).VITE_API_URL || 'http://localhost:3001';
+      const response = await fetch(`${API_URL}/api/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
-          model: 'gpt-4',
-          messages: [
-            { role: 'system', content: systemPrompt },
-            ...messages.map(msg => ({
-              role: msg.type === 'user' ? 'user' : 'assistant',
-              content: msg.content
-            })),
-            { role: 'user', content: currentInput }
-          ],
-          max_tokens: 500,
-          temperature: 0.7,
+          messages: [...messages, userMessage],
+          systemPrompt: systemPrompt
         }),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to get response from OpenAI');
+        throw new Error('Failed to get response from AI');
       }
 
       const data = await response.json();
-      const aiResponse = data.choices[0].message.content;
 
-      const botMessage = { type: 'bot', content: aiResponse };
+      if (!data.success) {
+        throw new Error(data.error || 'Failed to get AI response');
+      }
+
+      const botMessage = { type: 'bot', content: data.message };
       setMessages(prev => [...prev, botMessage]);
     } catch (error) {
       console.error('Error calling OpenAI:', error);
@@ -515,10 +487,7 @@ Answer as AaronGPT with enthusiasm, personality, and detailed knowledge. Be conv
 
       {!isOpen && (
         <button
-          onClick={() => {
-            console.log('Button clicked, setting isOpen to true');
-            setIsOpen(true);
-          }}
+          onClick={() => setIsOpen(true)}
           style={{
             position: 'fixed',
             bottom: isMobile ? '16px' : '24px',

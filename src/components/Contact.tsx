@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import emailjs from '@emailjs/browser';
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -30,24 +29,26 @@ export function Contact() {
     setFormStatus('loading');
 
     try {
-      // Get EmailJS configuration from environment variables
-      const serviceId = (import.meta as any).env.VITE_EMAILJS_SERVICE_ID;
-      const templateId = (import.meta as any).env.VITE_EMAILJS_TEMPLATE_ID;
-      const publicKey = (import.meta as any).env.VITE_EMAILJS_PUBLIC_KEY;
+      // Call backend API to send email
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+      const response = await fetch(`${API_URL}/api/send-email`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message
+        }),
+      });
 
-      if (!serviceId || !templateId || !publicKey) {
-        throw new Error('EmailJS configuration not found');
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || 'Failed to send email');
       }
-
-      // Prepare email data to match your template variables
-      const emailParams = {
-        name: formData.name,
-        time: new Date().toLocaleString(),
-        message: `Email: ${formData.email}\n${formData.subject ? `Subject: ${formData.subject}\n` : ''}Message: ${formData.message}`
-      };
-
-      // Send email using EmailJS
-      await emailjs.send(serviceId, templateId, emailParams, publicKey);
 
       setFormStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
