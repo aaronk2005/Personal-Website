@@ -3,7 +3,6 @@
   "outputDirectory": "build",
   "devCommand": "npm run dev",
   "installCommand": "npm install",
-  "cleanUrls": true,
   "rewrites": [
     {
       "source": "/(.*)",
