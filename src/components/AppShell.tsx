@@ -66,22 +66,26 @@ export function BootSequence({ onComplete }: { onComplete: () => void }) {
 }
 
 function ChannelArtwork({ channel }: { channel: Channel }) {
-  const label = <span className="portfolio-channel-name">{channel.title}</span>;
+  const label = (
+    <span className="portfolio-channel-name">
+      <b>{channel.title}</b>
+      <small>{channel.label}</small>
+    </span>
+  );
 
   switch (channel.icon) {
     case 'profile':
       return (
         <div className="channel-art portfolio-wii-channel channel-art-profile" aria-hidden="true">
-          <span className="channel-profile-photo"><img src="/images/linkedin-headshot.jpg" alt="" /></span>
-          <span className="profile-rings"><i /><i /><i /></span>
-          <strong>AK</strong>
+          <img className="channel-photo channel-photo-headshot" src="/images/linkedin-headshot.jpg" alt="" />
           {label}
         </div>
       );
     case 'experience':
       return (
         <div className="channel-art portfolio-wii-channel channel-art-experience" aria-hidden="true">
-          <div className="company-channel-logos">
+          <img className="channel-photo" src="/images/channels/qset-team.jpg" alt="" />
+          <div className="channel-logo-rail">
             <img src="/images/logos/amd.jpg" alt="" />
             <img src="/images/logos/tallysight.jpg" alt="" />
             <img src="/images/logos/qset.jpg" alt="" />
@@ -92,9 +96,9 @@ function ChannelArtwork({ channel }: { channel: Channel }) {
     case 'projects':
       return (
         <div className="channel-art portfolio-wii-channel channel-art-projects" aria-hidden="true">
-          <div className="project-channel-photos">
-            <img src="/images/projects/odysseywalk.png" alt="" />
-            <img src="/images/projects/spin2dine.png" alt="" />
+          <div className="channel-photo-split">
+            <img src="/images/channels/odyssey-amsterdam.jpg" alt="" />
+            <img src="/images/channels/odyssey-tokyo.jpg" alt="" />
           </div>
           {label}
         </div>
@@ -102,46 +106,41 @@ function ChannelArtwork({ channel }: { channel: Channel }) {
     case 'toolbox':
       return (
         <div className="channel-art portfolio-wii-channel channel-art-toolbox" aria-hidden="true">
-          <div className="toolbox-channel-cloud"><b>PY</b><b>TS</b><b>C++</b><b>ROCm</b></div>
+          <img className="channel-photo" src="/images/channels/qset-rover.jpg" alt="" />
+          <span className="channel-image-note">Robotics · systems · software</span>
           {label}
         </div>
       );
     case 'resume':
       return (
         <div className="channel-art portfolio-wii-channel channel-art-resume" aria-hidden="true">
-          <div className="resume-channel-sheet"><b>AK</b><i /><i /><i /></div>
+          <img className="channel-photo channel-photo-screen" src="/images/channels/resume.png" alt="" />
           {label}
         </div>
       );
     case 'spark':
       return (
         <div className="channel-art portfolio-wii-channel channel-art-spark" aria-hidden="true">
-          <div className="building-channel-mark">
-            <header><span>AGENTBENCH</span><i /></header>
-            <p><b>trace_review</b><small>building</small></p>
-            <p><b>scenario_run</b><small>ready</small></p>
-          </div>
+          <img className="channel-photo channel-photo-screen" src="/images/channels/now-building.png" alt="" />
+          <span className="channel-live-badge"><i /> Building</span>
           {label}
         </div>
       );
     case 'ai':
       return (
         <div className="channel-art portfolio-wii-channel channel-art-ai" aria-hidden="true">
-          <div className="ai-channel-screen">
-            <p><b>AK</b><span>Ask me about Aaron.</span></p>
-            <p><span>Projects?</span><b>YOU</b></p>
-          </div>
+          <img className="channel-photo channel-photo-screen" src="/images/channels/aaron-ai.png" alt="" />
+          <span className="channel-live-badge"><i /> Ready</span>
           {label}
         </div>
       );
     case 'hobbies':
       return (
         <div className="channel-art portfolio-wii-channel channel-art-hobbies" aria-hidden="true">
-          <div className="hobby-channel-dots">
-            <i><b>Hockey</b><small>sport</small></i>
-            <i><b>Travel</b><small>explore</small></i>
-            <i><b>Cooking</b><small>food</small></i>
-            <i><b>Music</b><small>listen</small></i>
+          <div className="channel-photo-collage">
+            <img src="/images/channels/hockey.jpg" alt="" />
+            <img src="/images/channels/cooking.jpg" alt="" />
+            <img src="/images/channels/gaming.jpg" alt="" />
           </div>
           {label}
         </div>
@@ -149,32 +148,31 @@ function ChannelArtwork({ channel }: { channel: Channel }) {
     case 'bonus':
       return (
         <div className="channel-art portfolio-wii-channel channel-art-bonus" aria-hidden="true">
-          <div className="bonus-channel-score">
-            <span><b>#1</b><small>QHacks</small></span>
-            <span><b>$1K+</b><small>Robot</small></span>
-            <span><b>20K</b><small>Drawings</small></span>
-          </div>
+          <img className="channel-photo" src="/images/channels/odyssey-rome.jpg" alt="" />
+          <span className="channel-achievement-badge"><b>#1</b> QHacks</span>
           {label}
         </div>
       );
     case 'contact':
       return (
         <div className="channel-art portfolio-wii-channel channel-art-contact" aria-hidden="true">
-          <span className="contact-channel-envelope"><ChannelIcon name="mail" size={54} /></span>
+          <img className="channel-photo" src="/images/channels/toronto.jpg" alt="" />
+          <img className="channel-corner-portrait" src="/images/linkedin-headshot.jpg" alt="" />
           {label}
         </div>
       );
     case 'github':
       return (
         <div className="channel-art portfolio-wii-channel channel-art-github" aria-hidden="true">
-          <span className="social-channel-mark"><ChannelIcon name="github" size={54} /></span>
+          <img className="channel-photo channel-photo-screen" src="/images/channels/github-profile.png" alt="" />
           {label}
         </div>
       );
     case 'linkedin':
       return (
         <div className="channel-art portfolio-wii-channel channel-art-linkedin" aria-hidden="true">
-          <span className="social-channel-mark linkedin-mark">in</span>
+          <img className="channel-photo channel-photo-headshot" src="/images/linkedin-headshot.jpg" alt="" />
+          <span className="channel-linkedin-mark">in</span>
           {label}
         </div>
       );
@@ -183,7 +181,7 @@ function ChannelArtwork({ channel }: { channel: Channel }) {
   }
 }
 
-function ChannelTile({ channel }: { channel: Channel }) {
+function ChannelTile({ channel, opening, onOpen }: { channel: Channel; opening: boolean; onOpen: (path: string) => void }) {
   const content = (
     <>
       <div className="channel-face">
@@ -203,7 +201,20 @@ function ChannelTile({ channel }: { channel: Channel }) {
     );
   }
 
-  return <Link className="menu-channel" to={channel.to} aria-label={`${channel.title} channel`}>{content}</Link>;
+  return (
+    <Link
+      className={`menu-channel${opening ? ' channel-selected' : ''}`}
+      to={channel.to}
+      aria-label={`${channel.title} channel`}
+      onClick={(event) => {
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        event.preventDefault();
+        onOpen(channel.to);
+      }}
+    >
+      {content}
+    </Link>
+  );
 }
 
 function MenuPager() {
@@ -251,11 +262,40 @@ function WiiFooter() {
 }
 
 export function HomeScreen() {
+  const navigate = useNavigate();
+  const [openingPath, setOpeningPath] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!openingPath) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      navigate(openingPath);
+      return;
+    }
+
+    document.documentElement.classList.add('wii-opening-channel');
+    const timer = window.setTimeout(() => navigate(openingPath), 360);
+
+    return () => {
+      document.documentElement.classList.remove('wii-opening-channel');
+      window.clearTimeout(timer);
+    };
+  }, [navigate, openingPath]);
+
   return (
-    <main id="main-content" className="wii-home-screen">
+    <main id="main-content" className={`wii-home-screen${openingPath ? ' is-opening' : ''}`}>
       <MenuPager />
       <section className="wii-channel-grid" aria-label="Portfolio channels">
-        {channels.map((channel) => <ChannelTile key={channel.title} channel={channel} />)}
+        {channels.map((channel) => (
+          <ChannelTile
+            key={channel.title}
+            channel={channel}
+            opening={openingPath === channel.to}
+            onOpen={(path) => {
+              if (!openingPath) setOpeningPath(path);
+            }}
+          />
+        ))}
       </section>
       <p className="menu-help">Select a channel</p>
     </main>
@@ -297,12 +337,14 @@ export function ChannelLayout({
       <main id="main-content" className="wii-channel-screen">
         <section className="wii-channel-window channel-launch-window" aria-labelledby="channel-title">
           <div className={`channel-launch channel-launch-${number}`}>
+            <span className="launch-side-arrow launch-side-arrow-left" aria-hidden="true">‹</span>
             <LaunchArtwork number={number} title={title} />
             <div className="launch-copy">
               <p>{eyebrow}</p>
               <h1 id="channel-title">{title}</h1>
               <span>{intro}</span>
             </div>
+            <span className="launch-side-arrow launch-side-arrow-right" aria-hidden="true">›</span>
           </div>
           <footer className="wii-channel-footer launch-footer">
             <Link to="/" className="wii-action-button"><span>Wii Menu</span></Link>
