@@ -116,28 +116,44 @@ function ChannelArtwork({ channel }: { channel: Channel }) {
     case 'spark':
       return (
         <div className="channel-art portfolio-wii-channel channel-art-spark" aria-hidden="true">
-          <div className="building-channel-mark"><span>AB</span><small>AgentBench</small></div>
+          <div className="building-channel-mark">
+            <header><span>AGENTBENCH</span><i /></header>
+            <p><b>trace_review</b><small>building</small></p>
+            <p><b>scenario_run</b><small>ready</small></p>
+          </div>
           {label}
         </div>
       );
     case 'ai':
       return (
         <div className="channel-art portfolio-wii-channel channel-art-ai" aria-hidden="true">
-          <div className="ai-channel-screen"><span>AK</span><i /><i /><i /></div>
+          <div className="ai-channel-screen">
+            <p><b>AK</b><span>Ask me about Aaron.</span></p>
+            <p><span>Projects?</span><b>YOU</b></p>
+          </div>
           {label}
         </div>
       );
     case 'hobbies':
       return (
         <div className="channel-art portfolio-wii-channel channel-art-hobbies" aria-hidden="true">
-          <div className="hobby-channel-dots"><i>H</i><i>T</i><i>F</i><i>M</i></div>
+          <div className="hobby-channel-dots">
+            <i><b>Hockey</b><small>sport</small></i>
+            <i><b>Travel</b><small>explore</small></i>
+            <i><b>Cooking</b><small>food</small></i>
+            <i><b>Music</b><small>listen</small></i>
+          </div>
           {label}
         </div>
       );
     case 'bonus':
       return (
         <div className="channel-art portfolio-wii-channel channel-art-bonus" aria-hidden="true">
-          <span className="bonus-channel-cup"><ChannelIcon name="trophy" size={50} /></span>
+          <div className="bonus-channel-score">
+            <span><b>#1</b><small>QHacks</small></span>
+            <span><b>$1K+</b><small>Robot</small></span>
+            <span><b>20K</b><small>Drawings</small></span>
+          </div>
           {label}
         </div>
       );
