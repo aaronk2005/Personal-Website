@@ -1,82 +1,72 @@
-import { Navigation } from './components/Navigation';
-import { Hero } from './components/Hero';
-import { About } from './components/About';
-import { Interests } from './components/Interests';
-import { Skills } from './components/Skills';
-import { Experience } from './components/Experience';
-import { Projects } from './components/Projects';
-import { Contact } from './components/Contact';
-import { AaronGPT } from './components/AaronGPT';
+import { useCallback, useEffect, useState } from 'react';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import { AppFrame, BootSequence, HomeScreen } from './components/AppShell';
+import {
+  AboutPage,
+  AaronAIPage,
+  BonusPage,
+  ContactPage,
+  ExperiencePage,
+  HobbiesPage,
+  NotFoundPage,
+  NowPage,
+  ProjectsPage,
+  ResumePage,
+  SkillsPage,
+} from './components/ChannelPages';
 
-import { useEffect } from 'react';
+const pageTitles: Record<string, string> = {
+  '/': 'Aaron Kleiman · Systems & Product Engineer',
+  '/about': 'About · Aaron Kleiman',
+  '/experience': 'Experience · Aaron Kleiman',
+  '/projects': 'Projects · Aaron Kleiman',
+  '/skills': 'Skills & Toolbox · Aaron Kleiman',
+  '/resume': 'Résumé · Aaron Kleiman',
+  '/now': 'Now Building · Aaron Kleiman',
+  '/aaron-ai': 'Aaron AI · Aaron Kleiman',
+  '/hobbies': 'Hobbies · Aaron Kleiman',
+  '/bonus': 'Bonus Level · Aaron Kleiman',
+  '/contact': 'Contact · Aaron Kleiman',
+};
+
+function RouteEffects() {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    document.title = pageTitles[location.pathname] ?? 'Page not found · Aaron Kleiman';
+  }, [location.pathname]);
+
+  return null;
+}
 
 export default function App() {
-  useEffect(() => {
-    // Add scroll-triggered animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
+  const [showBoot, setShowBoot] = useState(true);
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-slide-up');
-        }
-      });
-    }, observerOptions);
-
-    // Observe all sections
-    const sections = document.querySelectorAll('section');
-    sections.forEach((section) => {
-      section.style.opacity = '0';
-      section.style.transform = 'translateY(30px)';
-      observer.observe(section);
-    });
-
-    return () => observer.disconnect();
+  const completeBoot = useCallback(() => {
+    setShowBoot(false);
   }, []);
 
   return (
-    <div className="min-h-screen relative">
-      {/* Skip Navigation Link */}
-      <a 
-        href="#hero" 
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 glass-button rounded-lg px-4 py-2 text-white font-medium"
-        tabIndex={0}
-      >
-        Skip to main content
-      </a>
-      
-      {/* Navigation */}
-      <Navigation />
-      
-      {/* Main Content */}
-      <main role="main">
-        {/* Home - Hero Section */}
-        <Hero />
-
-        {/* About Section */}
-        <About />
-
-        {/* Skills Section */}
-        <Skills />
-
-        {/* Experience Section */}
-        <Experience />
-
-        {/* Projects Section */}
-        <Projects />
-
-        {/* Interests Section */}
-        <Interests />
-
-        {/* Contact Section */}
-        <Contact />
-      </main>
-      
-      {/* AaronGPT Chat System */}
-      <AaronGPT />
-    </div>
+    <>
+      <RouteEffects />
+      <AppFrame>
+        <Routes>
+          <Route path="/" element={<HomeScreen />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/experience" element={<ExperiencePage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/skills" element={<SkillsPage />} />
+          <Route path="/resume" element={<ResumePage />} />
+          <Route path="/now" element={<NowPage />} />
+          <Route path="/aaron-ai" element={<AaronAIPage />} />
+          <Route path="/hobbies" element={<HobbiesPage />} />
+          <Route path="/bonus" element={<BonusPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </AppFrame>
+      {showBoot && <BootSequence onComplete={completeBoot} />}
+    </>
   );
 }

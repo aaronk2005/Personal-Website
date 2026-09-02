@@ -1,55 +1,72 @@
-# Aaron Kleiman's Portfolio Website
+# Aaron Kleiman — Portfolio
 
-Modern glassmorphism portfolio website built with React, Vite, and TypeScript.
+A Wii-style engineering portfolio built with React, TypeScript, and Vite. It combines the console's 4×3 channel rhythm, curved footer, launch screens, and numbered hand pointer with Aaron's real project screenshots, company marks, and portfolio content.
 
-## Development
+## Highlights
 
-### Prerequisites
-- Node.js (v18+)
-- npm
+- Twelve deep-linkable channels, including Aaron AI, Hobbies, Bonus Level, GitHub, and LinkedIn
+- Short, skippable console startup with a Wii-style safety screen and reduced-motion support
+- Responsive channel grid with mobile-safe touch targets and keyboard-visible focus states
+- Centralized portfolio content in `src/data/portfolio.ts`
+- Local, deterministic Aaron AI guide with no API key, account, or remote text processing
+- Direct contact links without a fragile form backend
+- Per-route page titles, canonical metadata, Open Graph artwork, robots, and sitemap files
 
-### Setup
-1. Install dependencies:
+## Local development
+
+Requires Node.js 18 or newer.
+
 ```bash
 npm install
+npm run dev
 ```
 
-2. Configure environment variables:
-   - Copy `.env.example` to `.env.local`
-   - Copy `.env.server.example` to `.env.server` and add your API keys
+Open <http://localhost:3005>.
 
-3. Run development servers:
+To test the production build:
+
 ```bash
-npm run dev:all
+npm run build
+npm run preview
 ```
 
-This starts:
-- Frontend: http://localhost:3005
-- Backend API: http://localhost:3001
+## Content updates
 
-### Scripts
-- `npm run dev` - Start frontend only
-- `npm run server` - Start backend only
-- `npm run dev:all` - Start both frontend and backend
-- `npm run build` - Build for production
+Most portfolio copy, roles, projects, links, and tool groups live in:
 
-## Production Deployment
+```text
+src/data/portfolio.ts
+```
 
-### Backend (Render/Railway/Fly.io)
-1. Deploy the backend server
-2. Set environment variables from `.env.server`
-3. Note your backend URL
+The current headshot is:
 
-### Frontend (Vercel)
-1. Set environment variable: `VITE_API_URL=<your-backend-url>`
-2. Deploy
+```text
+public/images/linkedin-headshot.jpg
+```
 
-## Features
-- Interactive AaronGPT chatbot (powered by OpenAI)
-- Contact form with EmailJS integration
-- Glassmorphism design
-- Fully responsive
-- Secure API architecture
+### Résumé PDF
 
-## Security
-All sensitive credentials (OpenAI API key, EmailJS credentials) are stored server-side only and never exposed to the client.
+The repository did not include a current résumé PDF, so the UI intentionally shows an unavailable state rather than a broken link.
+
+1. Add the file as `public/Aaron-Kleiman-Resume.pdf`.
+2. Set `resumeAvailable` to `true` in `src/components/ChannelPages.tsx`.
+3. Run `npm run build` and verify the download from `/resume`.
+
+## Deployment
+
+The existing Vercel configuration builds to `build/` and rewrites extensionless application routes to `index.html`, preserving browser refreshes on channel URLs.
+
+Recommended release flow:
+
+1. Run `npm run build` locally.
+2. Preview desktop, mobile, keyboard-only, and reduced-motion behavior.
+3. Push the reviewed branch to the repository.
+4. Let the existing Vercel project create a preview deployment.
+5. Verify direct visits to `/projects`, `/aaron-ai`, `/resume`, and `/contact`.
+6. Promote the preview to the existing `aaronkleiman.dev` production domain.
+
+Do not change DNS unless the existing Vercel project is no longer attached to the domain.
+
+## Asset notes
+
+Wii reference artwork, the wordmark, and the Wii-style pointer are documented in `public/images/wii/ATTRIBUTION.md`. Company logos and project screenshots are used to identify Aaron's real experience and work.

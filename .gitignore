@@ -39,3 +39,4 @@ nul
 # Temporary files
 *.tmp
 *.temp
+.vercel
