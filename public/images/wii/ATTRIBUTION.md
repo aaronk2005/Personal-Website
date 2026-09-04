@@ -5,6 +5,10 @@ The channel thumbnails in this folder are cropped from a Nintendo Wii Menu scree
 - Source page: https://www.nintendolife.com/news/2013/04/nintendo_to_pull_the_plug_on_several_online_wii_channels
 - Source image: https://images.nintendolife.com/81edd95bd6cae/1280x720.jpg
 
+The higher-resolution Disc, Mii, Wii Shop, and Check Mii Out channel references are from eggdesign’s editable Wii Menu page, the primary UI reference supplied for this portfolio:
+
+- https://github.com/cornetespoir/wii-menu-page
+
 The Wii wordmark is sourced from Wikimedia Commons. The file is identified there as a simple text logo below the threshold of originality:
 
 - https://commons.wikimedia.org/wiki/File:Wii.svg

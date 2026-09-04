@@ -1719,3 +1719,329 @@ ul { margin: 0; padding: 0; }
   .channel-launch .portfolio-channel-name { min-height:34px; padding:6px 9px 5px; }
   .launch-side-arrow { width:26px; height:52px; font-size:1.55rem; }
 }
+
+/* Authentic Wii pass: keep the existing shell and let original channel artwork lead. */
+.actual-wii-channel {
+  position:absolute;
+  inset:0;
+  display:block;
+  overflow:hidden;
+  background:#fff;
+}
+.actual-wii-channel::before,.actual-wii-channel::after { display:none!important; }
+.actual-wii-channel .wii-channel-image {
+  position:absolute;
+  inset:-2px;
+  z-index:1;
+  width:calc(100% + 4px);
+  height:calc(100% + 4px);
+  max-width:none;
+  object-fit:cover;
+}
+.actual-wii-channel .portfolio-channel-name {
+  position:absolute!important;
+  top:auto!important;
+  right:9px!important;
+  bottom:8px!important;
+  left:9px!important;
+  z-index:6;
+  display:block!important;
+  width:auto!important;
+  min-width:0!important;
+  height:auto!important;
+  padding:4px 9px 5px!important;
+  border:1px solid rgba(105,110,112,.78)!important;
+  border-radius:999px!important;
+  background:rgba(250,250,249,.95)!important;
+  box-shadow:0 2px 5px rgba(0,0,0,.16)!important;
+  color:#505659!important;
+  font-size:clamp(.55rem,.8vw,.71rem)!important;
+  font-weight:700!important;
+  letter-spacing:-.015em!important;
+  line-height:1!important;
+  text-align:center!important;
+  text-shadow:0 1px #fff!important;
+  transform:none!important;
+}
+.personalized-wii-channel::after {
+  position:absolute;
+  inset:0;
+  z-index:2;
+  display:block!important;
+  background:linear-gradient(90deg,rgba(255,255,255,.03),rgba(255,255,255,.22));
+  content:"";
+}
+.personalized-wii-channel .wii-profile-photo {
+  position:absolute;
+  top:9%;
+  left:7%;
+  z-index:4;
+  height:78%;
+  aspect-ratio:1;
+  overflow:hidden;
+  border:4px solid #fff;
+  border-radius:50%;
+  box-shadow:0 0 0 2px #58bddb,0 4px 9px rgba(0,0,0,.25);
+}
+.personalized-wii-channel .wii-profile-photo img { width:100%; height:100%; object-fit:cover; object-position:50% 28%; }
+.personalized-wii-channel .portfolio-channel-name {
+  top:50%!important;
+  right:7%!important;
+  bottom:auto!important;
+  left:auto!important;
+  width:45%!important;
+  padding:9px 8px 10px!important;
+  border-color:#5ebbd7!important;
+  color:#218cac!important;
+  font-size:clamp(.67rem,1.08vw,.95rem)!important;
+  transform:translateY(-50%)!important;
+}
+.wii-company-row {
+  position:absolute;
+  top:9px;
+  right:9px;
+  z-index:4;
+  display:flex;
+  gap:4px;
+  padding:3px;
+  border:1px solid #b8bcbd;
+  border-radius:999px;
+  background:rgba(255,255,255,.94);
+  box-shadow:0 2px 6px rgba(0,0,0,.16);
+}
+.wii-company-row img { width:25px; height:25px; padding:2px; border:1px solid #d8dbdc; border-radius:50%; background:#fff; object-fit:contain; }
+.actual-wii-channel.channel-art-projects .portfolio-channel-name {
+  top:0!important;
+  right:0!important;
+  bottom:auto!important;
+  left:0!important;
+  display:grid!important;
+  height:34%!important;
+  padding:0 8px!important;
+  place-items:center;
+  border:0!important;
+  border-radius:0!important;
+  background:#8e5930!important;
+  color:#fff!important;
+  text-shadow:0 1px 2px #53331e!important;
+}
+.actual-wii-channel.channel-art-toolbox .portfolio-channel-name {
+  top:0!important;
+  right:0!important;
+  bottom:auto!important;
+  left:0!important;
+  display:grid!important;
+  height:31%!important;
+  padding:0 8px!important;
+  place-items:center;
+  border:0!important;
+  border-radius:0!important;
+  background:#fcfcfb!important;
+  color:#349cc0!important;
+}
+.actual-wii-channel.channel-art-toolbox .wii-channel-image { object-position:center 61%; }
+.actual-wii-channel.channel-art-resume .portfolio-channel-name,
+.actual-wii-channel.channel-art-spark .portfolio-channel-name {
+  top:0!important;
+  right:0!important;
+  bottom:auto!important;
+  left:0!important;
+  display:grid!important;
+  height:35%!important;
+  padding:0 8px!important;
+  place-items:center;
+  border:0!important;
+  border-radius:0!important;
+  color:#fff!important;
+  text-shadow:0 1px 2px rgba(0,0,0,.42)!important;
+}
+.actual-wii-channel.channel-art-resume .portfolio-channel-name { background:#23602d!important; }
+.actual-wii-channel.channel-art-spark .portfolio-channel-name { background:#1f53ae!important; }
+.actual-wii-channel.channel-art-ai .wii-channel-image { object-position:center bottom; }
+.actual-wii-channel.channel-art-ai .portfolio-channel-name {
+  top:0!important;
+  right:0!important;
+  bottom:auto!important;
+  left:0!important;
+  display:grid!important;
+  height:45%!important;
+  place-items:center;
+  border:0!important;
+  border-radius:0!important;
+  background:#f9f9f7!important;
+  color:#168c83!important;
+  font-size:clamp(.8rem,1.3vw,1.15rem)!important;
+}
+.actual-wii-channel.channel-art-hobbies .portfolio-channel-name {
+  top:50%!important;
+  right:0!important;
+  bottom:auto!important;
+  left:0!important;
+  display:grid!important;
+  height:76%!important;
+  padding:0 8px!important;
+  place-items:center;
+  border:0!important;
+  border-radius:0!important;
+  background:#52bec3!important;
+  color:#fff!important;
+  font-size:clamp(.72rem,1.16vw,1rem)!important;
+  text-shadow:0 1px 2px #2c7d82!important;
+  transform:translateY(-50%)!important;
+}
+.actual-wii-channel.channel-art-bonus .portfolio-channel-name {
+  top:50%!important;
+  right:0!important;
+  bottom:auto!important;
+  left:0!important;
+  display:grid!important;
+  height:76%!important;
+  padding:0 8px!important;
+  place-items:center;
+  border:0!important;
+  border-radius:0!important;
+  background:#fafaf8!important;
+  color:#4f5659!important;
+  font-size:clamp(.72rem,1.16vw,1rem)!important;
+  transform:translateY(-50%)!important;
+}
+.social-wii-channel::before {
+  position:absolute;
+  inset:0;
+  z-index:2;
+  display:block!important;
+  background:rgba(250,251,250,.76);
+  content:"";
+}
+.wii-social-mark {
+  position:absolute;
+  top:50%;
+  left:16%;
+  z-index:4;
+  display:grid;
+  width:47px;
+  height:47px;
+  place-items:center;
+  border:3px solid #fff;
+  border-radius:50%;
+  background:#41494d;
+  box-shadow:0 0 0 2px #77858a,0 3px 7px rgba(0,0,0,.18);
+  color:#fff;
+  transform:translateY(-50%);
+}
+.social-wii-channel .portfolio-channel-name {
+  top:50%!important;
+  right:9%!important;
+  bottom:auto!important;
+  left:auto!important;
+  width:54%!important;
+  padding:9px 8px 10px!important;
+  border-color:#59bad8!important;
+  color:#2d8dac!important;
+  font-size:clamp(.68rem,1.08vw,.94rem)!important;
+  transform:translateY(-50%)!important;
+}
+.real-photo-channel .portfolio-channel-name { min-height:36px; }
+.menu-channel .channel-hover-label {
+  bottom:-22px;
+  padding:5px 22px 6px;
+  border:2px solid #b9bdbe;
+  background:rgba(255,255,255,.97);
+  box-shadow:0 3px 9px rgba(0,0,0,.2);
+  color:#454b4e;
+  font-size:.68rem;
+  text-shadow:0 1px #fff;
+}
+
+/* Restore the earlier, restrained Wii channel launch layout. */
+.channel-launch {
+  position:relative;
+  display:grid;
+  grid-template-columns:minmax(250px,.8fr) minmax(360px,1.2fr);
+  align-items:center;
+  gap:7%;
+  overflow:hidden;
+  padding:clamp(35px,7vw,100px);
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,.018) 0 1px,transparent 1px 4px),#f8f8f8;
+}
+.channel-launch::before {
+  position:absolute;
+  top:0;
+  right:0;
+  left:0;
+  display:block;
+  width:auto;
+  height:18px;
+  border:0;
+  border-radius:0;
+  background:#62c5e3;
+  box-shadow:none;
+  content:"";
+  transform:none;
+}
+.channel-launch::after {
+  position:absolute;
+  top:auto;
+  right:-8%;
+  bottom:-38%;
+  left:auto;
+  display:block;
+  width:58%;
+  height:auto;
+  aspect-ratio:1;
+  border:1px solid rgba(92,199,232,.25);
+  border-radius:50%;
+  background:transparent;
+  box-shadow:0 0 0 55px rgba(92,199,232,.045),0 0 0 110px rgba(92,199,232,.035);
+  content:"";
+  transform:none;
+}
+.channel-launch .launch-wii-tile {
+  position:relative;
+  inset:auto;
+  z-index:2;
+  justify-self:center;
+  width:min(34vw,390px);
+  height:auto;
+  aspect-ratio:1.82;
+  border:4px solid #fff;
+  border-radius:24px;
+  box-shadow:0 0 0 3px #66c3df,0 9px 22px rgba(0,0,0,.2);
+  transform:rotate(-2deg);
+}
+.channel-launch .launch-custom-channel>.channel-art { border-radius:20px; }
+.channel-launch .launch-copy {
+  position:relative;
+  inset:auto;
+  z-index:3;
+  width:auto;
+  max-width:620px;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+.channel-launch .launch-copy p { font-size:.66rem; }
+.channel-launch .launch-copy h1 { margin:6px 0 18px; font-size:clamp(2.5rem,6vw,5rem); }
+.channel-launch .launch-copy span { font-size:clamp(.92rem,1.5vw,1.12rem); line-height:1.65; }
+.channel-launch .portfolio-channel-name { min-height:0; }
+
+@media (max-width:900px) {
+  .channel-launch { grid-template-columns:1fr; grid-template-rows:auto 1fr; align-content:center; gap:24px; padding:28px 22px 20px; text-align:center; }
+  .channel-launch .launch-wii-tile { inset:auto; width:min(68vw,310px); height:auto; }
+  .channel-launch .launch-copy { inset:auto; justify-self:center; width:auto; padding:0; text-align:center; }
+}
+
+@media (max-width:560px) {
+  .actual-wii-channel .portfolio-channel-name { font-size:.58rem!important; }
+  .personalized-wii-channel .wii-profile-photo { border-width:2px; }
+  .wii-company-row { top:6px; right:6px; padding:2px; }
+  .wii-company-row img { width:20px; height:20px; }
+  .wii-social-mark { left:12%; width:38px; height:38px; }
+  .social-wii-channel .portfolio-channel-name { right:7%!important; width:56%!important; }
+  .channel-launch .launch-wii-tile { width:min(78vw,300px); }
+  .channel-launch .launch-copy { inset:auto; width:auto; padding:0; text-align:center; }
+  .channel-launch .launch-copy h1 { margin-bottom:12px; font-size:clamp(2.25rem,10vw,3.8rem); }
+  .channel-launch .launch-copy span { font-size:.8rem; line-height:1.5; }
+}
