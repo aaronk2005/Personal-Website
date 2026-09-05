@@ -119,12 +119,6 @@ export function ChannelIcon({ name, size = 28, className = '' }: ChannelIconProp
           <path d="M16 9v7l4 3" />
         </svg>
       );
-    case 'trophy':
-      return (
-        <svg {...common}>
-          <path d="M10 5h12v6c0 5-2.3 8-6 8s-6-3-6-8zM16 19v5M11 27h10M8 8H5v3c0 3 2 5 6 5M24 8h3v3c0 3-2 5-6 5" />
-        </svg>
-      );
     case 'code':
       return (
         <svg {...common}>

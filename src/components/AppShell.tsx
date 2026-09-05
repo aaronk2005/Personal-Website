@@ -49,7 +49,7 @@ export function BootSequence({ onComplete }: { onComplete: () => void }) {
       {phase === 'splash' ? (
         <div className="boot-splash">
           <img src="/images/wii/wii-logo.svg" alt="Wii" />
-          <span>Aaron’s Portfolio Edition</span>
+          <span>Aaron's Portfolio Edition</span>
         </div>
       ) : (
         <>
@@ -77,7 +77,7 @@ function ChannelTile({ channel }: { channel: Channel }) {
         <ChannelArtwork channel={channel} />
         <span className="channel-gloss" aria-hidden="true" />
       </div>
-      <span className="channel-hover-label" aria-hidden="true">{channel.title}{channel.external ? ' ↗' : ''}</span>
+      <span className="channel-hover-label" aria-hidden="true">{channel.title}{channel.external ? ' ->' : ''}</span>
     </>
   );
 
@@ -96,9 +96,9 @@ function ChannelTile({ channel }: { channel: Channel }) {
 function MenuPager() {
   return (
     <nav className="menu-pager" aria-label="Menu page 1 of 1">
-      <button className="pager-left" type="button" disabled aria-label="Previous menu page"><span>‹</span></button>
+      <button className="pager-left" type="button" disabled aria-label="Previous menu page"><span>&lt;</span></button>
       <div className="page-dots" aria-hidden="true"><i className="active" /></div>
-      <button className="pager-right" type="button" disabled aria-label="Next menu page"><span>›</span></button>
+      <button className="pager-right" type="button" disabled aria-label="Next menu page"><span>&gt;</span></button>
     </nav>
   );
 }
@@ -121,13 +121,13 @@ function WiiFooter() {
   return (
     <footer className="wii-footer">
       <div className="footer-sculpture" aria-hidden="true" />
-      <Link to="/about" className="footer-side footer-left" aria-label="Open Aaron’s profile">
+      <Link to="/about" className="footer-side footer-left" aria-label="Open Aaron's profile">
         <span className="round-control"><img className="wii-footer-logo" src="/images/wii/wii-logo.svg" alt="" /></span>
         <small>Aaron Menu</small>
       </Link>
       <div className="footer-clock">
         <time dateTime={now.toISOString()}>{blinkingTime}</time>
-        <span>{dateFormatter.format(now)} · Toronto</span>
+        <span>{dateFormatter.format(now)} - Toronto</span>
       </div>
       <Link to="/contact" className="footer-side footer-right" aria-label="Open contact channel">
         <span className="round-control"><ChannelIcon name="mail" size={31} /></span>

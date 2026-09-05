@@ -7,7 +7,6 @@ export type IconName =
   | 'spark'
   | 'ai'
   | 'hobbies'
-  | 'bonus'
   | 'contact'
   | 'github'
   | 'linkedin'
@@ -17,7 +16,6 @@ export type IconName =
   | 'download'
   | 'mail'
   | 'clock'
-  | 'trophy'
   | 'code'
   | 'chip'
   | 'map';
@@ -35,11 +33,11 @@ export interface Channel {
 
 export const profile = {
   name: 'Aaron Kleiman',
-  role: 'Computer Engineering · Queen’s University',
+  role: 'Computer Engineering - Queens University',
   location: 'Toronto, Ontario',
-  education: 'BASc, Computer Engineering · Sep 2023–Apr 2028',
+  education: 'BASc, Computer Engineering - Sep 2023-Apr 2028',
   positioning:
-    'I build dependable systems, AI tooling, and polished products—from GPU validation pipelines to embedded robots and full-stack experiences.',
+    'I build dependable systems, AI tooling, and polished products - from GPU validation pipelines to embedded robots and full-stack experiences.',
   email: 'aaron.kleiman@queensu.ca',
   github: 'https://github.com/aaronk2005',
   linkedin: 'https://www.linkedin.com/in/aaron-kleiman-477b19286/',
@@ -81,7 +79,7 @@ export const channels: Channel[] = [
     tone: 'violet',
   },
   {
-    title: 'Résumé',
+    title: 'Resume',
     label: '05 / One-page view',
     description: 'A recruiter-friendly summary with a PDF download slot.',
     to: '/resume',
@@ -99,7 +97,7 @@ export const channels: Channel[] = [
   {
     title: 'Aaron AI',
     label: '07 / Portfolio guide',
-    description: 'Ask a focused, local guide about Aaron’s work, skills, and background.',
+    description: "Ask a focused, local guide about Aaron's work, skills, and background.",
     to: '/aaron-ai',
     icon: 'ai',
     tone: 'aqua',
@@ -113,16 +111,8 @@ export const channels: Channel[] = [
     tone: 'mint',
   },
   {
-    title: 'Bonus Level',
-    label: '09 / Highlights',
-    description: 'Competition wins, milestones, and a few real-life side quests.',
-    to: '/bonus',
-    icon: 'bonus',
-    tone: 'peach',
-  },
-  {
     title: 'Contact',
-    label: '10 / Say hello',
+    label: '09 / Say hello',
     description: 'Direct links for opportunities, collaborations, and questions.',
     to: '/contact',
     icon: 'contact',
@@ -151,8 +141,8 @@ export const channels: Channel[] = [
 export const experiences = [
   {
     company: 'AMD',
-    title: 'Systems Software Engineer Intern · Datacenter GPU Validation',
-    dates: 'May 2026–Present',
+    title: 'Systems Software Engineer Intern - Datacenter GPU Validation',
+    dates: 'May 2026-Present',
     kind: 'Systems & validation',
     summary:
       'Building automation and diagnostic tooling across firmware, drivers, ROCm workloads, and datacenter GPU validation.',
@@ -166,7 +156,7 @@ export const experiences = [
   {
     company: 'Tallysight',
     title: 'Software Engineer Intern',
-    dates: 'May–Aug 2025',
+    dates: 'May-Aug 2025',
     kind: 'Product engineering',
     summary:
       'Shipped product-facing automation that turned repetitive editorial and data operations into dependable workflows.',
@@ -178,12 +168,12 @@ export const experiences = [
     tech: ['Python', 'ETL', 'LLM workflows', 'Retool', 'MongoDB', 'n8n'],
   },
   {
-    company: 'Queen’s Space Engineering Team',
+    company: "Queen's Space Engineering Team",
     title: 'Software UI Lead',
-    dates: 'Jul 2025–May 2026',
+    dates: 'Jul 2025-May 2026',
     kind: 'Robotics & leadership',
     summary:
-      'Led the UI direction for a mission-critical rover dashboard while strengthening the team’s engineering workflow.',
+      "Led the UI direction for a mission-critical rover dashboard while strengthening the team's engineering workflow.",
     impact: [
       'Designed configurable telemetry widgets, real-time maps, and mission-planning flows.',
       'Integrated ROS 2 topics, diagnostics, TF frames, and playback into operator views.',
@@ -192,9 +182,9 @@ export const experiences = [
     tech: ['React', 'ROS 2', 'WebSockets', 'GitLab CI/CD', 'Maps'],
   },
   {
-    company: 'Queen’s University',
-    title: 'Undergraduate Teaching Assistant · APSC 141',
-    dates: 'Sep–Dec 2025',
+    company: "Queen's University",
+    title: 'Undergraduate Teaching Assistant - APSC 141',
+    dates: 'Sep-Dec 2025',
     kind: 'Teaching',
     summary:
       'Helped first-year engineering students build confidence with C, debugging, control flow, and algorithmic thinking.',
@@ -207,7 +197,7 @@ export const experiences = [
   {
     company: 'Swarmed',
     title: 'Software Developer',
-    dates: 'Oct 2024–May 2025',
+    dates: 'Oct 2024-May 2025',
     kind: 'Full-stack product',
     summary:
       'Improved a beekeeper-to-public service through product UI work, feedback tooling, and API-connected workflows.',
@@ -220,7 +210,7 @@ export const experiences = [
   {
     company: 'CAD Railway Industries',
     title: 'Engineering Summer Intern',
-    dates: 'May–Aug 2024',
+    dates: 'May-Aug 2024',
     kind: 'Technical operations',
     summary:
       'Organized large technical datasets and authored maintainable locomotive service documentation.',
@@ -254,7 +244,7 @@ export const projects = [
   {
     id: 'battle-bus',
     name: 'Autonomous Taxi Robot',
-    kicker: 'Final competition · $1,032.66 earned',
+    kicker: 'Final competition - $1,032.66 earned',
     signal: '20 Hz autonomous control loop',
     summary:
       'A Raspberry Pi taxi robot that planned fares, perceived its environment, and drove autonomously under competition constraints.',
@@ -351,12 +341,6 @@ export const skillGroups = [
   },
 ];
 
-export const achievements = [
-  ['QHacks 2026', 'Winner with OdysseyWalk'],
-  ['Autonomous Taxi Robot', '$1,032.66 earned in the final competition'],
-  ['Engineering documentation', '20,000+ drawings classified and 100+ manuals authored'],
-] as const;
-
 export const interests = [
   {
     name: 'Sports',
@@ -378,11 +362,4 @@ export const interests = [
     lead: 'Usually something competitive, strategic, or nostalgic.',
     items: ['Rap', 'Jazz', 'Lo-fi', 'Poker', 'Mario Kart', 'Wii Sports'],
   },
-] as const;
-
-export const bonusFacts = [
-  ['Childhood console', 'The Wii—especially Mario Kart and Wii Sports'],
-  ['Best sports memory', 'Winning a hockey championship with the George Bell Titans'],
-  ['Strategy table', 'Chess, poker, and fantasy basketball'],
-  ['Always learning', 'History, world cultures, and niche technical deep dives'],
 ] as const;

@@ -67,10 +67,6 @@
 .broadcast-hobbies .broadcast-detail { margin-top:3px; }
 .broadcast-crowd { position:absolute; bottom:0; width:100%; height:37%; overflow:hidden; }
 .broadcast-crowd img { width:100%; height:auto; object-fit:cover; }
-.broadcast-bonus { flex-direction:column; background:linear-gradient(#f6fafb,#d4e5ec); color:#4b778d; }
-.broadcast-bonus .broadcast-eyebrow { color:#4c6670; }
-.broadcast-bonus .broadcast-title { margin-top:6%; font-size:clamp(1.375rem,13cqw,3rem); color:#326c88; }
-.broadcast-bonus .broadcast-detail { margin-top:5%; color:#647b85; }
 .broadcast-contact { background:#182c43; color:white; }
 .broadcast-city { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
 .broadcast-contact::after { position:absolute; inset:0; z-index:1; background:linear-gradient(0deg,#102134f2,#10213405 90%); content:""; }
@@ -104,27 +100,44 @@
   .broadcast-ai-copy { padding-top:8%; }
   .broadcast-hobbies .broadcast-copy { padding-top:13%; }
   .broadcast-resume .broadcast-rule { display:none; }
-  .broadcast-bonus .broadcast-eyebrow { font-size:.75rem; }
+}
+
+@container (max-width:160px) {
+  .broadcast-profile .broadcast-eyebrow { display:none; }
+  .broadcast-profile .broadcast-copy { padding:4%; }
 }
 
 @media (max-width:900px) {
   .wii-menu-mode { height:auto; min-height:100dvh; overflow:visible; }
-  .wii-home-screen { display:block; width:100%; height:auto; min-height:100dvh; padding:22px 18px 140px; }
+  .wii-home-screen { display:block; width:100%; height:auto; min-height:100dvh; padding:22px 18px calc(140px + env(safe-area-inset-bottom)); }
   .wii-channel-grid { width:min(100%,700px); height:auto; grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-rows:repeat(6,auto); gap:14px; }
   .menu-channel { aspect-ratio:1.82; }
   .menu-pager { display:none; }
   .wii-footer .footer-clock span { font-size:.75rem; }
   .channel-launch { display:flex; gap:24px; padding:24px 16px; }
   .channel-launch .launch-wii-tile { width:min(520px,80vw); }
+  .wii-channel-screen { height:100dvh; padding:0; }
+  .channel-launch-window,.channel-content-window { width:100%; height:100dvh; border-radius:0; }
+  .wii-footer { height:calc(110px + env(safe-area-inset-bottom)); }
+  .footer-sculpture { height:calc(94px + env(safe-area-inset-bottom)); }
+  .footer-side { bottom:calc(15px + env(safe-area-inset-bottom)); }
+  .footer-clock { bottom:calc(7px + env(safe-area-inset-bottom)); }
+  .wii-channel-footer { padding-bottom:calc(14px + env(safe-area-inset-bottom)); }
 }
 @media (max-width:480px) {
-  .wii-home-screen { padding:14px 10px 120px; }
+  .wii-home-screen { padding:14px 10px calc(130px + env(safe-area-inset-bottom)); }
   .wii-channel-grid { gap:11px 9px; }
   .channel-face { padding:3px; border-radius:12px; }
   .broadcast { border-radius:7px; }
   .wii-footer .footer-clock span { max-width:155px; font-size:.75rem; }
   .channel-launch .launch-copy span { font-size:1rem; }
   .channel-launch .launch-wii-tile { width:86vw; }
+}
+@media (max-width:900px) and (max-height:500px) and (orientation:landscape) {
+  .channel-launch { flex-direction:row; gap:24px; padding:16px 24px; }
+  .channel-launch .launch-wii-tile { width:min(42vw,calc((100dvh - 130px) * 1.82)); }
+  .channel-launch .launch-copy { width:44%; }
+  .channel-launch .launch-copy span { font-size:.9375rem; line-height:1.45; }
 }
 @media (min-width:901px) and (max-height:650px) {
   .wii-home-screen { height:calc(100dvh - 112px); padding:15px 60px 20px; }

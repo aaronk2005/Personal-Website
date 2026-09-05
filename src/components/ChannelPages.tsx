@@ -1,8 +1,6 @@
 import { useState, type CSSProperties, type FormEvent, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  achievements,
-  bonusFacts,
   experiences,
   interests,
   profile,
@@ -16,8 +14,8 @@ import { ChannelLayout } from './AppShell';
 const companyLogos: Record<string, string> = {
   AMD: '/images/logos/amd.jpg',
   Tallysight: '/images/logos/tallysight.jpg',
-  'Queen’s Space Engineering Team': '/images/logos/qset.jpg',
-  'Queen’s University': '/images/logos/queens.jpg',
+  "Queen's Space Engineering Team": '/images/logos/qset.jpg',
+  "Queen's University": '/images/logos/queens.jpg',
   Swarmed: '/images/logos/swarmed.jpg',
   'CAD Railway Industries': '/images/logos/cad-railway.jpg',
 };
@@ -57,7 +55,7 @@ export function AboutPage() {
       number="01"
       eyebrow="Start here"
       title="Start Here"
-      intro="I’m a Computer Engineering student at Queen’s who likes working where software meets real constraints—hardware, people, performance, and production."
+      intro="I'm a Computer Engineering student at Queen's who likes working where software meets real constraints - hardware, people, performance, and production."
     >
       <section className="about-hero">
         <figure className="portrait-card">
@@ -67,7 +65,7 @@ export function AboutPage() {
           </div>
           <figcaption>
             <span>Computer Engineering</span>
-            <strong>Queen’s University · ’28</strong>
+            <strong>Queen's University - '28</strong>
           </figcaption>
         </figure>
 
@@ -97,21 +95,6 @@ export function AboutPage() {
         </div>
       </section>
 
-      <section className="achievement-strip" aria-labelledby="highlights-title">
-        <div>
-          <p className="eyebrow">Bonus channel</p>
-          <h2 id="highlights-title">A few useful signals</h2>
-        </div>
-        <div className="achievement-list">
-          {achievements.map(([label, value]) => (
-            <article key={label}>
-              <ChannelIcon name="trophy" size={24} />
-              <span>{label}</span>
-              <strong>{value}</strong>
-            </article>
-          ))}
-        </div>
-      </section>
     </ChannelLayout>
   );
 }
@@ -176,7 +159,7 @@ function ProjectVisual({ project }: { project: (typeof projects)[number] }) {
       <dl>
         <div><dt>System</dt><dd>{project.signal}</dd></div>
         <div><dt>Mode</dt><dd>{project.kicker}</dd></div>
-        <div><dt>Core stack</dt><dd>{project.stack.slice(0, 3).join(' · ')}</dd></div>
+      <div><dt>Core stack</dt><dd>{project.stack.slice(0, 3).join(' - ')}</dd></div>
       </dl>
       <footer><span>Documented build</span><i aria-hidden="true" /></footer>
     </div>
@@ -189,7 +172,7 @@ export function ProjectsPage() {
       number="03"
       eyebrow="Selected work"
       title="Projects"
-      intro="A selection of systems and products chosen for the engineering decisions behind them—not just the technologies listed underneath."
+      intro="A selection of systems and products chosen for the engineering decisions behind them - not just the technologies listed underneath."
     >
       <section className="project-stack" aria-label="Featured projects">
         {projects.map((project, index) => (
@@ -277,14 +260,14 @@ export function ResumePage() {
   return (
     <ChannelLayout
       number="05"
-      eyebrow="Résumé"
-      title="Résumé"
-      intro="A compact, mobile-friendly overview. The downloadable PDF slot is ready for the newest résumé once it is added to the repository."
+      eyebrow="Resume"
+      title="Resume"
+      intro="A compact overview of experience, projects, and core tools."
     >
-      <section className="resume-toolbar" aria-label="Résumé actions">
+      <section className="resume-toolbar" aria-label="Resume actions">
         <div>
-          <strong>Aaron Kleiman · Computer Engineering</strong>
-          <span>Toronto, Ontario · BASc 2023–2028</span>
+          <strong>Aaron Kleiman - Computer Engineering</strong>
+          <span>Toronto, Ontario - BASc 2023-2028</span>
         </div>
         {resumeAvailable ? (
           <a className="primary-button" href="/Aaron-Kleiman-Resume.pdf" download>
@@ -301,13 +284,13 @@ export function ResumePage() {
         <aside className="content-notice">
           <ChannelIcon name="resume" size={25} />
           <div>
-            <strong>No résumé PDF was present in the repository.</strong>
+            <strong>No resume PDF is available yet.</strong>
             <p>This page stays useful without a broken download. Add the current PDF as <code>public/Aaron-Kleiman-Resume.pdf</code>, then switch <code>resumeAvailable</code> to <code>true</code>.</p>
           </div>
         </aside>
       )}
 
-      <section className="resume-sheet" aria-label="Condensed résumé">
+      <section className="resume-sheet" aria-label="Condensed resume">
         <div className="resume-profile">
           <p className="eyebrow">Profile</p>
           <h2>Systems software, AI tooling, and product-minded engineering.</h2>
@@ -352,7 +335,7 @@ export function NowPage() {
       number="06"
       eyebrow="Now building"
       title="Now Building"
-      intro="AgentBench is an in-progress developer tool for testing and evaluating AI agents and skills. It is an active exploration—not a launched company or finished product."
+      intro="AgentBench is an in-progress developer tool for testing and evaluating AI agents and skills."
     >
       <section className="now-layout">
         <article className="now-feature">
@@ -360,7 +343,7 @@ export function NowPage() {
             <header><span>AGENTBENCH / LOCAL</span><b>BUILDING</b></header>
             <div className="agentbench-run">
               <span>Evaluation workspace</span>
-              <strong>Trace what an agent did—and why.</strong>
+              <strong>Trace what an agent did - and why.</strong>
             </div>
             <ul>
               <li><span>01</span>Scenario runner<i>ready</i></li>
@@ -372,7 +355,7 @@ export function NowPage() {
             <p className="eyebrow"><span className="signal-dot" aria-hidden="true" /> Active exploration</p>
             <h2>AgentBench</h2>
             <p>A workbench for running repeatable agent tests, understanding failures, and comparing behavior across skills and environments.</p>
-            <div className="status-chip">In development · scope evolving</div>
+            <div className="status-chip">In development - scope evolving</div>
           </div>
         </article>
         <div className="exploration-list">
@@ -419,9 +402,9 @@ function answerAaronQuestion(question: string) {
     return 'The fastest route is aaron.kleiman@queensu.ca. You can also use the LinkedIn and GitHub channels from the Wii Menu. He is especially interested in systems software, validation, developer tools, and AI infrastructure.';
   }
   if (/who|about|aaron/.test(normalized)) {
-    return 'Aaron is a Toronto-based Computer Engineering student at Queen’s University. He works across systems software, AI tooling, robotics, and product engineering—and cares about making complex systems useful and legible.';
+    return "Aaron is a Toronto-based Computer Engineering student at Queen's University. He works across systems software, AI tooling, robotics, and product engineering - and cares about making complex systems useful and legible.";
   }
-  return 'I’m a focused portfolio guide, so I’m best at questions about Aaron’s experience, projects, skills, hobbies, or how to contact him. Try one of the prompts above.';
+  return "I'm a focused portfolio guide, so I'm best at questions about Aaron's experience, projects, skills, hobbies, or how to contact him. Try one of the prompts above.";
 }
 
 export function AaronAIPage() {
@@ -429,7 +412,7 @@ export function AaronAIPage() {
     {
       id: 1,
       speaker: 'guide',
-      text: 'Hi—I’m Aaron AI, a small local guide to this portfolio. Ask about Aaron’s projects, work, skills, or life outside engineering.',
+      text: "Hi - I'm Aaron AI, a small local guide to this portfolio. Ask about Aaron's projects, work, skills, or life outside engineering.",
     },
   ]);
   const [draft, setDraft] = useState('');
@@ -463,7 +446,7 @@ export function AaronAIPage() {
       number="07"
       eyebrow="Interactive portfolio guide"
       title="Aaron AI"
-      intro="A compact, on-device guide adapted from the AaronGPT feature on my previous portfolio. It answers from this site’s content and does not send your text to an external AI service."
+      intro="A compact local guide to this portfolio. It answers from this site's content and does not send your text to an external AI service."
     >
       <section className="aaron-ai-layout">
         <aside className="ai-prompt-panel">
@@ -474,7 +457,7 @@ export function AaronAIPage() {
               <button type="button" key={prompt} onClick={() => sendQuestion(prompt)}>{prompt}</button>
             ))}
           </div>
-          <p className="ai-local-note"><span aria-hidden="true">1</span> Local portfolio guide · no account required</p>
+          <p className="ai-local-note"><span aria-hidden="true">1</span> Local portfolio guide - no account required</p>
         </aside>
         <div className="ai-console">
           <header><span>Aaron AI Channel</span><i aria-hidden="true" /> Ready</header>
@@ -492,7 +475,7 @@ export function AaronAIPage() {
               id="aaron-ai-question"
               value={draft}
               onChange={(event) => setDraft(event.target.value)}
-              placeholder="Ask about Aaron…"
+              placeholder="Ask about Aaron..."
               autoComplete="off"
             />
             <button type="submit">Send</button>
@@ -511,7 +494,7 @@ export function HobbiesPage() {
       title="Hobbies"
       intro="The things that keep me curious, competitive, and away from a debugger once in a while."
     >
-      <section className="hobby-grid" aria-label="Aaron’s interests and hobbies">
+      <section className="hobby-grid" aria-label="Aaron's interests and hobbies">
         {interests.map((interest, index) => (
           <article className="hobby-card" key={interest.name}>
             <header><span>{String(index + 1).padStart(2, '0')}</span><i aria-hidden="true" /></header>
@@ -523,33 +506,8 @@ export function HobbiesPage() {
       </section>
       <aside className="hobby-wii-note">
         <img src="/images/wii/wii-logo.svg" alt="Wii" />
-        <div><strong>The nostalgia is real.</strong><p>My childhood favourites were Mario Kart and Wii Sports—so this portfolio theme is not an arbitrary skin.</p></div>
+        <div><strong>The nostalgia is real.</strong><p>My childhood favourites were Mario Kart and Wii Sports - so this portfolio theme is personal.</p></div>
       </aside>
-    </ChannelLayout>
-  );
-}
-
-export function BonusPage() {
-  return (
-    <ChannelLayout
-      number="09"
-      eyebrow="A few extra signals"
-      title="Bonus Level"
-      intro="Real wins, useful milestones, and a handful of details that do not fit neatly on a résumé."
-    >
-      <section className="bonus-scoreboard" aria-labelledby="bonus-achievements">
-        <header><p className="eyebrow">Player one highlights</p><h2 id="bonus-achievements">Achievement board</h2></header>
-        <div>
-          {achievements.map(([label, value], index) => (
-            <article key={label}><span>{String(index + 1).padStart(2, '0')}</span><h3>{label}</h3><p>{value}</p></article>
-          ))}
-        </div>
-      </section>
-      <section className="bonus-facts" aria-label="More about Aaron">
-        {bonusFacts.map(([label, value]) => (
-          <article key={label}><span>{label}</span><strong>{value}</strong></article>
-        ))}
-      </section>
     </ChannelLayout>
   );
 }
@@ -591,8 +549,8 @@ export function ContactPage() {
     >
       <section className="contact-layout">
         <div className="contact-statement">
-          <p className="eyebrow"><span className="signal-dot" aria-hidden="true" /> Toronto · Eastern Time</p>
-          <h2>I’m especially interested in work where software touches real systems.</h2>
+          <p className="eyebrow"><span className="signal-dot" aria-hidden="true" /> Toronto - Eastern Time</p>
+          <h2>I'm especially interested in work where software touches real systems.</h2>
           <p>No contact form, no mystery backend. Choose a direct channel and your message goes where you expect.</p>
         </div>
         <div className="contact-methods">

@@ -4,7 +4,6 @@ import { AppFrame, BootSequence, HomeScreen } from './components/AppShell';
 import {
   AboutPage,
   AaronAIPage,
-  BonusPage,
   ContactPage,
   ExperiencePage,
   HobbiesPage,
@@ -16,17 +15,16 @@ import {
 } from './components/ChannelPages';
 
 const pageTitles: Record<string, string> = {
-  '/': 'Aaron Kleiman · Systems & Product Engineer',
-  '/about': 'About · Aaron Kleiman',
-  '/experience': 'Experience · Aaron Kleiman',
-  '/projects': 'Projects · Aaron Kleiman',
-  '/skills': 'Skills & Toolbox · Aaron Kleiman',
-  '/resume': 'Résumé · Aaron Kleiman',
-  '/now': 'Now Building · Aaron Kleiman',
-  '/aaron-ai': 'Aaron AI · Aaron Kleiman',
-  '/hobbies': 'Hobbies · Aaron Kleiman',
-  '/bonus': 'Bonus Level · Aaron Kleiman',
-  '/contact': 'Contact · Aaron Kleiman',
+  '/': 'Aaron Kleiman - Systems & Product Engineer',
+  '/about': 'About - Aaron Kleiman',
+  '/experience': 'Experience - Aaron Kleiman',
+  '/projects': 'Projects - Aaron Kleiman',
+  '/skills': 'Skills & Toolbox - Aaron Kleiman',
+  '/resume': 'Resume - Aaron Kleiman',
+  '/now': 'Now Building - Aaron Kleiman',
+  '/aaron-ai': 'Aaron AI - Aaron Kleiman',
+  '/hobbies': 'Hobbies - Aaron Kleiman',
+  '/contact': 'Contact - Aaron Kleiman',
 };
 
 function RouteEffects() {
@@ -34,7 +32,7 @@ function RouteEffects() {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
-    document.title = pageTitles[location.pathname] ?? 'Page not found · Aaron Kleiman';
+    document.title = pageTitles[location.pathname] ?? 'Page not found - Aaron Kleiman';
   }, [location.pathname]);
 
   return null;
@@ -61,7 +59,6 @@ export default function App() {
           <Route path="/now" element={<NowPage />} />
           <Route path="/aaron-ai" element={<AaronAIPage />} />
           <Route path="/hobbies" element={<HobbiesPage />} />
-          <Route path="/bonus" element={<BonusPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
