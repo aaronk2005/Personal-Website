@@ -542,7 +542,7 @@ export function ContactPage() {
 
   return (
     <ChannelLayout
-      number="10"
+      number="09"
       eyebrow="Contact"
       title="Contact"
       intro="For software, systems, validation, developer-tooling, and AI infrastructure conversations, these are the direct routes."
