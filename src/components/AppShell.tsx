@@ -1,7 +1,8 @@
-import { useEffect, useState, type PropsWithChildren } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type PropsWithChildren } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { channels, type Channel } from '../data/portfolio';
 import { ChannelIcon } from './ChannelIcon';
+import { ChannelArtwork } from './ChannelArtwork';
 
 const timeFormatter = new Intl.DateTimeFormat('en-CA', {
   timeZone: 'America/Toronto',
@@ -27,7 +28,10 @@ export function BootSequence({ onComplete }: { onComplete: () => void }) {
   useEffect(() => {
     if (phase !== 'safety') return;
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key.toLowerCase() === 'a' || event.key === 'Enter' || event.key === ' ') onComplete();
+      if (event.key.toLowerCase() === 'a' && !event.ctrlKey && !event.metaKey && !event.altKey) {
+        event.preventDefault();
+        onComplete();
+      }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
@@ -65,107 +69,6 @@ export function BootSequence({ onComplete }: { onComplete: () => void }) {
   );
 }
 
-function ChannelArtwork({ channel }: { channel: Channel }) {
-  const label = <span className="portfolio-channel-name">{channel.title}</span>;
-
-  switch (channel.icon) {
-    case 'profile':
-      return (
-        <div className="channel-art actual-wii-channel personalized-wii-channel channel-art-profile" aria-hidden="true">
-          <img className="wii-channel-image" src="/images/wii/reference-mii.png" alt="" />
-          <span className="wii-profile-photo"><img src="/images/linkedin-headshot.jpg" alt="" /></span>
-          {label}
-        </div>
-      );
-    case 'experience':
-      return (
-        <div className="channel-art actual-wii-channel channel-art-experience" aria-hidden="true">
-          <img className="wii-channel-image" src="/images/wii/reference-disc.png" alt="" />
-          <div className="wii-company-row">
-            <img src="/images/logos/amd.jpg" alt="" />
-            <img src="/images/logos/tallysight.jpg" alt="" />
-            <img src="/images/logos/qset.jpg" alt="" />
-          </div>
-          {label}
-        </div>
-      );
-    case 'projects':
-      return (
-        <div className="channel-art actual-wii-channel channel-art-projects" aria-hidden="true">
-          <img className="wii-channel-image" src="/images/wii/photo-channel.jpg" alt="" />
-          {label}
-        </div>
-      );
-    case 'toolbox':
-      return (
-        <div className="channel-art actual-wii-channel channel-art-toolbox" aria-hidden="true">
-          <img className="wii-channel-image" src="/images/wii/reference-shop.jpg" alt="" />
-          {label}
-        </div>
-      );
-    case 'resume':
-      return (
-        <div className="channel-art actual-wii-channel channel-art-resume" aria-hidden="true">
-          <img className="wii-channel-image" src="/images/wii/news-channel.jpg" alt="" />
-          {label}
-        </div>
-      );
-    case 'spark':
-      return (
-        <div className="channel-art actual-wii-channel channel-art-spark" aria-hidden="true">
-          <img className="wii-channel-image" src="/images/wii/forecast-channel.jpg" alt="" />
-          {label}
-        </div>
-      );
-    case 'ai':
-      return (
-        <div className="channel-art actual-wii-channel channel-art-ai" aria-hidden="true">
-          <img className="wii-channel-image" src="/images/wii/reference-check-mii.png" alt="" />
-          {label}
-        </div>
-      );
-    case 'hobbies':
-      return (
-        <div className="channel-art actual-wii-channel channel-art-hobbies" aria-hidden="true">
-          <img className="wii-channel-image" src="/images/wii/everybody-votes.jpg" alt="" />
-          {label}
-        </div>
-      );
-    case 'bonus':
-      return (
-        <div className="channel-art actual-wii-channel channel-art-bonus" aria-hidden="true">
-          <img className="wii-channel-image" src="/images/wii/nintendo-channel.jpg" alt="" />
-          {label}
-        </div>
-      );
-    case 'contact':
-      return (
-        <div className="channel-art portfolio-wii-channel real-photo-channel channel-art-contact" aria-hidden="true">
-          <img className="channel-photo" src="/images/channels/toronto.jpg" alt="" />
-          <img className="channel-corner-portrait" src="/images/linkedin-headshot.jpg" alt="" />
-          {label}
-        </div>
-      );
-    case 'github':
-      return (
-        <div className="channel-art actual-wii-channel social-wii-channel channel-art-github" aria-hidden="true">
-          <img className="wii-channel-image" src="/images/wii/internet-channel.jpg" alt="" />
-          <span className="wii-social-mark"><ChannelIcon name="github" size={45} /></span>
-          {label}
-        </div>
-      );
-    case 'linkedin':
-      return (
-        <div className="channel-art portfolio-wii-channel real-photo-channel channel-art-linkedin" aria-hidden="true">
-          <img className="channel-photo channel-photo-headshot" src="/images/linkedin-headshot.jpg" alt="" />
-          <span className="channel-linkedin-mark">in</span>
-          {label}
-        </div>
-      );
-    default:
-      return null;
-  }
-}
 
 function ChannelTile({ channel }: { channel: Channel }) {
   const content = (
@@ -174,7 +77,7 @@ function ChannelTile({ channel }: { channel: Channel }) {
         <ChannelArtwork channel={channel} />
         <span className="channel-gloss" aria-hidden="true" />
       </div>
-      <span className="channel-hover-label">{channel.title}</span>
+      <span className="channel-hover-label" aria-hidden="true">{channel.title}{channel.external ? ' ↗' : ''}</span>
     </>
   );
 
@@ -194,7 +97,7 @@ function MenuPager() {
   return (
     <nav className="menu-pager" aria-label="Menu page 1 of 1">
       <button className="pager-left" type="button" disabled aria-label="Previous menu page"><span>‹</span></button>
-      <div className="page-dots" aria-hidden="true"><i className="active" /><i /><i /><i /></div>
+      <div className="page-dots" aria-hidden="true"><i className="active" /></div>
       <button className="pager-right" type="button" disabled aria-label="Next menu page"><span>›</span></button>
     </nav>
   );
@@ -235,10 +138,22 @@ function WiiFooter() {
 }
 
 export function HomeScreen() {
+  const moveSelection = (event: ReactKeyboardEvent<HTMLElement>) => {
+    if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) return;
+    const links = [...event.currentTarget.querySelectorAll<HTMLAnchorElement>('.menu-channel')];
+    const current = links.indexOf(document.activeElement as HTMLAnchorElement);
+    if (current < 0) return;
+    const columns = getComputedStyle(event.currentTarget).gridTemplateColumns.split(' ').length;
+    const offset = { ArrowLeft: -1, ArrowRight: 1, ArrowUp: -columns, ArrowDown: columns }[event.key] ?? 0;
+    const next = event.key === 'Home' ? 0 : event.key === 'End' ? links.length - 1 : Math.max(0, Math.min(links.length - 1, current + offset));
+    event.preventDefault();
+    links[next].focus({ preventScroll: false });
+  };
+
   return (
     <main id="main-content" className="wii-home-screen">
       <MenuPager />
-      <section className="wii-channel-grid" aria-label="Portfolio channels">
+      <section className="wii-channel-grid" aria-label="Portfolio channels" onKeyDown={moveSelection}>
         {channels.map((channel) => <ChannelTile key={channel.title} channel={channel} />)}
       </section>
       <p className="menu-help">Select a channel</p>
@@ -267,14 +182,7 @@ export function ChannelLayout({
   intro,
   children,
 }: PropsWithChildren<{ number: string; eyebrow: string; title: string; intro: string }>) {
-  const navigate = useNavigate();
-  const location = useLocation();
   const [started, setStarted] = useState(false);
-
-  const goBack = () => {
-    if (location.key === 'default') navigate('/');
-    else navigate(-1);
-  };
 
   if (!started) {
     return (
@@ -314,7 +222,7 @@ export function ChannelLayout({
           <div className="page-content">{children}</div>
         </div>
         <footer className="wii-channel-footer">
-          <button type="button" className="wii-action-button" onClick={goBack}><span>Back</span></button>
+          <button type="button" className="wii-action-button" onClick={() => setStarted(false)}><span>Back</span></button>
           <Link to="/" className="wii-action-button primary"><span>Wii Menu</span></Link>
         </footer>
       </section>
@@ -322,12 +230,28 @@ export function ChannelLayout({
   );
 }
 
-export function AppFrame({ children }: PropsWithChildren) {
+export function AppFrame({ children, inactive = false }: PropsWithChildren<{ inactive?: boolean }>) {
   const location = useLocation();
   const home = location.pathname === '/';
+  const frame = useRef<HTMLDivElement>(null);
+  const previousPath = useRef(location.pathname);
+
+  useEffect(() => {
+    if (!frame.current) return;
+    frame.current.inert = inactive;
+    if (!inactive) frame.current.querySelector<HTMLElement>('.menu-channel, .wii-action-button.primary')?.focus({ preventScroll: true });
+  }, [inactive]);
+
+  useEffect(() => {
+    if (!inactive && home && previousPath.current !== '/') {
+      const links = frame.current?.querySelectorAll<HTMLAnchorElement>('.menu-channel');
+      [...(links ?? [])].find((link) => link.getAttribute('href') === previousPath.current)?.focus({ preventScroll: true });
+    }
+    previousPath.current = location.pathname;
+  }, [home, inactive, location.pathname]);
 
   return (
-    <div className={home ? 'app-frame wii-menu-mode' : 'app-frame wii-channel-mode'}>
+    <div ref={frame} aria-hidden={inactive || undefined} className={home ? 'app-frame wii-menu-mode' : 'app-frame wii-channel-mode'}>
       <a className="skip-link" href="#main-content">Skip to main content</a>
       {children}
       {home && <WiiFooter />}

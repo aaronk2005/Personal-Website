@@ -50,7 +50,7 @@ export default function App() {
   return (
     <>
       <RouteEffects />
-      <AppFrame>
+      <AppFrame inactive={showBoot}>
         <Routes>
           <Route path="/" element={<HomeScreen />} />
           <Route path="/about" element={<AboutPage />} />
