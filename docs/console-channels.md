@@ -23,3 +23,9 @@ Photo Channel's file picker is a private, temporary local viewer. It does not up
 - `npm run build`
 - `node --test tests/*.test.mjs`
 - Browser checks: game tile navigation; Mii create/edit/cancel/delete; keyboard sliders; computer turn and restart; tennis HOME pause; local photo loading, effects, slideshow and puzzle completion; mobile widths 390px and 320px.
+
+## Phone layout checks
+
+The mobile stylesheet keeps game controls compact, preserves 44px primary controls and 52px Snake direction buttons, and allows document scrolling in short landscape windows. Form text remains 16px and viewport zoom is not disabled. Safe-area spacing is provided for notches and home indicators.
+
+Checked in browser-sized viewports at 320×568, 375×667, 390×844, and 844×390: menu navigation, game start/pause/restart, Minesweeper flag toggling, paddle slider, Mii editor cancellation, and portfolio/Projects/Resume/Aaron AI/Photo Channel overflow. These are browser viewport checks, not physical iOS or Android device tests.
