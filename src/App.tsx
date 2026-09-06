@@ -1,9 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { AppFrame, BootSequence, HomeScreen } from './components/AppShell';
 import { ConsoleSystem } from './components/ConsoleSystem';
 import { MiiPlazaPage } from './components/MiiPlaza';
 import { ArcadePage } from './components/Arcade';
+import { PhotoChannel } from './components/PhotoChannel';
 import {
   AboutPage,
   AaronAIPage,
@@ -28,7 +29,13 @@ const pageTitles: Record<string, string> = {
   '/aaron-ai': 'Aaron AI - Aaron Kleiman',
   '/hobbies': 'Hobbies - Aaron Kleiman',
   '/contact': 'Contact - Aaron Kleiman',
-  '/mii': 'Mii Plaza - Aaron Kleiman',
+  '/mii': 'Mii Channel - Aaron Kleiman',
+  '/photos': 'Photo Channel - Aaron Kleiman',
+  '/play/bowling': 'Pocket Bowling - Aaron Kleiman',
+  '/play/targets': 'Target Rally - Aaron Kleiman',
+  '/play/memory': 'Mii Match - Aaron Kleiman',
+  '/play/tennis': 'Table Tennis - Aaron Kleiman',
+  '/play/four': 'Four in a Row - Aaron Kleiman',
   '/arcade': 'Arcade - Aaron Kleiman',
 };
 
@@ -66,7 +73,9 @@ export default function App() {
           <Route path="/hobbies" element={<HobbiesPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/mii" element={<MiiPlazaPage />} />
-          <Route path="/arcade" element={<ArcadePage />} />
+          <Route path="/arcade" element={<Navigate to="/?page=play" replace />} />
+          <Route path="/play/:gameId" element={<ArcadePage />} />
+          <Route path="/photos" element={<PhotoChannel />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </AppFrame>

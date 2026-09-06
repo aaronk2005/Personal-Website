@@ -6,6 +6,7 @@ import "./index.css";
 import "./channels.css";
 import "./play.css";
 import "./projects.css";
+import "./console-channels.css";
   
   createRoot(document.getElementById("root")!).render(
     <React.StrictMode>

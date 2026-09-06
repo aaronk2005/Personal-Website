@@ -140,7 +140,8 @@ function WiiFooter() {
 }
 
 export function HomeScreen() {
-  const [page, setPage] = useState(() => { try { return sessionStorage.getItem('ak-menu-page') === '1' ? 1 : 0; } catch { return 0; } });
+  const location = useLocation();
+  const [page, setPage] = useState(() => { if (new URLSearchParams(location.search).get('page') === 'play') return 1; try { return sessionStorage.getItem('ak-menu-page') === '1' ? 1 : 0; } catch { return 0; } });
   const grid = useRef<HTMLElement>(null);
   const lastPage = useRef(page);
   const { chime } = useConsole();
@@ -155,7 +156,7 @@ export function HomeScreen() {
     window.addEventListener('keydown', handle);
     return () => window.removeEventListener('keydown', handle);
   });
-  const visibleChannels = channels.filter(channel => ['/mii', '/arcade'].includes(channel.to) === (page === 1));
+  const visibleChannels = channels.filter(channel => (channel.page === 'play') === (page === 1));
   useEffect(() => {
     if (lastPage.current !== page) grid.current?.querySelector<HTMLElement>('.menu-channel')?.focus({ preventScroll: true });
     lastPage.current = page;
@@ -174,11 +175,11 @@ export function HomeScreen() {
 
   return (
     <main id="main-content" className="wii-home-screen">
-      <div className="menu-section-switch" aria-label="Channel pages"><button aria-pressed={page === 0} onClick={() => changePage(0)}>Portfolio</button><button aria-pressed={page === 1} onClick={() => changePage(1)}>Play <span>2 channels</span></button></div>
+      <div className="menu-section-switch" aria-label="Channel pages"><button aria-pressed={page === 0} onClick={() => changePage(0)}>Portfolio</button><button aria-pressed={page === 1} onClick={() => changePage(1)}>Play</button></div>
       <MenuPager page={page} onChange={changePage} />
       <section ref={grid} key={page} className="wii-channel-grid" aria-label={page ? 'Play channels' : 'Portfolio channels'} onKeyDown={moveSelection}>
         {visibleChannels.map((channel) => <ChannelTile key={channel.title} channel={channel} />)}
-        {Array.from({ length: 12 - visibleChannels.length }, (_, i) => <div key={'empty-'+i} className="empty-channel-slot" aria-hidden="true"><span>Wii</span></div>)}
+        {Array.from({ length: Math.max(0, 12 - visibleChannels.length) }, (_, i) => <div key={'empty-'+i} className="empty-channel-slot" aria-hidden="true"><span>Wii</span></div>)}
       </section>
       <p className="menu-help">Select a channel</p>
     </main>

@@ -1,22 +1,26 @@
 import { useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import { ChannelLayout } from './AppShell';
 import { DEMO_MIIS, loadPlayer, MiiAvatar } from './MiiPlaza';
 import { readLocal, writeLocal, useConsole, usePlayClock } from './ConsoleSystem';
 import { bowl, scoreMatch, shuffled } from './gameRules';
+import { FourInARow, TableTennis } from './MoreGames';
 
-type Game = 'bowling' | 'targets' | 'memory';
+type Game = 'bowling' | 'targets' | 'memory' | 'tennis' | 'four';
 const games: { id: Game; name: string; summary: string; label: string }[] = [
   { id: 'bowling', name: 'Pocket Bowling', summary: 'Line it up. Let it roll.', label: '5 frames / one roll each' },
   { id: 'targets', name: 'Target Rally', summary: 'Point, tap, repeat.', label: '20 seconds / beat your best' },
   { id: 'memory', name: 'Mii Match', summary: 'A familiar face. Twice.', label: '6 pairs / take your time' },
+  { id: 'tennis', name: 'Table Tennis', summary: 'Keep the rally going.', label: 'First to 5' },
+  { id: 'four', name: 'Four in a Row', summary: 'Make your next move.', label: 'You vs. the computer' },
 ];
 function savedRecords(): Record<Game, number> {
   const data = readLocal<Partial<Record<Game, number>>>('ak-arcade-records', {});
   return Object.fromEntries(games.map(({ id }) => [id, typeof data[id] === 'number' && Number.isFinite(data[id]) && data[id]! >= 0 ? data[id] : 0])) as Record<Game, number>;
 }
 export function ArcadePage() {
-  const [game, setGame] = useState<Game | null>(null);
+  const { gameId } = useParams();
+  const game = games.find(g => g.id === gameId)?.id;
   const [records, setRecords] = useState(savedRecords);
   const [round, setRound] = useState(0);
   const [player] = useState(loadPlayer);
@@ -28,19 +32,16 @@ export function ArcadePage() {
       return next;
     });
   };
-  return <ChannelLayout number="11" eyebrow="Play a little" title="Arcade" intro="Three little games. One more try." compact>
+  if (!game) return <Navigate to="/?page=play" replace />;
+  return <ChannelLayout key={game} number="PLAY" eyebrow="Player 1" title={games.find(g => g.id === game)!.name} intro={games.find(g => g.id === game)!.label} compact>
     <section className="arcade-workspace">
       <div className="play-toolbar"><div><span className="eyebrow">Pick up & play</span><h2>{game ? games.find(g => g.id === game)!.name : 'Choose a game'}</h2></div>
         <Link to="/mii" className="arcade-player" aria-label={'Change player, currently ' + player.name}><MiiAvatar mii={player} bust /><span><small>PLAYER 1</small>{player.name}</span></Link>
       </div>
-      {game ? <>
-        <div className="arcade-session-controls"><button className="play-button" onClick={() => setGame(null)}>All games</button><span>Best: {records[game]}{game === 'bowling' ? ' / 50' : ' pts'}</span><button className="play-button" onClick={() => setRound(r => r + 1)}>Restart</button></div>
-        <div key={game + round}>{game === 'bowling' ? <Bowling onFinish={onFinish} /> : game === 'targets' ? <Targets onFinish={onFinish} /> : <MemoryGame onFinish={onFinish} />}</div>
-      </> : <div className="game-shelf">{games.map((item, i) => <button className={'game-box game-box-' + item.id} key={item.id} onClick={() => setGame(item.id)}>
-        <span className="game-number">0{i + 1}</span>
-        <div className="game-cover" aria-hidden="true">{item.id === 'memory' ? <><MiiAvatar mii={DEMO_MIIS[0]} bust /><MiiAvatar mii={DEMO_MIIS[2]} bust /></> : item.id === 'targets' ? <span className="target-symbol" /> : <span className="bowling-symbol">●<i>10</i></span>}</div>
-        <h3>{item.name}</h3><p>{item.summary}</p><small>{item.label}</small><span className="game-play">Play <span aria-hidden="true">→</span></span>
-      </button>)}</div>}
+      <>
+        <div className="arcade-session-controls"><Link className="play-button" to="/?page=play">Play channels</Link><span>Best: {records[game]}{game === 'bowling' ? ' / 50' : ' pts'}</span><button className="play-button" onClick={() => setRound(r => r + 1)}>Restart</button></div>
+        <div key={game + round}>{game === 'bowling' ? <Bowling onFinish={onFinish} /> : game === 'targets' ? <Targets onFinish={onFinish} /> : game === 'memory' ? <MemoryGame onFinish={onFinish} /> : game === 'tennis' ? <TableTennis onFinish={onFinish} /> : <FourInARow onFinish={onFinish} />}</div>
+      </>
       <p className="arcade-note">Mouse, touch, or keyboard. HOME pauses play. Records stay on this device.</p>
     </section>
   </ChannelLayout>;
