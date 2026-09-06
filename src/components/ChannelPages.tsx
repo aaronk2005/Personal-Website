@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import {
   experiences,
   interests,
+  moreProjects,
   profile,
   projects,
   skillGroups,
@@ -20,14 +21,34 @@ const companyLogos: Record<string, string> = {
   'CAD Railway Industries': '/images/logos/cad-railway.jpg',
 };
 
-const projectImages: Record<string, { src: string; alt: string }> = {
+const projectImages: Record<string, { src: string; alt: string; caption: string; width: number; height: number }> = {
   odysseywalk: {
     src: '/images/projects/odysseywalk.png',
     alt: 'OdysseyWalk live product showing its worldwide walking-tour browser',
+    caption: 'Walking-tour browser',
+    width: 1265,
+    height: 712,
   },
   spin2dine: {
     src: '/images/projects/spin2dine.png',
     alt: 'Spin2Dine live product showing its restaurant discovery landing page',
+    caption: 'Restaurant discovery app',
+    width: 1265,
+    height: 712,
+  },
+  'study-safe': {
+    src: '/images/projects/study-safe-prototype.jpg',
+    alt: 'Study Safe Arduino prototype in its enclosure beside a phone showing motion readings and alarm controls',
+    caption: 'Prototype and connected phone interface',
+    width: 4032,
+    height: 3024,
+  },
+  perfex: {
+    src: '/images/projects/perfex-prototype.png',
+    alt: 'Perfex assessment running on a laptop beside the physical taskbox with buttons, sliders, and dials',
+    caption: 'Web assessment and Arduino taskbox',
+    width: 502,
+    height: 371,
   },
 };
 
@@ -146,24 +167,16 @@ function ProjectVisual({ project }: { project: (typeof projects)[number] }) {
 
   if (preview) {
     return (
-      <figure className="project-visual project-product-preview">
-        <img src={preview.src} alt={preview.alt} />
-        <figcaption><span>Live product</span>{project.signal}</figcaption>
+      <figure className="project-photo">
+        <a href={preview.src} target="_blank" rel="noreferrer" aria-label={`Open ${project.name} image (opens in a new tab)`}>
+          <img src={preview.src} alt={preview.alt} width={preview.width} height={preview.height} loading="lazy" decoding="async" />
+        </a>
+        <figcaption>{preview.caption}<ChannelIcon name="external" size={14} /></figcaption>
       </figure>
     );
   }
 
-  return (
-    <div className="project-visual project-system-panel" aria-label={`${project.name} system summary`}>
-      <header><span>AK / PROJECT</span><b>{project.id.toUpperCase()}</b></header>
-      <dl>
-        <div><dt>System</dt><dd>{project.signal}</dd></div>
-        <div><dt>Mode</dt><dd>{project.kicker}</dd></div>
-      <div><dt>Core stack</dt><dd>{project.stack.slice(0, 3).join(' - ')}</dd></div>
-      </dl>
-      <footer><span>Documented build</span><i aria-hidden="true" /></footer>
-    </div>
-  );
+  return null;
 }
 
 export function ProjectsPage() {
@@ -176,7 +189,7 @@ export function ProjectsPage() {
     >
       <section className="project-stack" aria-label="Featured projects">
         {projects.map((project, index) => (
-          <article className={`project-card${index < 2 ? ' flagship' : ''}`} key={project.id}>
+          <article className={`project-card${projectImages[project.id] ? ' with-photo' : ' text-only'}`} key={project.id}>
             <ProjectVisual project={project} />
             <div className="project-body">
               <div className="project-heading">
@@ -188,7 +201,7 @@ export function ProjectsPage() {
               </div>
               <p className="project-summary">{project.summary}</p>
               <div className="decision-block">
-                <h3>Key engineering decisions</h3>
+                <h3>Inside the build</h3>
                 <ul>
                   {project.decisions.map((decision) => <li key={decision}>{decision}</li>)}
                 </ul>
@@ -203,6 +216,20 @@ export function ProjectsPage() {
             </div>
           </article>
         ))}
+      </section>
+      <section className="project-archive" aria-labelledby="more-projects-title">
+        <header><p className="eyebrow">From my GitHub</p><h2 id="more-projects-title">More experiments</h2></header>
+        <div className="project-archive-grid">
+          {moreProjects.map((project) => (
+            <article key={project.name}>
+              <p className="eyebrow">{project.kind}</p>
+              <h3>{project.name}</h3>
+              <p>{project.summary}</p>
+              <TagList items={project.stack} />
+              <ExternalLink href={project.github}>{project.linkLabel}<span className="sr-only"> for {project.name}</span></ExternalLink>
+            </article>
+          ))}
+        </div>
       </section>
     </ChannelLayout>
   );

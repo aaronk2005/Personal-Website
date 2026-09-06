@@ -14,7 +14,7 @@ export function ChannelArtwork({ channel }: { channel: Channel }) {
       content = <><img className="broadcast-disc" src="/images/wii/reference-disc.png" alt="" /><div className="broadcast-copy">{title}<span className="broadcast-detail">AMD - Tallysight - QSET</span></div></>;
       break;
     case 'projects':
-      content = <>{title}<div className="broadcast-prints"><img src="/images/projects/odysseywalk.png" alt="" /><img src="/images/projects/spin2dine.png" alt="" /></div></>;
+      content = <>{title}<div className="broadcast-prints"><img src="/images/projects/odysseywalk.png" alt="" /><img src="/images/projects/perfex-prototype.png" alt="" /></div></>;
       break;
     case 'toolbox':
       content = <>{title}<div className="broadcast-shop-art"><img src="/images/wii/reference-shop.jpg" alt="" /></div></>;

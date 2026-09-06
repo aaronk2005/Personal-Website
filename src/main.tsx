@@ -5,6 +5,7 @@ import App from "./App";
 import "./index.css";
 import "./channels.css";
 import "./play.css";
+import "./projects.css";
   
   createRoot(document.getElementById("root")!).render(
     <React.StrictMode>

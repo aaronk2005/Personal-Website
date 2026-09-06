@@ -297,8 +297,8 @@ export const projects = [
     summary:
       'A playful restaurant discovery product with interactive wheels, live place data, and AI recommendations.',
     decisions: [
-      'Made choice paralysis the core product problem and used motion as functional feedback.',
-      'Connected Google Places data to conversational recommendation flows.',
+      'Built a two-stage flow: spin for a cuisine, then spin for a restaurant.',
+      'Combined Google Places data with location, budget, and dietary preferences to narrow the options.',
     ],
     stack: ['React', 'TypeScript', 'Node.js', 'Express', 'Google Places API', 'OpenAI API'],
     github: 'https://github.com/aaronk2005/Spin2Dine',
@@ -314,8 +314,8 @@ export const projects = [
     summary:
       'An Arduino-based device that detects unauthorized movement and streams alerts to a web dashboard.',
     decisions: [
-      'Connected physical sensing, live web state, and SMS notifications in one system.',
-      'Used WebSockets for immediate dashboard feedback.',
+      'Used an accelerometer to detect movement and trigger a local buzzer alarm.',
+      'Connected the device to a live WebSocket dashboard with remote controls and Twilio SMS alerts.',
     ],
     stack: ['Arduino', 'Node.js', 'Express', 'WebSockets', 'Twilio API'],
     github: 'https://github.com/aaronk2005/Study-Safe-Device',
@@ -330,13 +330,40 @@ export const projects = [
     summary:
       'A modern interpretation of a dispatcher assessment system, combining browser-based tests with custom Arduino hardware.',
     decisions: [
-      'Replaced paper workflows with automated grading and a repeatable web interface.',
-      'Designed the software and physical taskbox as one end-to-end experience.',
+      'Built with Andrew Heraldo, pairing browser-based assessments with an Arduino taskbox.',
+      'Included memory, note-taking, telephone, and map-navigation tests with automated grading.',
     ],
     stack: ['HTML', 'CSS', 'JavaScript', 'Arduino', 'Hardware design'],
     github: 'https://github.com/aaronk2005/911-Perfex-Test',
     icon: 'code' as IconName,
     accent: 'cobalt',
+  },
+];
+
+export const moreProjects = [
+  {
+    name: 'Walking vs. Jumping',
+    kind: 'Machine learning · ELEC 292',
+    summary: 'A team project classifying smartphone accelerometer data with logistic regression. My work focused on data visualization, feature extraction, normalization, and documentation.',
+    stack: ['Python', 'NumPy', 'Pandas', 'scikit-learn'],
+    github: 'https://github.com/aaronk2005/-walking-jumping-classifier',
+    linkLabel: 'Project notes',
+  },
+  {
+    name: 'Social Media Platform',
+    kind: 'Data structures · ELEC 278',
+    summary: 'A C implementation of users, friendships, messaging, and posts. Hash tables store users, linked lists track friends, and queues hold chat history.',
+    stack: ['C', 'Hash tables', 'Linked lists', 'Queues'],
+    github: 'https://github.com/aaronk2005/Social-Media-Platform',
+    linkLabel: 'View source',
+  },
+  {
+    name: 'Minesweeper',
+    kind: 'My first coding project',
+    summary: 'A Java desktop game with easy, medium, and hard modes, a timer, and flagging. An early experiment with graphical interfaces and event-driven programming.',
+    stack: ['Java', 'Swing', 'AWT'],
+    github: 'https://github.com/aaronk2005/Minesweeper',
+    linkLabel: 'View source',
   },
 ];
 
