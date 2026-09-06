@@ -93,7 +93,7 @@ export const channels: Channel[] = [
   {
     title: 'Now Building',
     label: '06 / In progress',
-    description: 'AgentBench and current explorations in reliable AI tooling.',
+    description: 'AgentBench regression testing and the latest Spin2Dine work.',
     to: '/now',
     icon: 'spark',
     tone: 'mint',
@@ -255,6 +255,23 @@ export const experiences = [
 
 export const projects = [
   {
+    id: 'agentbench',
+    name: 'AgentBench',
+    kicker: 'AI developer tools · Active development',
+    signal: 'Regression testing for AI agents',
+    summary: 'A workbench for creating agent tests, running evaluations, and comparing versions before shipping changes.',
+    decisions: [
+      'Built resumable evaluations with deterministic assertions, observable tool-call inspection, immutable run snapshots, and JSON export.',
+      'Added version comparisons that separate regressions, improvements, and changed test definitions.',
+      'Built a visual skill-test editor, private project/file workspaces, Markdown editing, and an isolated no-key demo.',
+      'The working app is private. A separate sample-only preview does not enable real execution, uploads, or durable saves.',
+    ],
+    stack: ['TypeScript', 'React', 'Vinext', 'Cloudflare Workers', 'D1', 'R2', 'OpenAI Responses API'],
+    github: 'https://github.com/aaronk2005/AgentBench',
+    icon: 'spark' as IconName,
+    accent: 'aqua',
+  },
+  {
     id: 'odysseywalk',
     name: 'OdysseyWalk',
     kicker: 'QHacks 2026 Winner',
@@ -305,16 +322,18 @@ export const projects = [
     id: 'spin2dine',
     name: 'Spin2Dine',
     kicker: 'Full-stack product',
-    signal: 'AI-assisted restaurant discovery',
+    signal: 'Restaurant discovery, browsing, and saved places',
     summary:
-      'A playful restaurant discovery product with interactive wheels, live place data, and AI recommendations.',
+      'A restaurant-discovery app with a redesigned browse experience, customizable cuisine and restaurant wheels, and a personal shortlist.',
     decisions: [
-      'Built a two-stage flow: spin for a cuisine, then spin for a restaurant.',
-      'Combined Google Places data with location, budget, and dietary preferences to narrow the options.',
+      'Added direct browsing, location suggestions, and distance, budget, cuisine, and open-now filters backed by Google Places.',
+      'Built customizable two-stage wheels with optional sound, reduced-motion support, and respins that avoid the previous pick when alternatives exist.',
+      'Added guest saved places and recently viewed restaurants. Account flows are implemented; live cross-device saving still needs setup and verification.',
+      'Shared server routes keep API credentials and photo requests on the server. The current discovery flow does not rely on AI verification.',
     ],
-    stack: ['React', 'TypeScript', 'Node.js', 'Express', 'Google Places API', 'OpenAI API'],
+    stack: ['React', 'TypeScript', 'Node.js', 'Express', 'Google Places API', 'Vercel'],
     github: 'https://github.com/aaronk2005/Spin2Dine',
-    live: 'https://spin2dine.org',
+    live: 'https://spin2dine.vercel.app',
     icon: 'spark' as IconName,
     accent: 'peach',
   },
@@ -390,7 +409,7 @@ export const skillGroups = [
     name: 'AI & agent tooling',
     description: 'Making LLM systems testable, observable, and useful inside real workflows.',
     skills: ['AI agents', 'Multi-agent orchestration', 'NumPy', 'Pandas', 'OpenAI API', 'n8n'],
-    proof: ['AMD triage agents', 'Tallysight automation'],
+    proof: ['AgentBench evaluations', 'AMD triage agents', 'Tallysight automation'],
   },
   {
     name: 'Web & full-stack',

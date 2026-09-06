@@ -27,7 +27,7 @@ export function ChannelArtwork({ channel }: { channel: Channel }) {
       content = <><span className="broadcast-eyebrow">Aaron Kleiman</span>{title}<span className="broadcast-rule" /><span className="broadcast-detail">Education - Experience - Selected work</span></>;
       break;
     case 'spark':
-      content = <><span className="broadcast-eyebrow">In progress</span>{title}<span className="broadcast-project">AgentBench</span><span className="broadcast-detail">Building reliable AI agents</span></>;
+      content = <><span className="broadcast-eyebrow">In progress</span>{title}<span className="broadcast-project">AgentBench</span><span className="broadcast-detail">Agent tests & version comparisons</span></>;
       break;
     case 'ai':
       content = <><div className="broadcast-ai-copy">{title}<span className="broadcast-detail">Ask about my work</span></div><div className="broadcast-mii-art"><img src="/images/wii/reference-check-mii.png" alt="" /></div></>;

@@ -31,8 +31,8 @@ const projectImages: Record<string, { src: string; alt: string; caption: string;
   },
   spin2dine: {
     src: '/images/projects/spin2dine.png',
-    alt: 'Spin2Dine live product showing its restaurant discovery landing page',
-    caption: 'Restaurant discovery app',
+    alt: 'Earlier Spin2Dine restaurant-discovery landing page before the September 2026 redesign',
+    caption: 'Original interface · redesigned September 2026',
     width: 1265,
     height: 712,
   },
@@ -348,42 +348,46 @@ export function NowPage() {
       number="06"
       eyebrow="Now building"
       title="Now Building"
-      intro="AgentBench is an in-progress developer tool for testing and evaluating AI agents and skills."
+      intro="AgentBench: repeatable agent evaluations. Spin2Dine: a new restaurant-discovery experience."
     >
       <section className="now-layout">
         <article className="now-feature">
-          <div className="agentbench-console" aria-label="AgentBench workbench preview">
-            <header><span>AGENTBENCH / LOCAL</span><b>BUILDING</b></header>
+          <div className="agentbench-console" aria-label="AgentBench evaluation workflow">
+            <header><span>AGENTBENCH</span><b>PRIVATE APP</b></header>
             <div className="agentbench-run">
               <span>Evaluation workspace</span>
-              <strong>Trace what an agent did - and why.</strong>
+              <strong>Find regressions before shipping an agent change.</strong>
             </div>
             <ul>
-              <li><span>01</span>Scenario runner<i>ready</i></li>
-              <li><span>02</span>Trace review<i>building</i></li>
-              <li><span>03</span>RAG inspection<i>exploring</i></li>
+              <li><span>01</span>Create tests<i>assertions</i></li>
+              <li><span>02</span>Run evaluations<i>resumable</i></li>
+              <li><span>03</span>Compare versions<i>regressions</i></li>
             </ul>
           </div>
           <div>
-            <p className="eyebrow"><span className="signal-dot" aria-hidden="true" /> Active exploration</p>
+            <p className="eyebrow"><span className="signal-dot" aria-hidden="true" /> Active development</p>
             <h2>AgentBench</h2>
-            <p>A workbench for running repeatable agent tests, understanding failures, and comparing behavior across skills and environments.</p>
-            <div className="status-chip">In development - scope evolving</div>
+            <p>Create tests with deterministic assertions, run an agent version, inspect outputs and observable tool calls, and compare failures against a previous run.</p>
+            <p>The skill editor, private project library, Markdown files, and help guides now support the full evaluation workflow. Saved runs can be resumed, cancelled, and exported.</p>
+            <div className="status-chip">Private app · separate sample-only preview</div>
+            <p>The preview uses example data only; real execution, uploads, and durable saves belong to the private app.</p>
+            <ExternalLink href="https://github.com/aaronk2005/AgentBench">View AgentBench source</ExternalLink>
           </div>
         </article>
         <div className="exploration-list">
-          <h2>Currently exploring</h2>
+          <h2>Latest work</h2>
           {[
-            ['01', 'Agent testing', 'Repeatable scenarios, regression suites, and behavior-level evaluation.'],
-            ['02', 'RAG & observability', 'Tracing retrieval, tool calls, and context quality across a run.'],
-            ['03', 'Developer tools', 'Interfaces that make failure analysis faster and less ambiguous.'],
-            ['04', 'Robust automation', 'Workflows that degrade clearly and recover without hiding important state.'],
+            ['01', 'Version comparisons', 'Separate regressions and improvements from added tests and changed definitions. Inspect immutable run snapshots instead of comparing moving targets.'],
+            ['02', 'Skill studio & project files', 'Edit instructions and tests, organize private project files, and explicitly import saved text into a skill. A no-key demo makes the workflow approachable.'],
+            ['03', 'Spin2Dine redesign', 'Browse restaurants directly or customize the cuisine wheel. Budget, distance, cuisine, and open-now filters stay in effect throughout discovery.'],
+            ['04', 'Saved places & account work', 'Guest shortlists work on the device. Account flows are implemented; live account saving and recovery still need end-to-end verification.'],
           ].map(([number, title, copy]) => (
             <article key={number}>
               <span>{number}</span>
               <div><h3>{title}</h3><p>{copy}</p></div>
             </article>
           ))}
+          <ExternalLink href="https://spin2dine.vercel.app">Try the new Spin2Dine</ExternalLink>
         </div>
       </section>
     </ChannelLayout>
@@ -405,7 +409,13 @@ function answerAaronQuestion(question: string) {
   if (/amd|experience|career|intern/.test(normalized)) {
     return `At AMD, Aaron validates firmware, drivers, and ROCm on MI300X, MI300A, and MI450 GPU clusters. ${experiences[0].impact[0]} His work includes Python test automation, Jenkins workloads, and multi-agent failure triage. Earlier roles include Tallysight, QSET, teaching, and Swarmed.`;
   }
-  if (/project|build|odyssey|robot|spin2dine|risc|processor/.test(normalized)) {
+  if (/agentbench|agent bench/.test(normalized)) {
+    return 'AgentBench is Aaron’s regression-testing workbench for AI agents: deterministic assertions, resumable evaluations, version comparisons, observable tool calls, a visual skill editor, and private project files. The working app is private; its separate preview uses sample data only. See Now Building or Projects for the current scope and source.';
+  }
+  if (/spin2dine|spin to dine|spin 2 dine/.test(normalized)) {
+    return 'Spin2Dine now combines restaurant browsing with customizable cuisine and restaurant wheels, Google Places filters, guest saved places, and recently viewed restaurants. The current flow does not rely on AI verification. Account flows are implemented, but live account saving still needs verification. The current app is linked in Projects.';
+  }
+  if (/project|build|odyssey|robot|risc|processor/.test(normalized)) {
     return 'His resume highlights OdysseyWalk, the QHacks 2026-winning voice tour app; an Autonomous Taxi Robot with a 20 Hz control loop and 37-node road graph; and a 32-Bit RISC Processor built in Verilog and verified in ModelSim. Find more in Projects.';
   }
   if (/skill|stack|language|technology|tech/.test(normalized)) {
