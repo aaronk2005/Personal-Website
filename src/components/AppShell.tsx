@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { channels, type Channel } from '../data/portfolio';
 import { ChannelIcon } from './ChannelIcon';
 import { ChannelArtwork } from './ChannelArtwork';
+import { useConsole } from './ConsoleSystem';
 
 const timeFormatter = new Intl.DateTimeFormat('en-CA', {
   timeZone: 'America/Toronto',
@@ -71,6 +72,7 @@ export function BootSequence({ onComplete }: { onComplete: () => void }) {
 
 
 function ChannelTile({ channel }: { channel: Channel }) {
+  const { chime } = useConsole();
   const content = (
     <>
       <div className="channel-face">
@@ -83,22 +85,22 @@ function ChannelTile({ channel }: { channel: Channel }) {
 
   if (channel.external) {
     return (
-      <a className="menu-channel" href={channel.to} target="_blank" rel="noreferrer" aria-label={`${channel.title} channel (opens in a new tab)`}>
+      <a className="menu-channel" onClick={() => chime()} href={channel.to} target="_blank" rel="noreferrer" aria-label={`${channel.title} channel (opens in a new tab)`}>
         {content}
         <span className="sr-only"> (opens in a new tab)</span>
       </a>
     );
   }
 
-  return <Link className="menu-channel" to={channel.to} aria-label={`${channel.title} channel`}>{content}</Link>;
+  return <Link className="menu-channel" onClick={() => chime()} to={channel.to} aria-label={`${channel.title} channel`}>{content}</Link>;
 }
 
-function MenuPager() {
+function MenuPager({ page, onChange }: { page: number; onChange: (page: number) => void }) {
   return (
-    <nav className="menu-pager" aria-label="Menu page 1 of 1">
-      <button className="pager-left" type="button" disabled aria-label="Previous menu page"><span>&lt;</span></button>
-      <div className="page-dots" aria-hidden="true"><i className="active" /></div>
-      <button className="pager-right" type="button" disabled aria-label="Next menu page"><span>&gt;</span></button>
+    <nav className="menu-pager" aria-label={'Menu page ' + (page + 1) + ' of 2'}>
+      <button className="pager-left" type="button" disabled={page === 0} onClick={() => onChange(0)} aria-label="Previous menu page"><span>&lt;</span></button>
+      <div className="page-dots" aria-hidden="true"><i className={page === 0 ? 'active' : ''} /><i className={page === 1 ? 'active' : ''} /></div>
+      <button className="pager-right" type="button" disabled={page === 1} onClick={() => onChange(1)} aria-label="Next menu page"><span>&gt;</span></button>
     </nav>
   );
 }
@@ -138,6 +140,26 @@ function WiiFooter() {
 }
 
 export function HomeScreen() {
+  const [page, setPage] = useState(() => { try { return sessionStorage.getItem('ak-menu-page') === '1' ? 1 : 0; } catch { return 0; } });
+  const grid = useRef<HTMLElement>(null);
+  const lastPage = useRef(page);
+  const { chime } = useConsole();
+  const changePage = (next: number) => { setPage(next); chime(); try { sessionStorage.setItem('ak-menu-page', String(next)); } catch {} };
+  useEffect(() => {
+    const handle = (event: KeyboardEvent) => {
+      if (event.target instanceof HTMLElement && event.target.closest('input,textarea,select,dialog')) return;
+      if (event.key === '+' || event.key === '=' || event.key === '-') {
+        event.preventDefault(); changePage(event.key === '-' ? 0 : 1);
+      }
+    };
+    window.addEventListener('keydown', handle);
+    return () => window.removeEventListener('keydown', handle);
+  });
+  const visibleChannels = channels.filter(channel => ['/mii', '/arcade'].includes(channel.to) === (page === 1));
+  useEffect(() => {
+    if (lastPage.current !== page) grid.current?.querySelector<HTMLElement>('.menu-channel')?.focus({ preventScroll: true });
+    lastPage.current = page;
+  }, [page]);
   const moveSelection = (event: ReactKeyboardEvent<HTMLElement>) => {
     if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) return;
     const links = [...event.currentTarget.querySelectorAll<HTMLAnchorElement>('.menu-channel')];
@@ -152,9 +174,11 @@ export function HomeScreen() {
 
   return (
     <main id="main-content" className="wii-home-screen">
-      <MenuPager />
-      <section className="wii-channel-grid" aria-label="Portfolio channels" onKeyDown={moveSelection}>
-        {channels.map((channel) => <ChannelTile key={channel.title} channel={channel} />)}
+      <div className="menu-section-switch" aria-label="Channel pages"><button aria-pressed={page === 0} onClick={() => changePage(0)}>Portfolio</button><button aria-pressed={page === 1} onClick={() => changePage(1)}>Play <span>2 channels</span></button></div>
+      <MenuPager page={page} onChange={changePage} />
+      <section ref={grid} key={page} className="wii-channel-grid" aria-label={page ? 'Play channels' : 'Portfolio channels'} onKeyDown={moveSelection}>
+        {visibleChannels.map((channel) => <ChannelTile key={channel.title} channel={channel} />)}
+        {Array.from({ length: 12 - visibleChannels.length }, (_, i) => <div key={'empty-'+i} className="empty-channel-slot" aria-hidden="true"><span>Wii</span></div>)}
       </section>
       <p className="menu-help">Select a channel</p>
     </main>
@@ -180,8 +204,9 @@ export function ChannelLayout({
   eyebrow,
   title,
   intro,
+  compact = false,
   children,
-}: PropsWithChildren<{ number: string; eyebrow: string; title: string; intro: string }>) {
+}: PropsWithChildren<{ number: string; eyebrow: string; title: string; intro: string; compact?: boolean }>) {
   const [started, setStarted] = useState(false);
 
   if (!started) {
@@ -207,7 +232,7 @@ export function ChannelLayout({
 
   return (
     <main id="main-content" className="wii-channel-screen">
-      <section className="wii-channel-window channel-content-window" aria-labelledby="channel-title">
+      <section className={'wii-channel-window channel-content-window' + (compact ? ' play-channel-window' : '')} aria-labelledby="channel-title">
         <header className="wii-channel-header">
           <div className="channel-header-band">
             <span>{number}</span>
@@ -218,7 +243,7 @@ export function ChannelLayout({
           </div>
         </header>
         <div className="wii-channel-scroll">
-          <p className="channel-intro">{intro}</p>
+          {!compact && <p className="channel-intro">{intro}</p>}
           <div className="page-content">{children}</div>
         </div>
         <footer className="wii-channel-footer">

@@ -1,6 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { AppFrame, BootSequence, HomeScreen } from './components/AppShell';
+import { ConsoleSystem } from './components/ConsoleSystem';
+import { MiiPlazaPage } from './components/MiiPlaza';
+import { ArcadePage } from './components/Arcade';
 import {
   AboutPage,
   AaronAIPage,
@@ -25,6 +28,8 @@ const pageTitles: Record<string, string> = {
   '/aaron-ai': 'Aaron AI - Aaron Kleiman',
   '/hobbies': 'Hobbies - Aaron Kleiman',
   '/contact': 'Contact - Aaron Kleiman',
+  '/mii': 'Mii Plaza - Aaron Kleiman',
+  '/arcade': 'Arcade - Aaron Kleiman',
 };
 
 function RouteEffects() {
@@ -46,7 +51,7 @@ export default function App() {
   }, []);
 
   return (
-    <>
+    <ConsoleSystem inactive={showBoot}>
       <RouteEffects />
       <AppFrame inactive={showBoot}>
         <Routes>
@@ -60,10 +65,12 @@ export default function App() {
           <Route path="/aaron-ai" element={<AaronAIPage />} />
           <Route path="/hobbies" element={<HobbiesPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/mii" element={<MiiPlazaPage />} />
+          <Route path="/arcade" element={<ArcadePage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </AppFrame>
       {showBoot && <BootSequence onComplete={completeBoot} />}
-    </>
+    </ConsoleSystem>
   );
 }

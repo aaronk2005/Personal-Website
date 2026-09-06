@@ -74,18 +74,18 @@ export function AboutPage() {
           <div className="principle-grid">
             <article>
               <span>01</span>
-              <h2>Work close to reality</h2>
-              <p>Validation, robotics, and infrastructure reveal the edge cases that make engineering interesting.</p>
+              <h2>GPU validation at AMD</h2>
+              <p>Built a triage pipeline that cut failure analysis from 40 minutes to a 10-minute report.</p>
             </article>
             <article>
               <span>02</span>
-              <h2>Automate the repeatable</h2>
-              <p>Good tooling gives people more time for judgment, investigation, and invention.</p>
+              <h2>QHacks 2026 winner</h2>
+              <p>Built OdysseyWalk with voice streaming, route-aware itineraries, and GPS-triggered narration.</p>
             </article>
             <article>
               <span>03</span>
-              <h2>Make complexity legible</h2>
-              <p>A thoughtful interface can turn a dense system into something people trust and enjoy using.</p>
+              <h2>Software meets hardware</h2>
+              <p>From an autonomous taxi robot to a 32-bit RISC processor designed in Verilog.</p>
             </article>
           </div>
           <div className="button-row">
@@ -105,7 +105,7 @@ export function ExperiencePage() {
       number="02"
       eyebrow="Experience"
       title="Experience"
-      intro="A career path moving through technical operations, product software, robotics, AI automation, and datacenter GPU systems."
+      intro="GPU validation, software engineering, robotics, and teaching."
     >
       <section className="timeline" aria-label="Career timeline">
         {experiences.map((experience, index) => (
@@ -172,7 +172,7 @@ export function ProjectsPage() {
       number="03"
       eyebrow="Selected work"
       title="Projects"
-      intro="A selection of systems and products chosen for the engineering decisions behind them - not just the technologies listed underneath."
+      intro="Selected software, robotics, and hardware projects."
     >
       <section className="project-stack" aria-label="Featured projects">
         {projects.map((project, index) => (
@@ -254,8 +254,6 @@ export function SkillsPage() {
   );
 }
 
-const resumeAvailable = false;
-
 export function ResumePage() {
   return (
     <ChannelLayout
@@ -269,32 +267,20 @@ export function ResumePage() {
           <strong>Aaron Kleiman - Computer Engineering</strong>
           <span>Toronto, Ontario - BASc 2023-2028</span>
         </div>
-        {resumeAvailable ? (
+        <div className="button-row">
+          <a className="secondary-button" href="/Aaron-Kleiman-Resume.pdf" target="_blank" rel="noreferrer">View PDF <ChannelIcon name="external" size={18} /></a>
           <a className="primary-button" href="/Aaron-Kleiman-Resume.pdf" download>
             Download PDF <ChannelIcon name="download" size={18} />
           </a>
-        ) : (
-          <span className="disabled-button" aria-disabled="true" title="Add Aaron-Kleiman-Resume.pdf to public/ to enable">
-            PDF awaiting upload <ChannelIcon name="download" size={18} />
-          </span>
-        )}
+        </div>
       </section>
-
-      {!resumeAvailable && (
-        <aside className="content-notice">
-          <ChannelIcon name="resume" size={25} />
-          <div>
-            <strong>No resume PDF is available yet.</strong>
-            <p>This page stays useful without a broken download. Add the current PDF as <code>public/Aaron-Kleiman-Resume.pdf</code>, then switch <code>resumeAvailable</code> to <code>true</code>.</p>
-          </div>
-        </aside>
-      )}
 
       <section className="resume-sheet" aria-label="Condensed resume">
         <div className="resume-profile">
           <p className="eyebrow">Profile</p>
-          <h2>Systems software, AI tooling, and product-minded engineering.</h2>
+          <h2>Systems software and GPU validation.</h2>
           <p>{profile.positioning}</p>
+          <p>{profile.education}</p>
           <div className="resume-contact-line">
             <a href={`mailto:${profile.email}`}>{profile.email}</a>
             <a href={profile.github} target="_blank" rel="noreferrer">github.com/aaronk2005</a>
@@ -321,7 +307,7 @@ export function ResumePage() {
               </article>
             ))}
             <h3>Core stack</h3>
-            <TagList items={['Python', 'TypeScript', 'C/C++', 'Linux', 'React', 'ROCm', 'ROS 2', 'Docker', 'CI/CD', 'RAG']} />
+            <TagList items={['Python', 'TypeScript', 'C/C++', 'Linux', 'ROCm', 'ROS 2', 'Docker', 'Jenkins', 'Verilog', 'AI agents']} />
           </aside>
         </div>
       </section>
@@ -386,17 +372,20 @@ type GuideMessage = {
 function answerAaronQuestion(question: string) {
   const normalized = question.toLowerCase();
 
-  if (/amd|experience|work|career|intern/.test(normalized)) {
-    return 'Aaron currently works in datacenter GPU validation at AMD, building Python and YAML automation across firmware, drivers, ROCm workloads, regression triage, and AI-assisted failure classification. His path also includes product engineering at Tallysight, rover UI leadership, teaching, and full-stack work.';
+  if (/resume|education|university|degree|course/.test(normalized)) {
+    return "Aaron is studying for a Bachelor of Applied Science in Computer Engineering at Queen's University, September 2023 to April 2028. Coursework includes Operating Systems, Computer Architecture, Microprocessor Systems, Data Structures & Algorithms, and Databases. View or download his full PDF in the Resume channel.";
   }
-  if (/project|build|odyssey|robot|spin2dine/.test(normalized)) {
-    return 'Start with OdysseyWalk, a QHacks 2026-winning voice-first walking tour, and the Autonomous Taxi Robot, which combined A*, PID control, a finite-state machine, and on-device inference. Spin2Dine is the strongest example of his playful full-stack product work.';
+  if (/amd|experience|career|intern/.test(normalized)) {
+    return `At AMD, Aaron validates firmware, drivers, and ROCm on MI300X, MI300A, and MI450 GPU clusters. ${experiences[0].impact[0]} His work includes Python test automation, Jenkins workloads, and multi-agent failure triage. Earlier roles include Tallysight, QSET, teaching, and Swarmed.`;
+  }
+  if (/project|build|odyssey|robot|spin2dine|risc|processor/.test(normalized)) {
+    return 'His resume highlights OdysseyWalk, the QHacks 2026-winning voice tour app; an Autonomous Taxi Robot with a 20 Hz control loop and 37-node road graph; and a 32-Bit RISC Processor built in Verilog and verified in ModelSim. Find more in Projects.';
   }
   if (/skill|stack|language|technology|tech/.test(normalized)) {
-    return 'His strongest through-line is dependable software around real systems: Python, TypeScript, C/C++, Linux, React, CI/CD, ROCm, ROS 2, embedded hardware, RAG, and agent tooling. The Toolbox channel connects each group to actual work.';
+    return 'His resume lists Python, C/C++, JavaScript/TypeScript, Java, SQL, VHDL, and Assembly; Linux, Docker, Jenkins, CUDA, ROCm, AI agents, React, Next.js, ROS 2, and FPGA tooling. The Toolbox channel connects these to his work.';
   }
   if (/hobby|outside|fun|sport|music|travel|food/.test(normalized)) {
-    return 'Outside engineering, Aaron is into hockey, basketball, the gym, cooking, travel, strategy games, rap, jazz, and lo-fi. The Hobbies channel has the fuller, less recruiter-shaped version.';
+    return 'Outside engineering, Aaron enjoys hockey, basketball, cooking, travel, music, and strategy games. See Hobbies, or try a game in Arcade.';
   }
   if (/contact|email|reach|hire|opportunity/.test(normalized)) {
     return 'The fastest route is aaron.kleiman@queensu.ca. You can also use the LinkedIn and GitHub channels from the Wii Menu. He is especially interested in systems software, validation, developer tools, and AI infrastructure.';
@@ -446,7 +435,7 @@ export function AaronAIPage() {
       number="07"
       eyebrow="Interactive portfolio guide"
       title="Aaron AI"
-      intro="A compact local guide to this portfolio. It answers from this site's content and does not send your text to an external AI service."
+      intro="Quick answers from my resume and portfolio. This guide uses preset answers; your questions stay in your browser."
     >
       <section className="aaron-ai-layout">
         <aside className="ai-prompt-panel">
@@ -504,10 +493,6 @@ export function HobbiesPage() {
           </article>
         ))}
       </section>
-      <aside className="hobby-wii-note">
-        <img src="/images/wii/wii-logo.svg" alt="Wii" />
-        <div><strong>The nostalgia is real.</strong><p>My childhood favourites were Mario Kart and Wii Sports - so this portfolio theme is personal.</p></div>
-      </aside>
     </ChannelLayout>
   );
 }

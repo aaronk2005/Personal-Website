@@ -31,6 +31,12 @@ export function ChannelArtwork({ channel }: { channel: Channel }) {
     case 'hobbies':
       content = <><div className="broadcast-copy">{title}<span className="broadcast-detail">Life beyond the keyboard</span></div><div className="broadcast-crowd"><img src="/images/wii/reference-mii.png" alt="" /></div></>;
       break;
+    case 'mii':
+      content = <><div className="broadcast-copy">{title}<span className="broadcast-detail">Create. Gather. Play.</span></div><div className="broadcast-crowd"><img src="/images/wii/reference-mii.png" alt="" /></div></>;
+      break;
+    case 'arcade':
+      content = <><span className="broadcast-eyebrow">Three little games</span>{title}<span className="arcade-tile-controls" aria-hidden="true"><b>+</b><i>A</i><i>B</i></span></>;
+      break;
     case 'contact':
       content = <><img className="broadcast-city" src="/images/channels/toronto.jpg" alt="" /><div className="broadcast-copy">{title}<span className="broadcast-detail">Say hello from anywhere.</span></div></>;
       break;

@@ -7,6 +7,8 @@ export type IconName =
   | 'spark'
   | 'ai'
   | 'hobbies'
+  | 'mii'
+  | 'arcade'
   | 'contact'
   | 'github'
   | 'linkedin'
@@ -33,11 +35,11 @@ export interface Channel {
 
 export const profile = {
   name: 'Aaron Kleiman',
-  role: 'Computer Engineering - Queens University',
+  role: "Computer Engineering - Queen's University",
   location: 'Toronto, Ontario',
   education: 'BASc, Computer Engineering - Sep 2023-Apr 2028',
   positioning:
-    'I build dependable systems, AI tooling, and polished products - from GPU validation pipelines to embedded robots and full-stack experiences.',
+    "I'm a Computer Engineering student at Queen's University and a Systems Software Engineer Intern at AMD. I work on GPU validation, test automation, AI triage agents, and embedded systems.",
   email: 'aaron.kleiman@queensu.ca',
   github: 'https://github.com/aaronk2005',
   linkedin: 'https://www.linkedin.com/in/aaron-kleiman-477b19286/',
@@ -81,7 +83,7 @@ export const channels: Channel[] = [
   {
     title: 'Resume',
     label: '05 / One-page view',
-    description: 'A recruiter-friendly summary with a PDF download slot.',
+    description: 'Experience, education, and projects. View or download my resume.',
     to: '/resume',
     icon: 'resume',
     tone: 'silver',
@@ -119,6 +121,22 @@ export const channels: Channel[] = [
     tone: 'cobalt',
   },
   {
+    title: 'Mii Plaza',
+    label: '10 / Create a character',
+    description: 'Create your player, join the plaza, and take a lap in the parade.',
+    to: '/mii',
+    icon: 'mii',
+    tone: 'mint',
+  },
+  {
+    title: 'Arcade',
+    label: '11 / Play',
+    description: 'Pocket Bowling, Target Rally, and Mii Match.',
+    to: '/arcade',
+    icon: 'arcade',
+    tone: 'aqua',
+  },
+  {
     title: 'GitHub',
     label: 'External',
     description: 'Code, experiments, and work in progress.',
@@ -145,13 +163,14 @@ export const experiences = [
     dates: 'May 2026-Present',
     kind: 'Systems & validation',
     summary:
-      'Building automation and diagnostic tooling across firmware, drivers, ROCm workloads, and datacenter GPU validation.',
+      'Validating pre-release firmware, drivers, and ROCm on bare-metal MI300X, MI300A, and MI450 GPU clusters.',
     impact: [
-      'Automating AI/ML and HPC benchmark validation with Python and YAML-driven workflows.',
-      'Supporting regression triage across firmware, driver, and ROCm validation contexts.',
-      'Developing AI-assisted failure classification and RAG over 1,500+ historical failure reports.',
+      'Built a production Python triage pipeline that reduced per-job failure analysis from 40 minutes of log review to a 10-minute structured report.',
+      'Developing domain-specific agents within a multi-agent framework for GPU regression, failure triage, and debugging.',
+      'Integrating BabelStream, HPCG, LAMMPS, and Megatron-LM with Python, YAML, and Jenkins CI/CD.',
+      'Engineering an AI agent for reliability, availability, and serviceability (RAS) failure triage and root-cause classification.',
     ],
-    tech: ['Python', 'ROCm', 'Linux', 'Jenkins', 'GitHub Actions', 'RAG'],
+    tech: ['Python', 'ROCm', 'Linux', 'Jenkins', 'Docker', 'AI agents', 'YAML'],
   },
   {
     company: 'Tallysight',
@@ -173,13 +192,12 @@ export const experiences = [
     dates: 'Jul 2025-May 2026',
     kind: 'Robotics & leadership',
     summary:
-      "Led the UI direction for a mission-critical rover dashboard while strengthening the team's engineering workflow.",
+      'Led a software sub-team and the design of a Next.js rover dashboard for real-time telemetry.',
     impact: [
-      'Designed configurable telemetry widgets, real-time maps, and mission-planning flows.',
-      'Integrated ROS 2 topics, diagnostics, TF frames, and playback into operator views.',
-      'Introduced review standards and PR checklists for a more reliable team workflow.',
+      'Integrated ROS 2 nodes over WebSockets for live rover telemetry.',
+      'Standardized GitLab code reviews and merge checklists to improve quality and onboarding.',
     ],
-    tech: ['React', 'ROS 2', 'WebSockets', 'GitLab CI/CD', 'Maps'],
+    tech: ['Next.js', 'ROS 2', 'WebSockets', 'GitLab'],
   },
   {
     company: "Queen's University",
@@ -189,21 +207,22 @@ export const experiences = [
     summary:
       'Helped first-year engineering students build confidence with C, debugging, control flow, and algorithmic thinking.',
     impact: [
-      'Supported weekly labs for a large first-year programming course.',
-      'Provided one-on-one debugging and code-clarity guidance.',
+      'Coordinated weekly C programming labs for 200+ first-year students.',
+      'Provided debugging support, feedback, and grading.',
     ],
     tech: ['C', 'Debugging', 'Mentorship'],
   },
   {
     company: 'Swarmed',
-    title: 'Software Developer',
+    title: 'Software Developer (Volunteer)',
     dates: 'Oct 2024-May 2025',
     kind: 'Full-stack product',
     summary:
       'Improved a beekeeper-to-public service through product UI work, feedback tooling, and API-connected workflows.',
     impact: [
-      'Redesigned core UI/UX flows for a platform supporting honey-bee rescues.',
-      'Built survey and REST-integrated workflows that streamlined user and backend operations.',
+      'Redesigned UI/UX for a beekeeper-public platform contributing to the protection of 250M+ honey bees.',
+      'Built dashboard survey tooling with JavaScript and Tally Forms.',
+      'Automated user interactions and backend operations with Bubble.io and REST APIs.',
     ],
     tech: ['JavaScript', 'REST APIs', 'Bubble.io', 'Product design'],
   },
@@ -231,9 +250,8 @@ export const projects = [
     summary:
       'A conversational walking-tour experience that turns a route into a live, location-aware story.',
     decisions: [
-      'Used WebSockets to keep the voice experience responsive while a tour unfolds.',
-      'Combined Maps and LLM APIs around a route-first interaction instead of a chat-first UI.',
-      'Designed for low-friction, eyes-up use while walking.',
+      'Won QHacks 2026 with route-aware itineraries generated through LLM and Google Maps APIs.',
+      'Built WebSocket TTS/STT streaming and GPS-triggered narration for hands-free guided walks.',
     ],
     stack: ['Next.js 14', 'TypeScript', 'Google Maps API', 'LLM APIs', 'WebSockets'],
     github: 'https://github.com/aaronk2005/OdysseyWalk',
@@ -244,18 +262,32 @@ export const projects = [
   {
     id: 'battle-bus',
     name: 'Autonomous Taxi Robot',
-    kicker: 'Final competition - $1,032.66 earned',
+    kicker: 'Embedded robotics',
     signal: '20 Hz autonomous control loop',
     summary:
       'A Raspberry Pi taxi robot that planned fares, perceived its environment, and drove autonomously under competition constraints.',
     decisions: [
-      'Separated behaviors with an event bus and finite-state machine.',
-      'Combined A* navigation with PID line following in a 20 Hz control loop.',
+      'Built an event-driven Python stack with a finite-state machine and a 20 Hz asyncio loop.',
+      'Combined PID control with heading-aware A* path planning on a 37-node road graph.',
       'Used a Coral Edge TPU and TensorFlow Lite for efficient on-device inference.',
     ],
     stack: ['Python', 'Raspberry Pi 4', 'Coral Edge TPU', 'asyncio', 'TensorFlow Lite', 'A*', 'PID'],
     icon: 'chip' as IconName,
     accent: 'violet',
+  },
+  {
+    id: 'risc-processor',
+    name: '32-Bit RISC Processor',
+    kicker: 'Computer architecture',
+    signal: 'Single-bus CPU with 16 registers',
+    summary: 'A 32-bit RISC CPU in Verilog with an ALU, memory, and finite-state-machine control.',
+    decisions: [
+      'Designed a single-bus datapath with 16 registers and FSM-based control.',
+      'Verified arithmetic, memory, branch, jump, I/O, multiply, and divide instructions with ModelSim testbenches.',
+    ],
+    stack: ['Verilog', 'ModelSim', 'Finite State Machines', 'Computer Architecture'],
+    icon: 'chip' as IconName,
+    accent: 'cobalt',
   },
   {
     id: 'spin2dine',
@@ -312,14 +344,14 @@ export const skillGroups = [
   {
     name: 'Systems & validation',
     description: 'Building repeatable workflows around complex hardware and software boundaries.',
-    skills: ['Python', 'C/C++', 'Linux', 'GPU validation', 'ROCm', 'Jenkins', 'CI/CD'],
+    skills: ['Python', 'C/C++', 'Linux', 'CUDA', 'ROCm', 'HPC', 'Jenkins', 'Test automation'],
     proof: ['AMD validation workflows', 'Autonomous Taxi Robot'],
   },
   {
     name: 'AI & agent tooling',
     description: 'Making LLM systems testable, observable, and useful inside real workflows.',
-    skills: ['AI agents', 'RAG', 'Vector databases', 'LLM APIs', 'Evaluation', 'Observability'],
-    proof: ['AgentBench', 'Tallysight automation', 'AMD failure classification'],
+    skills: ['AI agents', 'Multi-agent orchestration', 'NumPy', 'Pandas', 'OpenAI API', 'n8n'],
+    proof: ['AMD triage agents', 'Tallysight automation'],
   },
   {
     name: 'Web & full-stack',
@@ -330,14 +362,14 @@ export const skillGroups = [
   {
     name: 'Embedded & robotics',
     description: 'Connecting sensing, control, perception, and operator interfaces.',
-    skills: ['ROS 2', 'Raspberry Pi', 'Coral Edge TPU', 'TensorFlow Lite', 'Arduino', 'PID control'],
-    proof: ['Autonomous Taxi Robot', 'Study Safe Device', 'QSET dashboard'],
+    skills: ['ROS 2', 'Raspberry Pi', 'Coral Edge TPU', 'TensorFlow Lite', 'Arduino', 'FPGA', 'Verilog', 'ModelSim'],
+    proof: ['Autonomous Taxi Robot', '32-Bit RISC Processor', 'QSET dashboard'],
   },
   {
     name: 'Developer workflow',
     description: 'Treating automation, review, and documentation as part of the product.',
-    skills: ['Git', 'Docker', 'GitHub Actions', 'GitLab CI/CD', 'YAML', 'Technical documentation'],
-    proof: ['AMD CI workflows', 'QSET review standards', 'CAD Railway manuals'],
+    skills: ['Git', 'Docker', 'GitLab', 'Jenkins', 'YAML', 'AWS', 'GCP', 'Bash/Shell'],
+    proof: ['AMD CI workflows', 'QSET review standards'],
   },
 ];
 

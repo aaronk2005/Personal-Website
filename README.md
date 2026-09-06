@@ -4,7 +4,10 @@ A Wii-style engineering portfolio built with React, TypeScript, and Vite. It com
 
 ## Highlights
 
-- Twelve deep-linkable channels, including Aaron AI, Hobbies, Bonus Level, GitHub, and LinkedIn
+- Thirteen channels across Portfolio and Play pages, including a Mii Plaza and Arcade
+- Mii character editor with local saving, player selection, and a guest parade
+- Pocket Bowling (five frames), Target Rally (20 seconds), and Mii Match (six pairs)
+- HOME overlay pauses games; optional synthesized sounds and local high scores
 - Short, skippable console startup with a Wii-style safety screen and reduced-motion support
 - Responsive channel grid with mobile-safe touch targets and keyboard-visible focus states
 - Centralized portfolio content in `src/data/portfolio.ts`
@@ -44,13 +47,20 @@ The current headshot is:
 public/images/linkedin-headshot.jpg
 ```
 
-### Résumé PDF
+### Resume PDF
 
-The repository did not include a current résumé PDF, so the UI intentionally shows an unavailable state rather than a broken link.
+The supplied resume is published unchanged at `public/Aaron-Kleiman-Resume.pdf`. Replace that file to update the View PDF and Download PDF actions. Experience, skills, the three primary projects, and the local guide were aligned with the September 2026 supplied resume.
 
-1. Add the file as `public/Aaron-Kleiman-Resume.pdf`.
-2. Set `resumeAvailable` to `true` in `src/components/ChannelPages.tsx`.
-3. Run `npm run build` and verify the download from `/resume`.
+### Games and local data
+
+Run `node --test tests/game-rules.test.mjs` for bowling scoring and memory deck invariants. Mii characters, the active player, sound preferences, and best scores are stored on the visitor's device. No accounts or online score service are used. Games pause while the HOME menu is open or the tab is hidden.
+
+The characters and games are original browser adaptations, not Nintendo software or console emulation. Functional references:
+
+- [Mii creation](https://en-americas-support.nintendo.com/app/answers/detail/a_id/2675/p/50/c/183)
+- [Mii Parade to Plaza](https://www.nintendo.com/en-gb/Support/Legacy-system/Mii-Channel-Using-the-Mii-Parade-242333.html)
+- [Wii channel paging](https://en-americas-support.nintendo.com/app/answers/detail/a_id/2796)
+- [Wii manuals and HOME menu](https://en-americas-support.nintendo.com/app/answers/detail/a_id/16890/~/wii-manuals)
 
 ## Deployment
 
