@@ -118,7 +118,7 @@ function WiiFooter() {
   }, []);
 
   const time = timeFormatter.format(now);
-  const blinkingTime = time.replace(':', colonVisible ? ':' : ' ');
+  const timeParts = timeFormatter.formatToParts(now);
 
   return (
     <footer className="wii-footer">
@@ -128,8 +128,10 @@ function WiiFooter() {
         <small>Aaron Menu</small>
       </Link>
       <div className="footer-clock">
-        <time dateTime={now.toISOString()}>{blinkingTime}</time>
-        <span>{dateFormatter.format(now)} - Toronto</span>
+        <time dateTime={now.toISOString()} aria-label={`${time}, Toronto time`} title="Toronto time">
+          {timeParts.map((part, index) => <span key={index} className={'clock-part' + (part.type === 'dayPeriod' ? ' clock-period' : '')} style={part.value === ':' ? { visibility: colonVisible ? 'visible' : 'hidden' } : undefined} aria-hidden="true">{part.value}</span>)}
+        </time>
+        <span className="clock-date">{dateFormatter.format(now)}</span>
       </div>
       <Link to="/contact" className="footer-side footer-right" aria-label="Open contact channel">
         <span className="round-control"><ChannelIcon name="mail" size={31} /></span>

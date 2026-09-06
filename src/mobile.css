@@ -1,4 +1,26 @@
 /* Phone ergonomics: preserve the console frame, prioritize the playing surface. */
+/* Keep the clock entirely inside the recessed 52% of the footer bar. */
+.wii-footer .footer-clock { width: 34%; bottom: 8px; gap: 2px; }
+.wii-footer .footer-clock time {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  white-space: pre;
+  font-size: 2.5rem;
+  line-height: 1.05;
+  letter-spacing: -.03em;
+  font-variant-numeric: tabular-nums;
+}
+.wii-footer .footer-clock time .clock-part { margin: 0; max-width: none; font: inherit; }
+.wii-footer .footer-clock time .clock-period { margin-left: 3px; font-size: .875rem; letter-spacing: 0; }
+.wii-footer .footer-clock .clock-date { max-width: 100%; margin: 0; font-size: .875rem; line-height: 1.2; white-space: nowrap; }
+@media (max-width: 900px), (max-height: 650px) {
+  .wii-footer .footer-clock { bottom: calc(5px + env(safe-area-inset-bottom)); width: 40%; }
+  .wii-footer .footer-clock time { font-size: 1.625rem; }
+  .wii-footer .footer-clock time .clock-period { font-size: .75rem; margin-left: 2px; }
+  .wii-footer .footer-clock .clock-date { font-size: .75rem; }
+}
+
 @media (max-width: 900px) {
   .wii-home-screen {
     padding-left: max(10px, env(safe-area-inset-left));
