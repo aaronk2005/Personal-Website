@@ -143,6 +143,10 @@ export const channels: Channel[] = [
     ['memory', 'Mii Match', 'Find all six pairs of familiar faces.'],
     ['tennis', 'Table Tennis', 'A quick paddle match. First to five wins.'],
     ['four', 'Four in a Row', 'Connect four discs against the computer.'],
+    ['breaker', 'Brick Breaker', 'Five stages, armored bricks, combos, and power-ups.'],
+    ['snake', 'Snake', 'Three difficulties, accelerating speed, and obstacles.'],
+    ['mines', 'Minesweeper', 'Read the numbers, flag the mines, and clear the field.'],
+    ['reversi', 'Reversi', 'Flip the board against a strategic computer opponent.'],
   ].map(([id, title, description]): Channel => ({title, description, label: 'Play', to: '/play/' + id, icon: 'arcade', tone: 'aqua', page: 'play'})),
   {
     title: 'GitHub',

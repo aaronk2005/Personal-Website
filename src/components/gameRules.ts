@@ -48,3 +48,23 @@ export function computerColumn(board: readonly number[]): number {
     return !available.some(reply => { const result = dropDisc(next,reply,1); return result && fourWinner(result) === 1; });
   }) ?? available[0] ?? -1;
 }
+
+export function strategicColumn(board:readonly number[],depth=4):number {
+  function evaluate(b:readonly number[]):number {
+    const winner=fourWinner(b);if(winner)return winner===2?100000:-100000;
+    let score=0;b.forEach((v,i)=>{if(v)score+=(v===2?1:-1)*(3-Math.abs(i%7-3));});
+    for(let row=0;row<6;row++)for(let col=0;col<7;col++)for(const [dr,dc] of [[0,1],[1,0],[1,1],[1,-1]]){
+      if(row+3*dr>5||col+3*dc<0||col+3*dc>6)continue;
+      const line=[0,1,2,3].map(n=>b[(row+n*dr)*7+col+n*dc]),us=line.filter(n=>n===2).length,them=line.filter(n=>n===1).length;
+      if(!them)score+=[0,1,8,50,10000][us];if(!us)score-=[0,1,9,65,10000][them];
+    }return score;
+  }
+  function search(b:readonly number[],player:number,d:number,alpha:number,beta:number):number{
+    if(!d||fourWinner(b)||b.every(Boolean))return evaluate(b);
+    let best=player===2?-Infinity:Infinity;
+    for(const col of [3,2,4,1,5,0,6]){const next=dropDisc(b,col,player);if(!next)continue;const score=search(next,3-player,d-1,alpha,beta);best=player===2?Math.max(best,score):Math.min(best,score);if(player===2)alpha=Math.max(alpha,best);else beta=Math.min(beta,best);if(beta<=alpha)break;}return best;
+  }
+  let choice=-1,best=-Infinity;
+  for(const col of [3,2,4,1,5,0,6]){const next=dropDisc(board,col,2);if(!next)continue;const value=search(next,1,depth-1,-Infinity,Infinity);if(value>best){best=value;choice=col;}}
+  return choice;
+}

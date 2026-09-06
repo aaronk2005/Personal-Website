@@ -7,6 +7,7 @@ import "./channels.css";
 import "./play.css";
 import "./projects.css";
 import "./console-channels.css";
+import "./advanced-games.css";
   
   createRoot(document.getElementById("root")!).render(
     <React.StrictMode>

@@ -5,14 +5,19 @@ import { DEMO_MIIS, loadPlayer, MiiAvatar } from './MiiPlaza';
 import { readLocal, writeLocal, useConsole, usePlayClock } from './ConsoleSystem';
 import { bowl, scoreMatch, shuffled } from './gameRules';
 import { FourInARow, TableTennis } from './MoreGames';
+import { BrickBreaker, Minesweeper, Reversi, Snake } from './AdvancedGames';
 
-type Game = 'bowling' | 'targets' | 'memory' | 'tennis' | 'four';
+type Game = 'bowling' | 'targets' | 'memory' | 'tennis' | 'four' | 'breaker' | 'snake' | 'mines' | 'reversi';
 const games: { id: Game; name: string; summary: string; label: string }[] = [
   { id: 'bowling', name: 'Pocket Bowling', summary: 'Line it up. Let it roll.', label: '5 frames / one roll each' },
   { id: 'targets', name: 'Target Rally', summary: 'Point, tap, repeat.', label: '20 seconds / beat your best' },
   { id: 'memory', name: 'Mii Match', summary: 'A familiar face. Twice.', label: '6 pairs / take your time' },
   { id: 'tennis', name: 'Table Tennis', summary: 'Keep the rally going.', label: 'First to 5' },
   { id: 'four', name: 'Four in a Row', summary: 'Make your next move.', label: 'You vs. the computer' },
+  { id: 'breaker', name: 'Brick Breaker', summary: 'Keep the ball in play.', label: '5 stages · armor, combos & power-ups' },
+  { id: 'snake', name: 'Snake', summary: 'One more bite.', label: '3 difficulties · growing speed & obstacles' },
+  { id: 'mines', name: 'Minesweeper', summary: 'Read the field.', label: '3 difficulties · flags & safe first move' },
+  { id: 'reversi', name: 'Reversi', summary: 'Think a few moves ahead.', label: '3 computer levels · strategic disc flipping' },
 ];
 function savedRecords(): Record<Game, number> {
   const data = readLocal<Partial<Record<Game, number>>>('ak-arcade-records', {});
@@ -40,7 +45,7 @@ export function ArcadePage() {
       </div>
       <>
         <div className="arcade-session-controls"><Link className="play-button" to="/?page=play">Play channels</Link><span>Best: {records[game]}{game === 'bowling' ? ' / 50' : ' pts'}</span><button className="play-button" onClick={() => setRound(r => r + 1)}>Restart</button></div>
-        <div key={game + round}>{game === 'bowling' ? <Bowling onFinish={onFinish} /> : game === 'targets' ? <Targets onFinish={onFinish} /> : game === 'memory' ? <MemoryGame onFinish={onFinish} /> : game === 'tennis' ? <TableTennis onFinish={onFinish} /> : <FourInARow onFinish={onFinish} />}</div>
+        <div key={game + round}>{game === 'bowling' ? <Bowling onFinish={onFinish} /> : game === 'targets' ? <Targets onFinish={onFinish} /> : game === 'memory' ? <MemoryGame onFinish={onFinish} /> : game === 'tennis' ? <TableTennis onFinish={onFinish} /> : game === 'four' ? <FourInARow onFinish={onFinish} /> : game==='breaker'?<BrickBreaker onFinish={onFinish}/>:game==='snake'?<Snake onFinish={onFinish}/>:game==='mines'?<Minesweeper onFinish={onFinish}/>:<Reversi onFinish={onFinish}/>}</div>
       </>
       <p className="arcade-note">Mouse, touch, or keyboard. HOME pauses play. Records stay on this device.</p>
     </section>

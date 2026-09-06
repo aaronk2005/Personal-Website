@@ -36,6 +36,10 @@ const pageTitles: Record<string, string> = {
   '/play/memory': 'Mii Match - Aaron Kleiman',
   '/play/tennis': 'Table Tennis - Aaron Kleiman',
   '/play/four': 'Four in a Row - Aaron Kleiman',
+  '/play/breaker': 'Brick Breaker - Aaron Kleiman',
+  '/play/snake': 'Snake - Aaron Kleiman',
+  '/play/mines': 'Minesweeper - Aaron Kleiman',
+  '/play/reversi': 'Reversi - Aaron Kleiman',
   '/arcade': 'Arcade - Aaron Kleiman',
 };
 

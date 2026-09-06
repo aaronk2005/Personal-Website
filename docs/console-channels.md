@@ -1,6 +1,8 @@
 # Console channels
 
-The Play menu links directly to five games. `/arcade` remains a redirect for older links.
+The Play menu links directly to nine games, each with its own channel tile. `/arcade` remains a redirect for older links.
+
+Brick Breaker includes five stages, armor, combos, and falling power-ups. Snake adds difficulty-dependent wrapping and obstacles, increasing speed, and touch controls. Minesweeper supports a safe first reveal, flags, and number chording. Reversi includes legal-move hints, automatic passes, and three computer search depths. Four in a Row also has three computer difficulty settings. HOME pauses active game clocks.
 
 ## Wii references
 
@@ -19,5 +21,5 @@ Photo Channel's file picker is a private, temporary local viewer. It does not up
 ## Validation
 
 - `npm run build`
-- `node --test tests/game-rules.test.mjs`
+- `node --test tests/*.test.mjs`
 - Browser checks: game tile navigation; Mii create/edit/cancel/delete; keyboard sliders; computer turn and restart; tennis HOME pause; local photo loading, effects, slideshow and puzzle completion; mobile widths 390px and 320px.

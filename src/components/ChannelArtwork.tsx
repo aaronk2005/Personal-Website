@@ -1,10 +1,13 @@
 import type { Channel } from '../data/portfolio';
 import { ChannelIcon } from './ChannelIcon';
 import { DEFAULT_MII, DEMO_MIIS, MiiAvatar } from './MiiPlaza';
+import { AdvancedGameArtwork } from './AdvancedGameArtwork';
 
 /** Channel identities share a bezel, but each has its own broadcast composition. */
 export function ChannelArtwork({ channel }: { channel: Channel }) {
   const title = <span className="broadcast-title">{channel.title}</span>;
+  const game=channel.to.split('/').pop()!;
+  if(channel.icon==='arcade'&&['breaker','snake','mines','reversi'].includes(game))return <div className={'broadcast broadcast-arcade broadcast-game-'+game} aria-hidden="true"><div className="game-channel-preview"><AdvancedGameArtwork game={game}/></div>{title}</div>;
   let content;
 
   switch (channel.icon) {

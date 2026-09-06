@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import ts from 'typescript';
 const source = readFileSync(new URL('../src/components/gameRules.ts', import.meta.url), 'utf8');
 const output = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.ESNext } }).outputText;
-const { bowl, shuffled, scoreMatch, dropDisc, fourWinner, computerColumn } = await import('data:text/javascript;base64,' + Buffer.from(output).toString('base64'));
+const { bowl, shuffled, scoreMatch, dropDisc, fourWinner, computerColumn, strategicColumn } = await import('data:text/javascript;base64,' + Buffer.from(output).toString('base64'));
 
 test('bowling respects gutters, power limits, and a perfect five-frame game', () => {
   assert.equal(bowl(0,75), 0);
@@ -43,6 +43,12 @@ test('computer takes wins, blocks immediate losses, and returns a legal column',
   for(let move=0;move<42&&!fourWinner(game);move++){
     const col=computerColumn(game);assert.ok(col>=0&&col<7);game=dropDisc(game,col,move%2+1);assert.ok(game);
   }
+});
+
+test('deeper Four in a Row search takes wins and blocks threats',()=>{
+  const b=Array(42).fill(0);[35,36,37].forEach(i=>b[i]=1);assert.equal(strategicColumn(b,5),3);
+  const win=b.map(n=>n===1?2:0);assert.equal(strategicColumn(win,3),3);
+  assert.equal(strategicColumn(Array(42).fill(1),3),-1);
 });
 
 test('every shuffled memory board retains exactly six pairs without mutating input', () => {

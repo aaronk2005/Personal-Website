@@ -1,10 +1,11 @@
 import { useRef, useState } from 'react';
-import { computerColumn, dropDisc, fourWinner } from './gameRules';
+import { computerColumn, dropDisc, fourWinner, strategicColumn } from './gameRules';
 import { useConsole, usePlayClock } from './ConsoleSystem';
 
 export function FourInARow({ onFinish }: { onFinish: (score: number) => void }) {
   const [board, setBoard] = useState<number[]>(Array(42).fill(0));
   const [turn, setTurn] = useState(1);
+  const [difficulty,setDifficulty]=useState('Normal');
   const { paused, chime } = useConsole();
   const winner = fourWinner(board), draw = !winner && board.every(Boolean);
   const move = (column: number, player: number) => {
@@ -14,8 +15,9 @@ export function FourInARow({ onFinish }: { onFinish: (score: number) => void }) 
     if (fourWinner(next)) { chime(true); onFinish(player === 1 ? 100 : 0); }
     setTurn(player === 1 ? 2 : 1);
   };
-  usePlayClock(turn === 2 && !winner && !draw, paused, () => move(computerColumn(board), 2), 550);
+  usePlayClock(turn === 2 && !winner && !draw, paused, () => move(difficulty==='Easy'?computerColumn(board):strategicColumn(board,difficulty==='Hard'?5:3), 2), 550);
   return <div className="four-game">
+    <label className="advanced-difficulty">Difficulty<select value={difficulty} disabled={board.some(Boolean)&&!winner&&!draw} onChange={e=>{setDifficulty(e.target.value);setBoard(Array(42).fill(0));setTurn(1);}}><option>Easy</option><option>Normal</option><option>Hard</option></select></label>
     <p className="game-status" role="status">{winner ? winner === 1 ? 'You win! Four in a row.' : 'Computer wins. Try another round.' : draw ? 'A draw. The board is full.' : turn === 1 ? 'Your turn — choose a column.' : 'Computer is thinking…'}</p>
     <div className="four-columns" aria-label="Four in a Row board">{Array.from({length:7}, (_,col) => <button key={col} aria-label={'Drop disc in column ' + (col+1)} disabled={paused || turn !== 1 || !!winner || draw || !!board[col]} onClick={() => move(col,1)}>
       <span className="four-arrow" aria-hidden="true">↓</span>

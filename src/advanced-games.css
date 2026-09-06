@@ -1,0 +1,34 @@
+.advanced-game { padding:24px; border:1px solid #b8cbd3; border-radius:16px; background:#f7fafb; }
+.advanced-controls { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; margin-bottom:20px; }
+.advanced-difficulty { display:flex; align-items:center; gap:10px; color:#516b78; font-size:1rem; }
+.advanced-difficulty select { min-height:44px; padding:8px 30px 8px 12px; border:1px solid #b7c7ce; border-radius:8px; background:#fff; color:#405e70; font:inherit; }
+.advanced-difficulty select:disabled { opacity:.65; }
+.advanced-check { display:flex; align-items:center; gap:9px; font-size:.9375rem; color:#526d61; }.advanced-check input { width:20px; height:20px; accent-color:#4b8c70; }
+.advanced-hud { display:flex; align-items:center; justify-content:space-around; flex-wrap:wrap; gap:12px; padding:15px 10px; margin-bottom:20px; border:1px solid #d0dde1; border-radius:10px; background:#fff; color:#647b86; font-size:.875rem; }
+.advanced-hud b { display:block; margin-top:4px; font-size:1.35rem; color:#3b596a; font-weight:500; }
+.advanced-game .game-rules { margin:20px auto 0; max-width:740px; font-size:.9375rem; line-height:1.65; }
+.advanced-game .game-status { margin:16px 0; }
+.advanced-result { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; padding:24px; text-align:center; }
+.advanced-result h3 { font-size:1.65rem; color:#3e6276; font-weight:500; }.advanced-result p { font-size:1rem; color:#5c7480; }
+.mines-board { display:grid; grid-template-columns:repeat(9,minmax(0,1fr)); gap:3px; width:min(100%,495px); margin:auto; padding:7px; border:2px solid #9aaeb8; border-radius:8px; background:#d5e0e3; }
+.mines-board button { display:grid; place-items:center; min-width:0; aspect-ratio:1; padding:0; border:1px solid #91a8b5; border-radius:3px; box-shadow:inset 2px 2px #fff8,inset -2px -2px #4d66782b; background:linear-gradient(#d5e3e9,#bacdd8); color:#ad5c42; font:600 1.1rem/1 Arial,sans-serif; }
+.mines-board button.revealed { box-shadow:none; background:#f7faf6; border-color:#ced9d8; }.mines-board button.mine-hit { background:#e6a59b; color:#7d3027; }
+.mines-board button.revealed.mine-number-1 { color:#3378b0; }.mines-board button.revealed.mine-number-2 { color:#41805c; }.mines-board button.revealed.mine-number-3 { color:#af534d; }.mines-board button.revealed.mine-number-4 { color:#75679c; }
+.mines-board button:focus-visible,.reversi-board button:focus-visible { z-index:1; outline:3px solid #168ab5; outline-offset:1px; }
+.reversi-game { background:#f2f7f1; }.reversi-board { display:grid; grid-template-columns:repeat(8,minmax(0,1fr)); width:min(100%,500px); padding:8px; margin:auto; background:#3c6b57; border-radius:10px; box-shadow:0 3px 0 #2d4b41; }
+.reversi-board button { display:grid; place-items:center; aspect-ratio:1; min-width:0; padding:5px; border:1px solid #497862; background:#709b7e; }
+.reversi-disc { display:block; width:90%; aspect-ratio:1; border-radius:50%; box-shadow:1px 3px 2px #243f4655; }.reversi-disc.piece-1 { background:radial-gradient(circle at 30% 25%,#5b6263,#283434); }.reversi-disc.piece-2 { background:radial-gradient(circle at 30% 25%,#fff,#e1e4d4); }
+.reversi-hint { width:20%; aspect-ratio:1; border:2px solid #d7eed4; border-radius:50%; }.reversi-board button:hover[aria-disabled=false] { background:#84ac8f; }
+.snake-court,.breaker-court { position:relative; overflow:hidden; margin:auto; border:3px solid #aabeb5; border-radius:10px; touch-action:none; }
+.snake-court { width:min(100%,440px); aspect-ratio:1; }.breaker-court { width:min(100%,800px); aspect-ratio:1.5; border-color:#afc3d2; }
+.snake-court>svg,.breaker-court>svg { display:block; width:100%; height:100%; }.snake-court:focus-visible,.breaker-court:focus-visible { outline:3px solid #168ab5; outline-offset:4px; }
+.court-overlay { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:18px; padding:20px; background:#f8fcf4e3; text-align:center; }.court-overlay h3 { font-size:1.55rem; color:#476651; font-weight:500; }.breaker-court .court-overlay { background:#f4f8fbe3; }
+.snake-dpad { display:flex; justify-content:center; gap:12px; margin-top:18px; }.snake-dpad button { width:56px; min-height:48px; padding:4px; font-size:1.4rem; }
+.breaker-slider { display:flex; flex-direction:column; gap:8px; max-width:800px; margin:20px auto 0; font-size:.875rem; color:#5d7385; }.breaker-slider input { width:100%; min-height:36px; accent-color:#487ea2; }
+.broadcast-game-snake { background:#f0f5e8; color:#517142; }.broadcast-game-mines { background:#edf3f5; color:#567488; }.broadcast-game-reversi { background:#eef5ef; color:#4e735c; }
+@media(max-width:600px){
+  .advanced-game { padding:14px 10px; }.advanced-controls { gap:10px; }.advanced-difficulty { font-size:.875rem; gap:8px; }.advanced-hud { padding:12px 7px; gap:8px; }.advanced-hud b { font-size:1.15rem; }
+  .mines-board { gap:2px; padding:4px; }.mines-board button { font-size:.9375rem; }.reversi-board { padding:5px; }.reversi-board button { padding:3px; }
+  .breaker-court { aspect-ratio:1; }.court-overlay { padding:12px; gap:14px; }.court-overlay h3 { font-size:1.25rem; }.advanced-result { padding:14px 6px; }
+  .snake-dpad { gap:9px; }.snake-dpad button { width:48px; }.advanced-game .game-rules { font-size:.875rem; }
+}
