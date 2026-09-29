@@ -93,7 +93,7 @@ export const channels: Channel[] = [
   {
     title: 'Now Building',
     label: '06 / In progress',
-    description: 'AgentBench regression testing and the latest Spin2Dine work.',
+    description: 'This portfolio is a work in progress, alongside Spin2Dine.',
     to: '/now',
     icon: 'spark',
     tone: 'mint',
@@ -255,23 +255,6 @@ export const experiences = [
 
 export const projects = [
   {
-    id: 'agentbench',
-    name: 'AgentBench',
-    kicker: 'AI developer tools · Active development',
-    signal: 'Regression testing for AI agents',
-    summary: 'A workbench for creating agent tests, running evaluations, and comparing versions before shipping changes.',
-    decisions: [
-      'Built resumable evaluations with deterministic assertions, observable tool-call inspection, immutable run snapshots, and JSON export.',
-      'Added version comparisons that separate regressions, improvements, and changed test definitions.',
-      'Built a visual skill-test editor, private project/file workspaces, Markdown editing, and an isolated no-key demo.',
-      'The working app is private. A separate sample-only preview does not enable real execution, uploads, or durable saves.',
-    ],
-    stack: ['TypeScript', 'React', 'Vinext', 'Cloudflare Workers', 'D1', 'R2', 'OpenAI Responses API'],
-    github: 'https://github.com/aaronk2005/AgentBench',
-    icon: 'spark' as IconName,
-    accent: 'aqua',
-  },
-  {
     id: 'odysseywalk',
     name: 'OdysseyWalk',
     kicker: 'QHacks 2026 Winner',
@@ -409,7 +392,7 @@ export const skillGroups = [
     name: 'AI & agent tooling',
     description: 'Making LLM systems testable, observable, and useful inside real workflows.',
     skills: ['AI agents', 'Multi-agent orchestration', 'NumPy', 'Pandas', 'OpenAI API', 'n8n'],
-    proof: ['AgentBench evaluations', 'AMD triage agents', 'Tallysight automation'],
+    proof: ['AMD triage agents', 'Tallysight automation'],
   },
   {
     name: 'Web & full-stack',

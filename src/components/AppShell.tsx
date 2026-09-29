@@ -281,6 +281,7 @@ export function AppFrame({ children, inactive = false }: PropsWithChildren<{ ina
   return (
     <div ref={frame} aria-hidden={inactive || undefined} className={home ? 'app-frame wii-menu-mode' : 'app-frame wii-channel-mode'}>
       <a className="skip-link" href="#main-content">Skip to main content</a>
+      <aside className="building-banner" aria-label="Website status"><span className="building-dot" aria-hidden="true" /><strong>Currently building</strong><span className="building-note">This site is a work in progress.</span></aside>
       {children}
       {home && <WiiFooter />}
     </div>

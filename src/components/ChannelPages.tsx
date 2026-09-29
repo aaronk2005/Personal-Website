@@ -348,46 +348,30 @@ export function NowPage() {
       number="06"
       eyebrow="Now building"
       title="Now Building"
-      intro="AgentBench: repeatable agent evaluations. Spin2Dine: a new restaurant-discovery experience."
+      intro="This portfolio is a work in progress."
     >
       <section className="now-layout">
         <article className="now-feature">
-          <div className="agentbench-console" aria-label="AgentBench evaluation workflow">
-            <header><span>AGENTBENCH</span><b>PRIVATE APP</b></header>
-            <div className="agentbench-run">
-              <span>Evaluation workspace</span>
-              <strong>Find regressions before shipping an agent change.</strong>
-            </div>
-            <ul>
-              <li><span>01</span>Create tests<i>assertions</i></li>
-              <li><span>02</span>Run evaluations<i>resumable</i></li>
-              <li><span>03</span>Compare versions<i>regressions</i></li>
-            </ul>
-          </div>
           <div>
             <p className="eyebrow"><span className="signal-dot" aria-hidden="true" /> Active development</p>
-            <h2>AgentBench</h2>
-            <p>Create tests with deterministic assertions, run an agent version, inspect outputs and observable tool calls, and compare failures against a previous run.</p>
-            <p>The skill editor, private project library, Markdown files, and help guides now support the full evaluation workflow. Saved runs can be resumed, cancelled, and exported.</p>
-            <div className="status-chip">Private app · separate sample-only preview</div>
-            <p>The preview uses example data only; real execution, uploads, and durable saves belong to the private app.</p>
-            <ExternalLink href="https://github.com/aaronk2005/AgentBench">View AgentBench source</ExternalLink>
+            <h2>This portfolio</h2>
+            <p>A Wii-inspired home for my projects, games, and experiments. I'm still refining the channels and the experience on phones.</p>
+            <div className="status-chip">Currently building</div>
+            <Link className="project-link" to="/projects">Explore my projects <ChannelIcon name="arrow" size={16} /></Link>
           </div>
         </article>
         <div className="exploration-list">
-          <h2>Latest work</h2>
+          <h2>Spin2Dine</h2>
           {[
-            ['01', 'Version comparisons', 'Separate regressions and improvements from added tests and changed definitions. Inspect immutable run snapshots instead of comparing moving targets.'],
-            ['02', 'Skill studio & project files', 'Edit instructions and tests, organize private project files, and explicitly import saved text into a skill. A no-key demo makes the workflow approachable.'],
-            ['03', 'Spin2Dine redesign', 'Browse restaurants directly or customize the cuisine wheel. Budget, distance, cuisine, and open-now filters stay in effect throughout discovery.'],
-            ['04', 'Saved places & account work', 'Guest shortlists work on the device. Account flows are implemented; live account saving and recovery still need end-to-end verification.'],
+            ['01', 'Restaurant discovery', 'Browse restaurants directly or use the cuisine and restaurant wheels to choose where to eat.'],
+            ['02', 'Your shortlist', 'Narrow the options by location and budget, then save places on your device.'],
           ].map(([number, title, copy]) => (
             <article key={number}>
               <span>{number}</span>
               <div><h3>{title}</h3><p>{copy}</p></div>
             </article>
           ))}
-          <ExternalLink href="https://spin2dine.vercel.app">Try the new Spin2Dine</ExternalLink>
+          <ExternalLink href="https://spin2dine.vercel.app">Try Spin2Dine</ExternalLink>
         </div>
       </section>
     </ChannelLayout>
@@ -408,9 +392,6 @@ function answerAaronQuestion(question: string) {
   }
   if (/amd|experience|career|intern/.test(normalized)) {
     return `At AMD, Aaron validates firmware, drivers, and ROCm on MI300X, MI300A, and MI450 GPU clusters. ${experiences[0].impact[0]} His work includes Python test automation, Jenkins workloads, and multi-agent failure triage. Earlier roles include Tallysight, QSET, teaching, and Swarmed.`;
-  }
-  if (/agentbench|agent bench/.test(normalized)) {
-    return 'AgentBench is Aaron’s regression-testing workbench for AI agents: deterministic assertions, resumable evaluations, version comparisons, observable tool calls, a visual skill editor, and private project files. The working app is private; its separate preview uses sample data only. See Now Building or Projects for the current scope and source.';
   }
   if (/spin2dine|spin to dine|spin 2 dine/.test(normalized)) {
     return 'Spin2Dine now combines restaurant browsing with customizable cuisine and restaurant wheels, Google Places filters, guest saved places, and recently viewed restaurants. The current flow does not rely on AI verification. Account flows are implemented, but live account saving still needs verification. The current app is linked in Projects.';
