@@ -2,7 +2,7 @@
 
 The menu contains twelve channels on one page. Mii Channel occupies slot 06, replacing Now Building. The Play page and game routes are retired; `/play/*` and `/arcade` redirect to the menu, and `/now` redirects to Mii Channel. Saved characters and historical game records are preserved.
 
-Startup runs once per browser tab, with an immediate Skip intro button and A/Escape shortcuts. The menu only mounts after startup finishes. Skip to content stays visually hidden until keyboard focus, then moves focus to the main content.
+Startup runs once per browser tab, with an immediate Skip intro button and A/Escape shortcuts. The menu only mounts after startup finishes. Skip to content stays visually hidden until focus from a fresh Tab keypress, then moves focus to the main content. Restored/programmatic focus does not reveal it; pointer interactions, blur, and page restoration clear its visible state.
 
 ## Wii references
 

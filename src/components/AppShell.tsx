@@ -4,6 +4,7 @@ import { channels, type Channel } from '../data/portfolio';
 import { ChannelIcon } from './ChannelIcon';
 import { ChannelArtwork } from './ChannelArtwork';
 import { useConsole } from './ConsoleSystem';
+import { SkipLink } from './SkipLink';
 
 const timeFormatter = new Intl.DateTimeFormat('en-CA', {
   timeZone: 'America/Toronto',
@@ -248,7 +249,7 @@ export function AppFrame({ children }: PropsWithChildren) {
 
   return (
     <div ref={frame} className={home ? 'app-frame wii-menu-mode' : 'app-frame wii-channel-mode'}>
-      <a className="skip-link" href="#main-content" onClick={event => { event.preventDefault(); frame.current?.querySelector<HTMLElement>('#main-content')?.focus({ preventScroll: true }); }}>Skip to main content</a>
+      <SkipLink />
       <aside className="building-banner" aria-label="Website status"><span className="building-dot" aria-hidden="true" /><strong>Currently building</strong><span className="building-note">This site is a work in progress.</span></aside>
       {children}
       {home && <WiiFooter />}

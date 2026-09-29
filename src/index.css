@@ -79,7 +79,7 @@ ul { margin: 0; padding: 0; }
   pointer-events: none;
 }
 
-.skip-link:focus-visible { clip-path: none; opacity: 1; pointer-events: auto; }
+.skip-link[data-keyboard-focus="true"]:focus { clip-path: none; opacity: 1; pointer-events: auto; }
 #main-content:focus { outline: none; }
 
 .app-frame { min-height: 100vh; }

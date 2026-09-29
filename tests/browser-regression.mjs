@@ -50,6 +50,44 @@ try {
   await page.reload();
   await assertMenu();
   assert.equal(await page.locator('.boot-screen').count(), 0);
+
+  // Browser/webview focus restoration must not reveal the link by itself.
+  const skip = page.locator('.skip-link');
+  const skipOpacity = () => skip.evaluate(el => getComputedStyle(el).opacity);
+  const tabToSkip = async () => {
+    await page.locator('.menu-channel').first().focus();
+    await page.keyboard.press('Shift+Tab');
+    assert.equal(await skipOpacity(), '1');
+  };
+  await skip.focus();
+  assert.equal(await skipOpacity(), '0', 'programmatic focus must stay hidden');
+  await page.keyboard.press('a');
+  assert.equal(await skipOpacity(), '0', 'non-Tab keyboard input must not reveal the link');
+  await tabToSkip();
+  await page.reload();
+  await assertMenu();
+  await skip.focus();
+  assert.equal(await skipOpacity(), '0', 'focus restored after reload must stay hidden');
+  await tabToSkip();
+  await page.goto(base + '/about');
+  await page.getByRole('button', { name: 'Start', exact: true }).waitFor();
+  await page.goBack();
+  await assertMenu();
+  await tabToSkip();
+  await page.locator('main').click({ position: { x: 2, y: 2 } });
+  assert.equal(await skipOpacity(), '0', 'pointer interaction must dismiss the link');
+  await tabToSkip();
+  await skip.click();
+  assert.equal(await page.evaluate(() => document.activeElement.id), 'main-content');
+  assert.equal(await skipOpacity(), '0', 'the revealed link remains mouse-clickable');
+  await tabToSkip();
+  await page.evaluate(() => window.dispatchEvent(new Event('blur')));
+  assert.equal(await skipOpacity(), '0', 'leaving the window clears a stale reveal');
+  await tabToSkip();
+  await page.keyboard.press('Enter');
+  assert.equal(await page.evaluate(() => document.activeElement.id), 'main-content');
+  assert.equal(await skipOpacity(), '0');
+
   await page.evaluate(() => sessionStorage.setItem('ak-menu-page', '1'));
   await page.goto(`${base}/?page=play`);
   await assertMenu();
@@ -109,8 +147,22 @@ try {
   await blockedPage.getByRole('button', { name: 'Start', exact: true }).waitFor();
   assert.equal(await blockedPage.locator('.boot-screen').count(), 0);
   await blocked.close();
+
+  const touch = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
+  await touch.addInitScript(() => sessionStorage.setItem('ak-startup-complete', '1'));
+  const touchPage = await touch.newPage();
+  touchPage.on('pageerror', error => errors.push(error.message));
+  await touchPage.goto(base);
+  await touchPage.locator('.skip-link').focus();
+  assert.equal(await touchPage.locator('.skip-link').evaluate(el => getComputedStyle(el).opacity), '0');
+  await touchPage.locator('.menu-channel').first().focus();
+  await touchPage.keyboard.press('Shift+Tab');
+  assert.equal(await touchPage.locator('.skip-link').evaluate(el => getComputedStyle(el).opacity), '1');
+  await touchPage.touchscreen.tap(200, 85);
+  assert.equal(await touchPage.locator('.skip-link').evaluate(el => getComputedStyle(el).opacity), '0');
+  await touch.close();
   assert.deepEqual(errors, []);
-  console.log('PASS: startup, focus trap, skip link, reload, menu ordering, stale links, Mii navigation, HOME, blocked storage, desktop and 320/390/844px layouts.');
+  console.log('PASS: startup, focus trap, deliberate Tab-only skip link, restored focus, focused reload/history, pointer/touch dismissal, menu ordering, stale links, Mii navigation, HOME, blocked storage, desktop and 320/390/844px layouts.');
 } finally {
   await browser.close();
 }
