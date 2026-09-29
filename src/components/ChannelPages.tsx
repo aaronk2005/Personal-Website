@@ -342,42 +342,6 @@ export function ResumePage() {
   );
 }
 
-export function NowPage() {
-  return (
-    <ChannelLayout
-      number="06"
-      eyebrow="Now building"
-      title="Now Building"
-      intro="This portfolio is a work in progress."
-    >
-      <section className="now-layout">
-        <article className="now-feature">
-          <div>
-            <p className="eyebrow"><span className="signal-dot" aria-hidden="true" /> Active development</p>
-            <h2>This portfolio</h2>
-            <p>A Wii-inspired home for my projects, games, and experiments. I'm still refining the channels and the experience on phones.</p>
-            <div className="status-chip">Currently building</div>
-            <Link className="project-link" to="/projects">Explore my projects <ChannelIcon name="arrow" size={16} /></Link>
-          </div>
-        </article>
-        <div className="exploration-list">
-          <h2>Spin2Dine</h2>
-          {[
-            ['01', 'Restaurant discovery', 'Browse restaurants directly or use the cuisine and restaurant wheels to choose where to eat.'],
-            ['02', 'Your shortlist', 'Narrow the options by location and budget, then save places on your device.'],
-          ].map(([number, title, copy]) => (
-            <article key={number}>
-              <span>{number}</span>
-              <div><h3>{title}</h3><p>{copy}</p></div>
-            </article>
-          ))}
-          <ExternalLink href="https://spin2dine.vercel.app">Try Spin2Dine</ExternalLink>
-        </div>
-      </section>
-    </ChannelLayout>
-  );
-}
-
 type GuideMessage = {
   id: number;
   speaker: 'guide' | 'visitor';
@@ -403,7 +367,7 @@ function answerAaronQuestion(question: string) {
     return 'His resume lists Python, C/C++, JavaScript/TypeScript, Java, SQL, VHDL, and Assembly; Linux, Docker, Jenkins, CUDA, ROCm, AI agents, React, Next.js, ROS 2, and FPGA tooling. The Toolbox channel connects these to his work.';
   }
   if (/hobby|outside|fun|sport|music|travel|food/.test(normalized)) {
-    return 'Outside engineering, Aaron enjoys hockey, basketball, cooking, travel, music, and strategy games. See Hobbies, or try a game in Arcade.';
+    return 'Outside engineering, Aaron enjoys hockey, basketball, cooking, travel, music, and strategy games. See Hobbies, or create a character in the Mii Channel.';
   }
   if (/contact|email|reach|hire|opportunity/.test(normalized)) {
     return 'The fastest route is aaron.kleiman@queensu.ca. You can also use the LinkedIn and GitHub channels from the Wii Menu. He is especially interested in systems software, validation, developer tools, and AI infrastructure.';

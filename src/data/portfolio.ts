@@ -32,7 +32,6 @@ export interface Channel {
   tone: string;
   featured?: boolean;
   external?: boolean;
-  page?: 'play';
 }
 
 export const profile = {
@@ -91,11 +90,11 @@ export const channels: Channel[] = [
     tone: 'silver',
   },
   {
-    title: 'Now Building',
-    label: '06 / In progress',
-    description: 'This portfolio is a work in progress, alongside Spin2Dine.',
-    to: '/now',
-    icon: 'spark',
+    title: 'Mii Channel',
+    label: '06 / Create a character',
+    description: 'Create your character, join the plaza, and take a lap in the parade.',
+    to: '/mii',
+    icon: 'mii',
     tone: 'mint',
   },
   {
@@ -123,31 +122,11 @@ export const channels: Channel[] = [
     tone: 'cobalt',
   },
   {
-    title: 'Mii Channel',
-    label: '10 / Create a character',
-    description: 'Create your player, join the plaza, and take a lap in the parade.',
-    to: '/mii',
-    icon: 'mii',
-    tone: 'mint',
-    page: 'play',
-  },
-  {
     title: 'Photo Channel',
-    label: '12 / Photo album',
+    label: '10 / Photo album',
     description: 'Browse photos, start a slideshow, or turn a picture into a puzzle.',
     to: '/photos', icon: 'photo', tone: 'peach',
   },
-  ...[
-    ['bowling', 'Pocket Bowling', 'Five frames. Line up your next strike.'],
-    ['targets', 'Target Rally', 'A twenty-second point-and-tap challenge.'],
-    ['memory', 'Mii Match', 'Find all six pairs of familiar faces.'],
-    ['tennis', 'Table Tennis', 'A quick paddle match. First to five wins.'],
-    ['four', 'Four in a Row', 'Connect four discs against the computer.'],
-    ['breaker', 'Brick Breaker', 'Five stages, armored bricks, combos, and power-ups.'],
-    ['snake', 'Snake', 'Three difficulties, accelerating speed, and obstacles.'],
-    ['mines', 'Minesweeper', 'Read the numbers, flag the mines, and clear the field.'],
-    ['reversi', 'Reversi', 'Flip the board against a strategic computer opponent.'],
-  ].map(([id, title, description]): Channel => ({title, description, label: 'Play', to: '/play/' + id, icon: 'arcade', tone: 'aqua', page: 'play'})),
   {
     title: 'GitHub',
     label: 'External',

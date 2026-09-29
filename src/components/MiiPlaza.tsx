@@ -108,7 +108,7 @@ export function MiiPlazaPage() {
     }
     setRemoving(false);setPlayer(mii); writeLocal('ak-player', mii.id); chime(); setNotice(mii.name + ' is Player 1.');
   };
-  return <ChannelLayout number="10" eyebrow="Your characters" title="Mii Channel" intro="Mii Plaza, character editor, and Mii Parade." compact>
+  return <ChannelLayout number="06" eyebrow="Your characters" title="Mii Channel" intro="Mii Plaza, character editor, and Mii Parade." compact>
     <section className="plaza-workspace">
       <div className="play-toolbar">
         <div><span className="eyebrow">Your console</span><h2>{editing ? 'Create your Mii' : parade ? 'Mii Parade' : 'Mii Plaza'}</h2></div>
@@ -129,7 +129,7 @@ export function MiiPlazaPage() {
         </div>
         {removing&&<div className="mii-delete-confirm" role="group" aria-label="Confirm Mii removal"><p>Erase {player.name} from this device? This cannot be undone.</p><button className="play-button" onClick={()=>setRemoving(false)} autoFocus>Keep Mii</button><button className="play-button" onClick={remove}>Erase Mii</button></div>}
         <div className="plaza-bottom"><div className="button-row">
-          <Link className="play-button primary" to="/?page=play">Play as {player.name}</Link>
+          <Link className="play-button primary" to="/">Back to Wii Menu</Link>
         </div><p>Saved on this device. {miis.length+1} / 100 Miis.</p></div>
       </>}
       <p className="play-notice" role="status">{notice || (parade ? 'A local guest parade. Select a guest to invite them; no online Mii sharing.' : editing ? 'Changes stay in the preview until you save.' : 'Select a Mii, then choose Edit. You can also drag a Mii onto Edit.')}</p>

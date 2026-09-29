@@ -56,14 +56,14 @@ export function ConsoleSystem({ children, inactive }: PropsWithChildren<{ inacti
     {!inactive && <button className="console-home" onClick={() => setOpen(true)} aria-label="Open HOME Menu (Escape)"><span aria-hidden="true">⌂</span> HOME</button>}
     <dialog ref={dialog} className="console-dialog" onCancel={event => { event.preventDefault(); setOpen(false); }} aria-labelledby="home-menu-title">
       <header><h2 id="home-menu-title">HOME Menu</h2><button onClick={() => setOpen(false)} aria-label="Close HOME Menu">Close</button></header>
-      <p>Take a breather. Your game is paused.</p>
+      <p>Return to the menu or visit your Mii Plaza.</p>
       <div className="console-home-actions">
         <button onClick={() => setOpen(false)}>Resume</button>
         <Link to="/" onClick={() => setOpen(false)}>Wii Menu</Link>
         <Link to="/mii" onClick={() => setOpen(false)}>Mii Plaza</Link>
       </div>
-      <label className="sound-setting"><span>Menu & game sounds</span><input type="checkbox" checked={sound} onChange={e => { setSound(e.target.checked); writeLocal('ak-sound', e.target.checked); }} /></label>
-      <p className="console-instructions">Arrow keys: select a channel. Enter: open. + / -: change page. Escape: HOME.</p>
+      <label className="sound-setting"><span>Menu sounds</span><input type="checkbox" checked={sound} onChange={e => { setSound(e.target.checked); writeLocal('ak-sound', e.target.checked); }} /></label>
+      <p className="console-instructions">Arrow keys: select a channel. Enter: open. Escape: HOME.</p>
       <footer><span className="player-light" /> Player 1 <span>Portfolio edition</span></footer>
     </dialog>
   </ConsoleContext.Provider>;

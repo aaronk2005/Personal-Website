@@ -3,7 +3,7 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { AppFrame, BootSequence, HomeScreen } from './components/AppShell';
 import { ConsoleSystem } from './components/ConsoleSystem';
 import { MiiPlazaPage } from './components/MiiPlaza';
-import { ArcadePage } from './components/Arcade';
+import { hasCompletedStartup, rememberStartup } from './startup';
 import { PhotoChannel } from './components/PhotoChannel';
 import {
   AboutPage,
@@ -12,7 +12,6 @@ import {
   ExperiencePage,
   HobbiesPage,
   NotFoundPage,
-  NowPage,
   ProjectsPage,
   ResumePage,
   SkillsPage,
@@ -25,22 +24,11 @@ const pageTitles: Record<string, string> = {
   '/projects': 'Projects - Aaron Kleiman',
   '/skills': 'Skills & Toolbox - Aaron Kleiman',
   '/resume': 'Resume - Aaron Kleiman',
-  '/now': 'Now Building - Aaron Kleiman',
   '/aaron-ai': 'Aaron AI - Aaron Kleiman',
   '/hobbies': 'Hobbies - Aaron Kleiman',
   '/contact': 'Contact - Aaron Kleiman',
   '/mii': 'Mii Channel - Aaron Kleiman',
   '/photos': 'Photo Channel - Aaron Kleiman',
-  '/play/bowling': 'Pocket Bowling - Aaron Kleiman',
-  '/play/targets': 'Target Rally - Aaron Kleiman',
-  '/play/memory': 'Mii Match - Aaron Kleiman',
-  '/play/tennis': 'Table Tennis - Aaron Kleiman',
-  '/play/four': 'Four in a Row - Aaron Kleiman',
-  '/play/breaker': 'Brick Breaker - Aaron Kleiman',
-  '/play/snake': 'Snake - Aaron Kleiman',
-  '/play/mines': 'Minesweeper - Aaron Kleiman',
-  '/play/reversi': 'Reversi - Aaron Kleiman',
-  '/arcade': 'Arcade - Aaron Kleiman',
 };
 
 function RouteEffects() {
@@ -55,16 +43,19 @@ function RouteEffects() {
 }
 
 export default function App() {
-  const [showBoot, setShowBoot] = useState(true);
+  const [showBoot, setShowBoot] = useState(() => {
+    try { return !hasCompletedStartup(window.sessionStorage); } catch { return true; }
+  });
 
   const completeBoot = useCallback(() => {
+    try { rememberStartup(window.sessionStorage); } catch { /* Storage can be blocked by browser policy. */ }
     setShowBoot(false);
   }, []);
 
   return (
     <ConsoleSystem inactive={showBoot}>
       <RouteEffects />
-      <AppFrame inactive={showBoot}>
+      {showBoot ? <BootSequence onComplete={completeBoot} /> : <AppFrame>
         <Routes>
           <Route path="/" element={<HomeScreen />} />
           <Route path="/about" element={<AboutPage />} />
@@ -72,18 +63,17 @@ export default function App() {
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/skills" element={<SkillsPage />} />
           <Route path="/resume" element={<ResumePage />} />
-          <Route path="/now" element={<NowPage />} />
+          <Route path="/now" element={<Navigate to="/mii" replace />} />
           <Route path="/aaron-ai" element={<AaronAIPage />} />
           <Route path="/hobbies" element={<HobbiesPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/mii" element={<MiiPlazaPage />} />
-          <Route path="/arcade" element={<Navigate to="/?page=play" replace />} />
-          <Route path="/play/:gameId" element={<ArcadePage />} />
+          <Route path="/arcade" element={<Navigate to="/" replace />} />
+          <Route path="/play/*" element={<Navigate to="/" replace />} />
           <Route path="/photos" element={<PhotoChannel />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
-      </AppFrame>
-      {showBoot && <BootSequence onComplete={completeBoot} />}
+      </AppFrame>}
     </ConsoleSystem>
   );
 }

@@ -1,8 +1,8 @@
 # Console channels
 
-The Play menu links directly to nine games, each with its own channel tile. `/arcade` remains a redirect for older links.
+The menu contains twelve channels on one page. Mii Channel occupies slot 06, replacing Now Building. The Play page and game routes are retired; `/play/*` and `/arcade` redirect to the menu, and `/now` redirects to Mii Channel. Saved characters and historical game records are preserved.
 
-Brick Breaker includes five stages, armor, combos, and falling power-ups. Snake adds difficulty-dependent wrapping and obstacles, increasing speed, and touch controls. Minesweeper supports a safe first reveal, flags, and number chording. Reversi includes legal-move hints, automatic passes, and three computer search depths. Four in a Row also has three computer difficulty settings. HOME pauses active game clocks.
+Startup runs once per browser tab, with an immediate Skip intro button and A/Escape shortcuts. The menu only mounts after startup finishes. Skip to content stays visually hidden until keyboard focus, then moves focus to the main content.
 
 ## Wii references
 
@@ -22,9 +22,10 @@ Photo Channel's file picker is a private, temporary local viewer. It does not up
 
 - `npm run build`
 - `node --test tests/*.test.mjs`
-- Browser checks: game tile navigation; Mii create/edit/cancel/delete; keyboard sliders; computer turn and restart; tennis HOME pause; local photo loading, effects, slideshow and puzzle completion; mobile widths 390px and 320px.
+- `node tests/browser-regression.mjs` with an installed Playwright module and a running preview; `PORTFOLIO_URL`, `PLAYWRIGHT_MODULE`, and `BROWSER_CHANNEL` can select the environment.
+- Current browser checks: startup keyboard/focus trap; hidden skip link and keyboard activation; same-tab reload; blocked session storage; twelve-channel order; retired route redirects; Mii launch/return; HOME dialog; banner and clock layout; desktop and 320px, 390px, and 844px viewports. These are browser viewport checks, not physical-device tests.
 
-## Phone layout checks
+## Historical phone layout checks (before Play removal)
 
 The mobile stylesheet keeps game controls compact, preserves 44px primary controls and 52px Snake direction buttons, and allows document scrolling in short landscape windows. Form text remains 16px and viewport zoom is not disabled. Safe-area spacing is provided for notches and home indicators.
 

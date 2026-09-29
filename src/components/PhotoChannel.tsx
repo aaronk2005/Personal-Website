@@ -5,7 +5,7 @@ import { useConsole, usePlayClock } from './ConsoleSystem';
 import { shuffled } from './gameRules';
 
 export function PhotoChannel() {
-  return <ChannelLayout number="12" eyebrow="Pictures & memories" title="Photo Channel" intro="An album, a slideshow, and a little photo fun." compact><PhotoLibrary /></ChannelLayout>;
+  return <ChannelLayout number="10" eyebrow="Pictures & memories" title="Photo Channel" intro="An album, a slideshow, and a little photo fun." compact><PhotoLibrary /></ChannelLayout>;
 }
 function PhotoLibrary() {
   const [localPhotos,setLocalPhotos] = useState<TravelPhoto[]>([]);

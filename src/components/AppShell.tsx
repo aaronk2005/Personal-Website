@@ -27,9 +27,8 @@ export function BootSequence({ onComplete }: { onComplete: () => void }) {
   }, []);
 
   useEffect(() => {
-    if (phase !== 'safety') return;
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key.toLowerCase() === 'a' && !event.ctrlKey && !event.metaKey && !event.altKey) {
+      if (['a', 'escape'].includes(event.key.toLowerCase()) && !event.ctrlKey && !event.metaKey && !event.altKey) {
         event.preventDefault();
         onComplete();
       }
@@ -46,11 +45,19 @@ export function BootSequence({ onComplete }: { onComplete: () => void }) {
       aria-label={phase === 'splash' ? 'Portfolio startup' : undefined}
       aria-labelledby={phase === 'safety' ? 'boot-title' : undefined}
       aria-live="polite"
+      onKeyDown={event => {
+        if (event.key !== 'Tab') return;
+        const controls = [...event.currentTarget.querySelectorAll<HTMLElement>('a[href],button')];
+        const first = controls[0], last = controls.at(-1);
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+      }}
     >
       {phase === 'splash' ? (
         <div className="boot-splash">
           <img src="/images/wii/wii-logo.svg" alt="Wii" />
           <span>Aaron's Portfolio Edition</span>
+          <button type="button" className="boot-skip" onClick={onComplete} autoFocus>Skip intro</button>
         </div>
       ) : (
         <>
@@ -95,16 +102,6 @@ function ChannelTile({ channel }: { channel: Channel }) {
   return <Link className="menu-channel" onClick={() => chime()} to={channel.to} aria-label={`${channel.title} channel`}>{content}</Link>;
 }
 
-function MenuPager({ page, onChange }: { page: number; onChange: (page: number) => void }) {
-  return (
-    <nav className="menu-pager" aria-label={'Menu page ' + (page + 1) + ' of 2'}>
-      <button className="pager-left" type="button" disabled={page === 0} onClick={() => onChange(0)} aria-label="Previous menu page"><span>&lt;</span></button>
-      <div className="page-dots" aria-hidden="true"><i className={page === 0 ? 'active' : ''} /><i className={page === 1 ? 'active' : ''} /></div>
-      <button className="pager-right" type="button" disabled={page === 1} onClick={() => onChange(1)} aria-label="Next menu page"><span>&gt;</span></button>
-    </nav>
-  );
-}
-
 function WiiFooter() {
   const [now, setNow] = useState(() => new Date());
   const [colonVisible, setColonVisible] = useState(true);
@@ -142,27 +139,6 @@ function WiiFooter() {
 }
 
 export function HomeScreen() {
-  const location = useLocation();
-  const [page, setPage] = useState(() => { if (new URLSearchParams(location.search).get('page') === 'play') return 1; try { return sessionStorage.getItem('ak-menu-page') === '1' ? 1 : 0; } catch { return 0; } });
-  const grid = useRef<HTMLElement>(null);
-  const lastPage = useRef(page);
-  const { chime } = useConsole();
-  const changePage = (next: number) => { setPage(next); chime(); try { sessionStorage.setItem('ak-menu-page', String(next)); } catch {} };
-  useEffect(() => {
-    const handle = (event: KeyboardEvent) => {
-      if (event.target instanceof HTMLElement && event.target.closest('input,textarea,select,dialog')) return;
-      if (event.key === '+' || event.key === '=' || event.key === '-') {
-        event.preventDefault(); changePage(event.key === '-' ? 0 : 1);
-      }
-    };
-    window.addEventListener('keydown', handle);
-    return () => window.removeEventListener('keydown', handle);
-  });
-  const visibleChannels = channels.filter(channel => (channel.page === 'play') === (page === 1));
-  useEffect(() => {
-    if (lastPage.current !== page) grid.current?.querySelector<HTMLElement>('.menu-channel')?.focus({ preventScroll: true });
-    lastPage.current = page;
-  }, [page]);
   const moveSelection = (event: ReactKeyboardEvent<HTMLElement>) => {
     if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'].includes(event.key)) return;
     const links = [...event.currentTarget.querySelectorAll<HTMLAnchorElement>('.menu-channel')];
@@ -176,12 +152,10 @@ export function HomeScreen() {
   };
 
   return (
-    <main id="main-content" className="wii-home-screen">
-      <div className="menu-section-switch" aria-label="Channel pages"><button aria-pressed={page === 0} onClick={() => changePage(0)}>Portfolio</button><button aria-pressed={page === 1} onClick={() => changePage(1)}>Play</button></div>
-      <MenuPager page={page} onChange={changePage} />
-      <section ref={grid} key={page} className="wii-channel-grid" aria-label={page ? 'Play channels' : 'Portfolio channels'} onKeyDown={moveSelection}>
-        {visibleChannels.map((channel) => <ChannelTile key={channel.title} channel={channel} />)}
-        {Array.from({ length: Math.max(0, 12 - visibleChannels.length) }, (_, i) => <div key={'empty-'+i} className="empty-channel-slot" aria-hidden="true"><span>Wii</span></div>)}
+    <main id="main-content" className="wii-home-screen" tabIndex={-1}>
+      <section className="wii-channel-grid" aria-label="Portfolio channels" onKeyDown={moveSelection}>
+        {channels.map((channel) => <ChannelTile key={channel.title} channel={channel} />)}
+        {Array.from({ length: Math.max(0, 12 - channels.length) }, (_, i) => <div key={'empty-'+i} className="empty-channel-slot" aria-hidden="true"><span>Wii</span></div>)}
       </section>
       <p className="menu-help">Select a channel</p>
     </main>
@@ -214,7 +188,7 @@ export function ChannelLayout({
 
   if (!started) {
     return (
-      <main id="main-content" className="wii-channel-screen">
+      <main id="main-content" className="wii-channel-screen" tabIndex={-1}>
         <section className="wii-channel-window channel-launch-window" aria-labelledby="channel-title">
           <div className={`channel-launch channel-launch-${number}`}>
             <LaunchArtwork number={number} title={title} />
@@ -234,7 +208,7 @@ export function ChannelLayout({
   }
 
   return (
-    <main id="main-content" className="wii-channel-screen">
+    <main id="main-content" className="wii-channel-screen" tabIndex={-1}>
       <section className={'wii-channel-window channel-content-window' + (compact ? ' play-channel-window' : '')} aria-labelledby="channel-title">
         <header className="wii-channel-header">
           <div className="channel-header-band">
@@ -258,29 +232,23 @@ export function ChannelLayout({
   );
 }
 
-export function AppFrame({ children, inactive = false }: PropsWithChildren<{ inactive?: boolean }>) {
+export function AppFrame({ children }: PropsWithChildren) {
   const location = useLocation();
   const home = location.pathname === '/';
   const frame = useRef<HTMLDivElement>(null);
   const previousPath = useRef(location.pathname);
 
   useEffect(() => {
-    if (!frame.current) return;
-    frame.current.inert = inactive;
-    if (!inactive) frame.current.querySelector<HTMLElement>('.menu-channel, .wii-action-button.primary')?.focus({ preventScroll: true });
-  }, [inactive]);
-
-  useEffect(() => {
-    if (!inactive && home && previousPath.current !== '/') {
+    if (home && previousPath.current !== '/') {
       const links = frame.current?.querySelectorAll<HTMLAnchorElement>('.menu-channel');
       [...(links ?? [])].find((link) => link.getAttribute('href') === previousPath.current)?.focus({ preventScroll: true });
     }
     previousPath.current = location.pathname;
-  }, [home, inactive, location.pathname]);
+  }, [home, location.pathname]);
 
   return (
-    <div ref={frame} aria-hidden={inactive || undefined} className={home ? 'app-frame wii-menu-mode' : 'app-frame wii-channel-mode'}>
-      <a className="skip-link" href="#main-content">Skip to main content</a>
+    <div ref={frame} className={home ? 'app-frame wii-menu-mode' : 'app-frame wii-channel-mode'}>
+      <a className="skip-link" href="#main-content" onClick={event => { event.preventDefault(); frame.current?.querySelector<HTMLElement>('#main-content')?.focus({ preventScroll: true }); }}>Skip to main content</a>
       <aside className="building-banner" aria-label="Website status"><span className="building-dot" aria-hidden="true" /><strong>Currently building</strong><span className="building-note">This site is a work in progress.</span></aside>
       {children}
       {home && <WiiFooter />}
